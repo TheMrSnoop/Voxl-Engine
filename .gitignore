@@ -36,6 +36,7 @@
 *.exe
 *.out
 *.app
+*.ipch
 
 # debug information files
 *.dwo
