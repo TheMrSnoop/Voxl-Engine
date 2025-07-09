@@ -1,0 +1,18 @@
+﻿  Block.cpp
+C:\dev\Voxl-Engine\Block.cpp(243,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\dev\Voxl-Engine\Block.cpp(243,13): warning C4244:         with
+C:\dev\Voxl-Engine\Block.cpp(243,13): warning C4244:         [
+C:\dev\Voxl-Engine\Block.cpp(243,13): warning C4244:             T=float
+C:\dev\Voxl-Engine\Block.cpp(243,13): warning C4244:         ]
+C:\dev\Voxl-Engine\Block.cpp(245,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\dev\Voxl-Engine\Block.cpp(245,14): warning C4244:         with
+C:\dev\Voxl-Engine\Block.cpp(245,14): warning C4244:         [
+C:\dev\Voxl-Engine\Block.cpp(245,14): warning C4244:             T=float
+C:\dev\Voxl-Engine\Block.cpp(245,14): warning C4244:         ]
+C:\dev\Voxl-Engine\Block.cpp(247,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\dev\Voxl-Engine\Block.cpp(247,15): warning C4244:         with
+C:\dev\Voxl-Engine\Block.cpp(247,15): warning C4244:         [
+C:\dev\Voxl-Engine\Block.cpp(247,15): warning C4244:             T=float
+C:\dev\Voxl-Engine\Block.cpp(247,15): warning C4244:         ]
+C:\dev\Voxl-Engine\Block.cpp(191,1): warning C4715: 'Block::ReturnBlock': not all control paths return a value
+  Voxl-Engine.vcxproj -> C:\dev\Voxl-Engine\x64\Debug\Voxl-Engine.exe
