@@ -1,4 +1,3 @@
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/VoxlCube.png)
 # Voxl Engine
 My attempt at a custom made game engine.
 Created in C++ to force myself to learn it, at least to an intermediate level.
