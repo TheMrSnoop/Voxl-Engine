@@ -1,7 +1,7 @@
 # Voxl Engine
 My attempt at a custom made game engine.
 Created in C++ to force myself to learn it, at least to an intermediate level.
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Voxl.png)
+![Branding](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Voxl%20Branding.png)
 
 # Planned Features
 * Basic 3D rendering
