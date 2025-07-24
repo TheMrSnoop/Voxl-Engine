@@ -1,7 +1,6 @@
-# Voxl Engine
+![Branding](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Voxl%20Branding.png)
 My attempt at a custom made game engine.
 Created in C++ to force myself to learn it, at least to an intermediate level.
-![Branding](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Voxl%20Branding.png)
 
 # Still left to do
 * Shadows
