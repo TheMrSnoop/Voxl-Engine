@@ -44,3 +44,7 @@
 # custom added
 *.vsidx
 *.opendb
+*.sln
+*.vcxproj
+*.filters
+*.users
