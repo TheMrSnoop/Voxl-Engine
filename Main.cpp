@@ -29,6 +29,7 @@
 #include"Block.h"
 #include"WorldStructure.h"
 #include"FBO.h"
+#include"MenuBar.h"
 
 //Its cleaner if I just put this inside Camera.h
 float FOV = 70.0f;
@@ -47,6 +48,8 @@ int main()
 	//Defines the voxlEngine object to be used in the rest of the script
 	VoxlEngine voxlEngine;
 
+	MenuBar menuBar;
+
 	//Rendering resolution can be fixed like this
 	int width = 1920;
 	int height = 1080;
@@ -59,68 +62,9 @@ int main()
 	//Defines the window object
 	GLFWwindow* window = glfwCreateWindow(width, height, "Voxl Engine", NULL, NULL);
 
-	//Fullscreen
-	//GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-	//const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-	//GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Voxl Engine", monitor, NULL);
 
-	//CODE FOR THE TOP TOOLBAR
-	//Creates the top window
-	HWND hwnd = glfwGetWin32Window(window);
-
-	HMENU hMenu = CreateMenu();
-
-	//Creates the first dropdown menu, "File"
-	HMENU hFileMenu = CreatePopupMenu();
-	AppendMenu(hFileMenu, MF_STRING, 1, L"Open");
-	AppendMenu(hFileMenu, MF_STRING, 2, L"Save");
-	AppendMenu(hFileMenu, MF_SEPARATOR, 0, NULL);
-	AppendMenu(hFileMenu, MF_STRING, 3, L"Exit");
-
-	//Creates the second dropdown menu, "Edit"
-	HMENU hEditMenu = CreatePopupMenu();
-	AppendMenu(hEditMenu, MF_STRING, 1, L"Project Settings");
-	AppendMenu(hEditMenu, MF_STRING, 2, L"Editor Settings");
-
-	//Creates the third dropdown menu, "View"
-	HMENU hViewMenu = CreatePopupMenu();
-	AppendMenu(hViewMenu, MF_STRING, 1, L"Editor Viewmode");
-
-	//Seperates the dropdown, kinda like a horizontal rule (<hr>)
-	AppendMenu(hViewMenu, MF_SEPARATOR, 0, NULL);
-
-	AppendMenu(hViewMenu, MF_STRING, 2, L"Editor Camera FOV");
-	AppendMenu(hViewMenu, MF_STRING, 3, L"Viewport Resolution");
-
-	AppendMenu(hViewMenu, MF_SEPARATOR, 0, NULL);
-
-	AppendMenu(hViewMenu, MF_STRING, 4, L"Viewport Window");
-	AppendMenu(hViewMenu, MF_STRING, 5, L"File Explorer Windows");
-
-	//Creates the fourth dropdown menu, "Documentation"
-	HMENU hDoc = CreatePopupMenu();
-	AppendMenu(hDoc, MF_STRING, 1, L"Voxl Documentation");
-	AppendMenu(hDoc, MF_SEPARATOR, 0, NULL);
-	AppendMenu(hDoc, MF_STRING, 2, L"Created by TheMrSnoop");
-
-
-	//Creates the fourth dropdown menu, "Add"
-	HMENU hAdd = CreatePopupMenu();
-	AppendMenu(hAdd, MF_STRING, 1, L"Game Object");
-	AppendMenu(hAdd, MF_STRING, 2, L"Player Object");
-	AppendMenu(hAdd, MF_STRING, 3, L"Character Object");
-
-
-	//Adds both of the dropdown menus to the window
-	//! Note. Instead of just copying and pasting all the previous code, I should first move all of this to a UI class, then figure out how to pull the dropdown text from a .json file.
-	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hFileMenu, L"File");
-	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hEditMenu, L"Edit");
-	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hViewMenu, L"View");
-	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hDoc, L"Documentation");
-	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hAdd, L"Add");
-
-
-	SetMenu(hwnd, hMenu);
+	//Creates the top Menu Bar
+	menuBar.CreateMenuBar(window, glfwGetWin32Window(window));
 
 	//If window failed, create error message
 	if (window == NULL)
@@ -255,7 +199,7 @@ int main()
 
 
 	stbi_set_flip_vertically_on_load(false);
-	unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/TerracubeGradient.png", &iconWidth, &iconHeight, &iconChannels, 4);
+	unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/TerracubeGradient_Small.png", &iconWidth, &iconHeight, &iconChannels, 4);
 
 
 	//Changes the window icon
@@ -267,11 +211,11 @@ int main()
 	glfwSetWindowIcon(window, 1, images);
 
 
-	Shader shaderProgram("default.vert", "default.frag");
+	Shader shaderProgram("Shaders/default.vert", "Shaders/default.frag");
 
 	//Causing issues because I moved it into the shaders folder
 	// or "../../Shaders/" depending where you are
-	Shader screenShader("pixelation.vert", "pixelation.frag");
+	Shader screenShader("Shaders/pixelation.vert", "Shaders/pixelation.frag");
 
 
 	screenShader.Activate();
@@ -532,7 +476,7 @@ int main()
 		
 
 
-		if (screenShader.VertexShaderName == "pixelation.vert")
+		if (screenShader.VertexShaderName == "Shaders/pixelation.vert")
 		{
 			screenShader.setFloat("pixelSize", 1.0f);  //The resolution is divided by this value, so lower = higher res
 			screenShader.setVec2("resolution", (float)width, (float)height);

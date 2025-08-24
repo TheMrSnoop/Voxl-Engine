@@ -33,25 +33,25 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="shaderClass.cpp">
+    <ClCompile Include="SourceCode\shaderClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VBO.cpp">
+    <ClCompile Include="SourceCode\VBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VAO.cpp">
+    <ClCompile Include="SourceCode\VAO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EBO.cpp">
+    <ClCompile Include="SourceCode\EBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stb.cpp">
+    <ClCompile Include="SourceCode\stb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
+    <ClCompile Include="SourceCode\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="SourceCode\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
@@ -75,48 +75,51 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="DeltaTime.cpp">
+    <ClCompile Include="SourceCode\DeltaTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tree.cpp">
+    <ClCompile Include="SourceCode\Tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Block.cpp">
+    <ClCompile Include="SourceCode\Block.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldStructure.cpp">
+    <ClCompile Include="SourceCode\WorldStructure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FBO.cpp">
+    <ClCompile Include="SourceCode\FBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VoxlEngine.cpp">
+    <ClCompile Include="SourceCode\VoxlEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\MenuBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="default.vert">
+    <None Include="Shaders\default.vert">
       <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="default.frag">
+    <None Include="Shaders\default.frag">
       <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="outline.frag">
+    <None Include="Shaders\outline.frag">
       <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="outline.vert">
+    <None Include="Shaders\outline.vert">
       <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="basic-pixelation.vert">
+    <None Include="Shaders\basic-pixelation.vert">
       <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="basic-pixelation.frag">
+    <None Include="Shaders\basic-pixelation.frag">
       <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="screen.vert">
+    <None Include="Shaders\screen.vert">
       <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="screen.frag">
+    <None Include="Shaders\screen.frag">
       <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
     <None Include="Shaders\pixelation.frag">
@@ -188,6 +191,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="WorldStructure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Custom\MenuBar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -84,7 +84,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);IMGUI_IMPL_OPENGL_LOADER_GLAD</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>imgui;C:\dev\Voxl-Engine\Libraries\Custom;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,7 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);IMGUI_IMPL_OPENGL_LOADER_GLAD</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>imgui;C:\dev\Voxl-Engine\Libraries\Custom;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -139,11 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Block.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="DeltaTime.cpp" />
-    <ClCompile Include="EBO.cpp" />
-    <ClCompile Include="FBO.cpp" />
+    <ClCompile Include="SourceCode\Block.cpp" />
+    <ClCompile Include="SourceCode\Camera.cpp" />
+    <ClCompile Include="SourceCode\DeltaTime.cpp" />
+    <ClCompile Include="SourceCode\EBO.cpp" />
+    <ClCompile Include="SourceCode\FBO.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -153,24 +153,25 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="shaderClass.cpp" />
-    <ClCompile Include="stb.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Tree.cpp" />
-    <ClCompile Include="VAO.cpp" />
-    <ClCompile Include="VBO.cpp" />
-    <ClCompile Include="VoxlEngine.cpp" />
-    <ClCompile Include="WorldStructure.cpp" />
+    <ClCompile Include="SourceCode\shaderClass.cpp" />
+    <ClCompile Include="SourceCode\MenuBar.cpp" />
+    <ClCompile Include="SourceCode\stb.cpp" />
+    <ClCompile Include="SourceCode\Texture.cpp" />
+    <ClCompile Include="SourceCode\Tree.cpp" />
+    <ClCompile Include="SourceCode\VAO.cpp" />
+    <ClCompile Include="SourceCode\VBO.cpp" />
+    <ClCompile Include="SourceCode\VoxlEngine.cpp" />
+    <ClCompile Include="SourceCode\WorldStructure.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="default.frag" />
-    <None Include="default.vert" />
-    <None Include="outline.frag" />
-    <None Include="outline.vert" />
-    <None Include="basic-pixelation.frag" />
-    <None Include="basic-pixelation.vert" />
-    <None Include="screen.frag" />
-    <None Include="screen.vert" />
+    <None Include="Shaders\default.frag" />
+    <None Include="Shaders\default.vert" />
+    <None Include="Shaders\outline.frag" />
+    <None Include="Shaders\outline.vert" />
+    <None Include="Shaders\basic-pixelation.frag" />
+    <None Include="Shaders\basic-pixelation.vert" />
+    <None Include="Shaders\screen.frag" />
+    <None Include="Shaders\screen.vert" />
     <None Include="Shaders\pixelation.frag" />
     <None Include="Shaders\pixelation.vert" />
   </ItemGroup>
@@ -189,6 +190,7 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="Libraries\Custom\MenuBar.h" />
     <ClInclude Include="shaderClass.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Tree.h" />
