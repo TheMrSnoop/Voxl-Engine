@@ -24,31 +24,17 @@
 #include"VBO.h"
 #include"EBO.h"
 #include"Camera.h"
-#include"DeltaTime.h"
+#include"VoxlEngine.h"
 #include"Tree.h"
 #include"Block.h"
 #include"WorldStructure.h"
 #include"FBO.h"
 
-
-int width = 1920;
-int height = 1080;
-
-
-//technicallllly, its better to include this varriable in Camera.h, and slightly remake the logic in Camera.cpp, then to store it here.
-//..why?
-//uh
-//because
-//its cleaner? idk why I wrote this
-
+//Its cleaner if I just put this inside Camera.h
 float FOV = 70.0f;
-
-
 
 int main()
 {
-
-
 	//Initializes GLFW
 	glfwInit();
 
@@ -58,28 +44,31 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
+	//Defines the voxlEngine object to be used in the rest of the script
+	VoxlEngine voxlEngine;
 
+	//Rendering resolution can be fixed like this
+	int width = 1920;
+	int height = 1080;
 
-	//Defines the window object
+	//Or it can take up the entire screen (still windowed) like this
+	//int width = voxlEngine.getDisplayResolution().x;
+	//int height = voxlEngine.getDisplayResolution().y;
 	
-
-
+	
+	//Defines the window object
 	GLFWwindow* window = glfwCreateWindow(width, height, "Voxl Engine", NULL, NULL);
-
 
 	//Fullscreen
 	//GLFWmonitor* monitor = glfwGetPrimaryMonitor();
 	//const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 	//GLFWwindow* window = glfwCreateWindow(mode->width, mode->height, "Voxl Engine", monitor, NULL);
 
-
 	//CODE FOR THE TOP TOOLBAR
-
 	//Creates the top window
 	HWND hwnd = glfwGetWin32Window(window);
 
 	HMENU hMenu = CreateMenu();
-
 
 	//Creates the first dropdown menu, "File"
 	HMENU hFileMenu = CreatePopupMenu();
@@ -115,11 +104,21 @@ int main()
 	AppendMenu(hDoc, MF_STRING, 2, L"Created by TheMrSnoop");
 
 
+	//Creates the fourth dropdown menu, "Add"
+	HMENU hAdd = CreatePopupMenu();
+	AppendMenu(hAdd, MF_STRING, 1, L"Game Object");
+	AppendMenu(hAdd, MF_STRING, 2, L"Player Object");
+	AppendMenu(hAdd, MF_STRING, 3, L"Character Object");
+
+
 	//Adds both of the dropdown menus to the window
+	//! Note. Instead of just copying and pasting all the previous code, I should first move all of this to a UI class, then figure out how to pull the dropdown text from a .json file.
 	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hFileMenu, L"File");
 	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hEditMenu, L"Edit");
 	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hViewMenu, L"View");
 	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hDoc, L"Documentation");
+	AppendMenu(hMenu, MF_POPUP, (UINT_PTR)hAdd, L"Add");
+
 
 	SetMenu(hwnd, hMenu);
 
@@ -233,6 +232,7 @@ int main()
 	//glClearColor(0.063f, 0.063f, 0.063f, 1.0f); //== Dark Gray
 	//glClearColor(0.106f, 0.624f, 1.0f, 1.0f); //== Sky blue
 	glClearColor(0.753f, 0.847f, 1.0f, 1.0f); //== Sky White
+	//glClearColor(0.0, 0.0, 0.0, 1.0f); //== Black
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	glfwSwapBuffers(window);
@@ -255,7 +255,7 @@ int main()
 
 
 	stbi_set_flip_vertically_on_load(false);
-	unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/VoxlCube.png", &iconWidth, &iconHeight, &iconChannels, 4);
+	unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/TerracubeGradient.png", &iconWidth, &iconHeight, &iconChannels, 4);
 
 
 	//Changes the window icon
@@ -269,7 +269,10 @@ int main()
 
 	Shader shaderProgram("default.vert", "default.frag");
 
+	//Causing issues because I moved it into the shaders folder
+	// or "../../Shaders/" depending where you are
 	Shader screenShader("pixelation.vert", "pixelation.frag");
+
 
 	screenShader.Activate();
 	screenShader.setInt("screenTexture", 0); // bind to texture unit 0
@@ -313,18 +316,11 @@ int main()
 	quadVAO.Unbind();
 	quadVBO.Unbind();
 
-
-
 	FBO sceneFBO(width, height);
-
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
-
-
 
 	//Gets a reference to the Block Database
 	auto allBlocks = Block::blockDatabase;
@@ -341,7 +337,7 @@ int main()
 
 	Camera camera(width, height, glm::vec3(0.0f, 1.0f, 2.0f));
 
-	DeltaTime deltatime(0.5f);
+
 
 	//Trees
 	Tree OakTree(std::string("Oak"), Block::ReturnBlock("Log"), Block::ReturnBlock("Leaves"));
@@ -386,7 +382,7 @@ int main()
 	ImGui_ImplGlfw_InitForOpenGL(window, true); 
 	ImGui_ImplOpenGL3_Init("#version 330");
 
-	float DevMenuFontSize = 18.0f;
+	float DevMenuFontSize = 16.0f;
 
 	ImGuiStyle& DevMenuStyle = ImGui::GetStyle();
 	DevMenuStyle.Colors[ImGuiCol_WindowBg] = ImVec4(1.0f, 1.0f, 1.0f, 0.0f);
@@ -398,6 +394,12 @@ int main()
 
 	ImFont* SpaceMono_Regular = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/SpaceMono-Regular.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
 	ImFont* SpaceMono_Bold = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/SpaceMono-Bold.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
+
+	ImFont* Doto = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Doto-Bold.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
+	ImFont* Doto_Bold = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Doto-Black.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
+
+	ImFont* Pixeloid = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Pixeloid.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
+	ImFont* Pixeloid_Bold = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Pixeloid-Bold.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
 
 	DevMenuStyle.WindowBorderSize = 0.0f;
 
@@ -415,7 +417,8 @@ int main()
 	//Main program while loop
 	while (!glfwWindowShouldClose(window))
 	{
-		deltatime.CalculateValues();
+		voxlEngine.CalculateFPS();
+
 		float currentTime = glfwGetTime();
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -457,24 +460,28 @@ int main()
 		VAO1.Bind();
 		//Draws the shape using the GL Primative, Triangle
 	
-		float t = glfwGetTime();
-		glUniform1f(glGetUniformLocation(shaderProgram.ID, "time"), t);
+		glUniform1f(glGetUniformLocation(shaderProgram.ID, "time"), currentTime);
 
 
 		//Builds a manual set of blocks
-		for (int i = 0; i < blockDataBaseLength; i++)
-		{
-			Block::SpawnBlock(allBlocks[i].DisplayName, glm::vec3(((i * 1.0f) - (blockDataBaseLength / 2)), 0.0f, -20.0f), shaderProgram);
-		}
+		//for (int i = 0; i < blockDataBaseLength; i++)
+		//{
+			//Block::SpawnBlock(allBlocks[i].DisplayName, glm::vec3(((i * 1.0f) - (blockDataBaseLength / 2)), 0.0f, -20.0f), shaderProgram);
+		//}
 
-		//Spawns the 2 trees
+		//Spawns trees
 		Tree::SpawnTree(glm::vec3(0.0f, 0.0f, 5.0f), OakTree, shaderProgram);
-		Tree::SpawnTree(glm::vec3(0.0f, 0.0f, 12.0f), LargeOakTree, shaderProgram);
+		Tree::SpawnTree(glm::vec3(10.0f, 0.0f, 3.0f), OakTree, shaderProgram);
+		Tree::SpawnTree(glm::vec3(12.0f, 0.0f, -5.0f), OakTree, shaderProgram);
+		Tree::SpawnTree(glm::vec3(-3.0f, 0.0f, 12.0f), LargeOakTree, shaderProgram);
+		Tree::SpawnTree(glm::vec3(3.0f, 0.0f, -5.0f), LargeOakTree, shaderProgram);
+		Tree::SpawnTree(glm::vec3(15.0f, 0.0f, -10.0f), LargeOakTree, shaderProgram);
 		Tree::SpawnTree(glm::vec3(0.0f, 0.0f, 19.0f), PineTree, shaderProgram);
 
 		//Spawns the 2 foliage
 		Tree::SpawnTree(glm::vec3(5.0f, 0.0f, 5.0f), FallenLog, shaderProgram);
 		Tree::SpawnTree(glm::vec3(5.0f, 0.0f, 10.0f), Rock, shaderProgram);
+		Tree::SpawnTree(glm::vec3(15.0f, 0.0f, 3.0f), Rock, shaderProgram);
 
 		//Spawns the Ruin Structure
 		WorldStructure::SpawnStructure(glm::vec3(15.0f, -1.0f, 10.0f), Ruins, shaderProgram);
@@ -485,22 +492,20 @@ int main()
 		// ! WARNING !, this is a temporary solution, and murders the FPS.
 		Block::SpawnAreaOfBlocks("Grass Top", glm::vec3(0.0f, -1.0f, 0.0f), glm::vec2(-25.0f, 25.0f), glm::vec2(0.0f, 1.0f), glm::vec2(-25.0f, 25.0f), shaderProgram);
 
-
 		Block::SpawnBlock("Light Block", glm::vec3(0.0f, 1.0f, -3.0f), shaderProgram);
-
-
-		//for (int i = 0; i < Tree::allTreePositions.size(); i++)
-		//{
-			//Tree::SpawnTree(Tree::allTreePositions[i], OakTree, shaderProgram);
-		//}
-
 
 
 
 		//Spawns a block on the camera's current position
+
+		glm::vec3 blockPlacementPosition = camera.Position + voxlEngine.multiplyVectorWithFloat(camera.Orientation, 2.0f);
+
+		//glm::vec3 blockPlacementPosition = voxlEngine.Raycast(camera.Position, camera.Orientation, 128).hitPosition; 
+
+
 		if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 		{
-			allPlacedBlocksPos.push_back(camera.Position);
+			allPlacedBlocksPos.push_back(blockPlacementPosition);
 		}
 
 		//Re-renders all the placed blocks, if they are any
@@ -511,7 +516,7 @@ int main()
 				Block::SpawnBlock("Stone", allPlacedBlocksPos[i], shaderProgram);
 			}
 		}
-
+		
 
 		sceneFBO.Unbind();
 
@@ -529,17 +534,16 @@ int main()
 
 		if (screenShader.VertexShaderName == "pixelation.vert")
 		{
-			screenShader.setFloat("pixelSize", 4.0f);  //The resolution is divided by this value, so lower = higher res
+			screenShader.setFloat("pixelSize", 1.0f);  //The resolution is divided by this value, so lower = higher res
 			screenShader.setVec2("resolution", (float)width, (float)height);
 		}
-
-
-
 		glBindTexture(GL_TEXTURE_2D, sceneFBO.textureID);
 		quadVAO.Bind();
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 
+		//User Interface
+		//Its all kinda messy right now, I should eventually move all of this to seperate UI classes
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -548,38 +552,92 @@ int main()
 		ImGui::SetNextWindowPos(ImVec2(20, 20), ImGuiCond_Always);
 		ImGui::SetNextWindowSize(ImVec2(800, 800));
 
+		ImGui::PushFont(Doto_Bold);
 		//All the display data for the developer menu
 		ImGui::Begin("DEVELOPER MENU", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
 		//Using the default font right now
-		//ImGui::PushFont(SpaceMono_Regular);
-		ImGui::Text("FPS: %.2f", deltatime.FPS);
-		ImGui::Text("Delta Time: %.10fs", deltatime.DTPS);
+		ImGui::Text("FPS: %.2f", voxlEngine.FPS);
+		ImGui::Text("Delta Time: %.10fs", voxlEngine.DTPS);
 		ImGui::Text("Runtime: %.1f seconds", currentTime);
-		//ImGui::Text("Block Count %i", Block::TotalBlockCount);
+
 		ImGui::Text("Camera Speed %.1f", camera.speed);
+		ImGui::Text("Camera Rotation %.1f, %.1f, %.1f", camera.Orientation.x, camera.Orientation.y, camera.Orientation.z);
 		ImGui::Text("Camera Position %.1f, %.1f, %.1f", camera.Position.x, camera.Position.y, camera.Position.z);
+
+		ImGui::Text("Camera Block Placement Position %.1f, %.1f, %.1f", blockPlacementPosition.x, blockPlacementPosition.y, blockPlacementPosition.z);
 		ImGui::Text("[L-Alt] Camera Free: %s", camera.ImitatePlayer ? "FALSE" : "TRUE");
 		ImGui::Text("Engine Rendering Mode: %s", camera.RenderModeDisplayName);
 		ImGui::Text("Applying Shader: %s and %s", screenShader.VertexShaderName, screenShader.FragmentShaderName);
+		ImGui::Text("Display Resolution: %.1f/%.1f", voxlEngine.getDisplayResolution().x, voxlEngine.getDisplayResolution().y);
 
 		//When using custom fonts, make sure to UNCOMMENT this
-		//ImGui::PopFont();
+		ImGui::PopFont();
+		ImGui::End();
+
+		//Loading Crosshair Image
+		int crosshairWidth, crosshairHeight, crosshairChannels;
+		unsigned char* crosshair_image_data = stbi_load("C:/dev/Voxl-Engine/Images/CrossCropped.png", &crosshairWidth, &crosshairHeight, &crosshairChannels, 4);
+
+		//Creating the Crosshair Image
+		GLuint crosshairTextureID;
+		glGenTextures(1, &crosshairTextureID);
+		glBindTexture(GL_TEXTURE_2D, crosshairTextureID);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, crosshairWidth, crosshairHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, crosshair_image_data);
+		stbi_image_free(crosshair_image_data); // Free CPU memory after uploading to GPU
+
+		ImGui::SetNextWindowPos(ImVec2((width - (width * 0.5)) - 18.75, (height - (height * 0.5)) - 6.25), ImGuiCond_Always);
+		ImGui::SetNextWindowSize(ImVec2(100, 100));
+		ImGui::Begin("Center HUD", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
+		ImGui::Image((void*)(intptr_t)crosshairTextureID, ImVec2((float)25, (float)25));
 		ImGui::End();
 
 
 
-		// health bar window
-		ImGui::SetNextWindowPos(ImVec2(width - (width * 0.1), 20), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2(800, 800));
 
-		ImGui::Begin("Scene Collection", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
-		ImGui::Text("Voxel Landscape");
+		//Loading HUD Hearts
+		int heartsWidth, heartsHeight, heartsChannels;
+		unsigned char* hearts_image_data = stbi_load("C:/dev/Voxl-Engine/Images/HUD/PixelatedHearts.png", &heartsWidth, &heartsHeight, &heartsChannels, 4);
+
+		//Creating the Crosshair Image
+		GLuint heartsTextureID;
+		glGenTextures(1, &heartsTextureID);
+		glBindTexture(GL_TEXTURE_2D, heartsTextureID);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, heartsWidth, heartsHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, hearts_image_data);
+		stbi_image_free(hearts_image_data); // Free CPU memory after uploading to GPU
+
+		ImGui::SetNextWindowPos(ImVec2(32, height - 64));
+		ImGui::SetNextWindowSize(ImVec2(750, 128));
+		ImGui::Begin("Hearts", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
+		ImGui::Image((void*)(intptr_t)heartsTextureID, ImVec2((float)200, (float)32));
+		ImGui::End();
+
+
+		//Loading HUD Toolbar
+		int toolbarWidth, toolbarHeight, toolbarChannels;
+		unsigned char* toolbar_image_data = stbi_load("C:/dev/Voxl-Engine/Images/HUD/Toolbar.png", &toolbarWidth, &toolbarHeight, &toolbarChannels, 4);
+
+		//Creating the Crosshair Image
+		GLuint toolbarTextureID;
+		glGenTextures(1, &toolbarTextureID);
+		glBindTexture(GL_TEXTURE_2D, toolbarTextureID);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, toolbarWidth, toolbarHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, toolbar_image_data);
+		stbi_image_free(toolbar_image_data); // Free CPU memory after uploading to GPU
+
+		ImGui::SetNextWindowPos(ImVec2((width / 2) - 450, (height / 2) + 250));
+		ImGui::SetNextWindowSize(ImVec2(1000, 300));
+		ImGui::Begin("Toolbar", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
+		ImGui::Image((void*)(intptr_t)toolbarTextureID, ImVec2((float)900, (float)150));
 		ImGui::End();
 
 		//IM GUI SHOULD ALWAYS RENDER AFTER THE EVERYTHING ELSE
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 
 		glfwSwapBuffers(window);
 

@@ -7,7 +7,7 @@
 
 //for checking if the texture exsists
 
-
+std::vector<glm::vec3> Block::allBlockPositions;
 
 //Defines all the vertices for a cube
 
@@ -206,6 +206,7 @@ void Block::SpawnBlock(std::string BlockDataID, glm::vec3 position, Shader shade
 	//Ensures that the block "snaps" to a grid
 	glm::vec3 roundedPosition = glm::vec3(round(position.x) * 1.0f, round(position.y) * 1.0f, round(position.z) * 1.0f);
 
+	Block::allBlockPositions.push_back(roundedPosition);
 
 	//Gets a ref
 
@@ -251,8 +252,19 @@ void Block::SpawnAreaOfBlocks(std::string BlockDataID, glm::vec3 position, glm::
 			}
 		}
 	}
-
-
 }
 
+
+bool Block::doesBlockExsistAtLocation(glm::vec3 targetVector)
+{
+	for (int i = 0; i < Block::allBlockPositions.size(); i++)
+	{
+		//We are doing this instead of directly saying "== to" because this implementation allows for tollerance, in this case, by 0.001.
+		if (glm::distance(allBlockPositions[i], targetVector) < 0.001f)
+		{
+			return true;
+		}
+	}
+	return false;
+}
 

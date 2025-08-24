@@ -9,21 +9,21 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Resource Files\Shaders">
-      <UniqueIdentifier>{f79fa4d7-de8e-4187-896b-2b677e277a8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource Files\Textures">
-      <UniqueIdentifier>{5d463088-b054-4929-8bc2-7540af84071c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\imgui">
       <UniqueIdentifier>{bcc25d65-25cb-47df-859a-3acabdaaefd4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\imgui">
       <UniqueIdentifier>{49c640f5-d459-4670-baf1-ac9bed7de3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Resource Files\Shaders">
+      <UniqueIdentifier>{f79fa4d7-de8e-4187-896b-2b677e277a8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Resource Files\Textures">
+      <UniqueIdentifier>{5d463088-b054-4929-8bc2-7540af84071c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,37 +90,40 @@
     <ClCompile Include="FBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VoxlEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.vert">
-      <Filter>Resource Files\Shaders</Filter>
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
     <None Include="default.frag">
-      <Filter>Resource Files\Shaders</Filter>
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
     <None Include="outline.frag">
-      <Filter>Resource Files\Shaders</Filter>
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
     <None Include="outline.vert">
-      <Filter>Resource Files\Shaders</Filter>
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
     <None Include="basic-pixelation.vert">
-      <Filter>Resource Files\Shaders</Filter>
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
     <None Include="basic-pixelation.frag">
-      <Filter>Resource Files\Shaders</Filter>
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
     <None Include="screen.vert">
-      <Filter>Resource Files\Shaders</Filter>
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
     <None Include="screen.frag">
-      <Filter>Resource Files\Shaders</Filter>
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="pixelation.vert">
-      <Filter>Resource Files\Shaders</Filter>
+    <None Include="Shaders\pixelation.frag">
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
-    <None Include="pixelation.frag">
-      <Filter>Resource Files\Shaders</Filter>
+    <None Include="Shaders\pixelation.vert">
+      <Filter>Header Files\Resource Files\Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -178,40 +181,43 @@
     <ClInclude Include="Block.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldStructure.h">
+    <ClInclude Include="FBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FBO.h">
+    <ClInclude Include="VoxlEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldStructure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\Users\thoma\Downloads\grass.jpg">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
     <Image Include="Images\VoxlCube.png">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
     <Image Include="Images\ITWORKS.jpg">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
     <Image Include="Images\MossyCobble.jpg">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
     <Image Include="Images\MossyCobbleVoxl.png">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
     <Image Include="Images\BlockTextures\Darkstone.jpg">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
     <Image Include="Images\BlockTextures\MossyDarkstone.jpg">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
     <Image Include="Images\BlockTextures\Stone.jpg">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
     <Image Include="Images\BlockTextures\Dirt.jpg">
-      <Filter>Resource Files\Textures</Filter>
+      <Filter>Header Files\Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>
 </Project>

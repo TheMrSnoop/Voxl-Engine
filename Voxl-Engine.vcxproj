@@ -159,6 +159,7 @@
     <ClCompile Include="Tree.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
+    <ClCompile Include="VoxlEngine.cpp" />
     <ClCompile Include="WorldStructure.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,10 +169,10 @@
     <None Include="outline.vert" />
     <None Include="basic-pixelation.frag" />
     <None Include="basic-pixelation.vert" />
-    <None Include="pixelation.frag" />
-    <None Include="pixelation.vert" />
     <None Include="screen.frag" />
     <None Include="screen.vert" />
+    <None Include="Shaders\pixelation.frag" />
+    <None Include="Shaders\pixelation.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Tree.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
+    <ClInclude Include="VoxlEngine.h" />
     <ClInclude Include="WorldStructure.h" />
   </ItemGroup>
   <ItemGroup>

@@ -60,6 +60,9 @@ public:
 
 	//Used for drawing a square of blocks
 	static void SpawnAreaOfBlocks(std::string BlockDataID, glm::vec3 position, glm::vec2 sizeX, glm::vec2 sizeY, glm::vec2 sizeZ, Shader shaderProgram);
+	
+	
+	static std::vector<glm::vec3> allBlockPositions;
+	static bool doesBlockExsistAtLocation(glm::vec3);
 
 };
-
