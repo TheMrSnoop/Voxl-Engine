@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Resource Files\Textures">
       <UniqueIdentifier>{5d463088-b054-4929-8bc2-7540af84071c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\json">
+      <UniqueIdentifier>{db1e4941-7cf7-4b91-888c-75b163d55116}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -96,6 +99,9 @@
     <ClCompile Include="SourceCode\MenuBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\UserInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\default.vert">
@@ -127,6 +133,9 @@
     </None>
     <None Include="Shaders\pixelation.vert">
       <Filter>Header Files\Resource Files\Shaders</Filter>
+    </None>
+    <None Include="json\MenuBar.json">
+      <Filter>Source Files\json</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +203,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\Custom\MenuBar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Custom\UserInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

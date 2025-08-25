@@ -1,0 +1,110 @@
+[
+    {
+        "Header": "File",
+        "Items": [
+            {
+                "type": "command",
+                "label": "Open Project"
+            },
+            {
+                "type": "command",
+                "label": "New Project"
+            },
+            { "type": "separator" },
+            {
+                "type": "command",
+                "label": "Save Project"
+            },
+            {
+                "type": "command",
+                "label": "Save Project As"
+            },
+            { "type": "separator" },
+            {
+                "type": "command",
+                "label": "Exit Voxl"
+            }
+        ]
+    },
+    {
+        "Header": "Edit",
+        "Items": [
+            {
+                "type": "command",
+                "label": "Project Settings"
+            },
+            { "type": "separator" },
+            {
+                "type": "command",
+                "label": "Editor Settings"
+            }
+        ]
+    },
+    {
+        "Header": "View",
+        "Items": [
+            {
+                "type": "command",
+                "label": "Editor Viewmode"
+            },
+            { "type": "separator" },
+            {
+                "type": "command",
+                "label": "Editor Camera FOV"
+            },
+            {
+                "type": "command",
+                "label": "Viewport Resolution"
+            },
+            { "type": "separator" },
+            {
+                "type": "command",
+                "label": "Viewport Window"
+            },
+            {
+                "type": "command",
+                "label": "File Explorer Windows"
+            }
+        ]
+    },
+    {
+        "Header": "Add",
+        "Items": [
+            {
+                "type": "command",
+                "label": "Game Object"
+            },
+            {
+                "type": "command",
+                "label": "Player Object"
+            },
+            {
+                "type": "command",
+                "label": "Character Object"
+            },
+            { "type": "separator" },
+            {
+                "type": "command",
+                "label": "Light Block"
+            },
+            {
+                "type": "command",
+                "label": "Dirrectional Light"
+            }
+        ]
+    },
+    {
+        "Header": "Help",
+        "Items": [
+            {
+                "type": "command",
+                "label": "Voxl Documentation"
+            },
+            { "type": "separator" },
+            {
+                "type": "command",
+                "label": "Created by TheMrSnoop"
+            }
+        ]
+    }
+]

@@ -7,16 +7,24 @@
       "RelativeMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|solutionrelative:Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|C:\\dev\\Voxl-Engine\\SourceCode\\MenuBar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|solutionrelative:SourceCode\\MenuBar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|C:\\dev\\Voxl-Engine\\Libraries\\Custom\\MenuBar.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|solutionrelative:Libraries\\Custom\\MenuBar.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|C:\\dev\\Voxl-Engine\\VoxlEngine.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|solutionrelative:VoxlEngine.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\dev\\Voxl-Engine\\Libraries\\include\\fmt\\include\\fmt\\format.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Libraries\\include\\fmt\\include\\fmt\\format.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|C:\\dev\\Voxl-Engine\\SourceCode\\UserInterface.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|solutionrelative:SourceCode\\UserInterface.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|C:\\dev\\Voxl-Engine\\Libraries\\Custom\\UserInterface.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|solutionrelative:Libraries\\Custom\\UserInterface.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|C:\\dev\\Voxl-Engine\\SourceCode\\MenuBar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{D16A00B6-7412-4B6D-BB49-619EF99454DD}|Voxl-Engine.vcxproj|solutionrelative:SourceCode\\MenuBar.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -36,7 +44,7 @@
               "RelativeDocumentMoniker": "Main.cpp",
               "ToolTip": "C:\\dev\\Voxl-Engine\\Main.cpp",
               "RelativeToolTip": "Main.cpp",
-              "ViewState": "AgIAAL0AAAAAAAAAAAAcwM0AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAOcBAAAAAAAAAAAuwAkCAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-06-29T04:28:15.884Z",
               "IsPinned": true,
@@ -48,19 +56,59 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "format.h",
+              "DocumentMoniker": "C:\\dev\\Voxl-Engine\\Libraries\\include\\fmt\\include\\fmt\\format.h",
+              "RelativeDocumentMoniker": "Libraries\\include\\fmt\\include\\fmt\\format.h",
+              "ToolTip": "C:\\dev\\Voxl-Engine\\Libraries\\include\\fmt\\include\\fmt\\format.h",
+              "RelativeToolTip": "Libraries\\include\\fmt\\include\\fmt\\format.h",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAawIwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-08-25T00:34:32.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserInterface.h",
+              "DocumentMoniker": "C:\\dev\\Voxl-Engine\\Libraries\\Custom\\UserInterface.h",
+              "RelativeDocumentMoniker": "Libraries\\Custom\\UserInterface.h",
+              "ToolTip": "C:\\dev\\Voxl-Engine\\Libraries\\Custom\\UserInterface.h",
+              "RelativeToolTip": "Libraries\\Custom\\UserInterface.h",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAuwCkAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-08-24T21:13:27.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserInterface.cpp",
+              "DocumentMoniker": "C:\\dev\\Voxl-Engine\\SourceCode\\UserInterface.cpp",
+              "RelativeDocumentMoniker": "SourceCode\\UserInterface.cpp",
+              "ToolTip": "C:\\dev\\Voxl-Engine\\SourceCode\\UserInterface.cpp",
+              "RelativeToolTip": "SourceCode\\UserInterface.cpp",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAADQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-08-24T21:13:21.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "MenuBar.cpp",
               "DocumentMoniker": "C:\\dev\\Voxl-Engine\\SourceCode\\MenuBar.cpp",
               "RelativeDocumentMoniker": "SourceCode\\MenuBar.cpp",
               "ToolTip": "C:\\dev\\Voxl-Engine\\SourceCode\\MenuBar.cpp",
               "RelativeToolTip": "SourceCode\\MenuBar.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-24T19:52:53.432Z"
+              "WhenOpened": "2025-08-24T19:52:53.432Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MenuBar.h",
               "DocumentMoniker": "C:\\dev\\Voxl-Engine\\Libraries\\Custom\\MenuBar.h",
               "RelativeDocumentMoniker": "Libraries\\Custom\\MenuBar.h",
@@ -68,19 +116,8 @@
               "RelativeToolTip": "Libraries\\Custom\\MenuBar.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-24T19:37:45.325Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "VoxlEngine.h",
-              "DocumentMoniker": "C:\\dev\\Voxl-Engine\\VoxlEngine.h",
-              "RelativeDocumentMoniker": "VoxlEngine.h",
-              "ToolTip": "C:\\dev\\Voxl-Engine\\VoxlEngine.h",
-              "RelativeToolTip": "VoxlEngine.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-05T01:18:05.442Z"
+              "WhenOpened": "2025-08-24T19:37:45.325Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -75,40 +75,45 @@ void Camera::Inputs(GLFWwindow* window)
 
 	//Engine Input and Controls
 
+	bool RequireMouseInputForMovement = false;
 
-	//WASD CONTROLS
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	if (!RequireMouseInputForMovement || glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
 	{
-		Position += speed * deltaTime * Orientation;
+		//WASD CONTROLS
+		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		{
+			Position += speed * deltaTime * Orientation;
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+		{
+			Position += speed * deltaTime * -glm::normalize(glm::cross(Orientation, Up));
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+		{
+			Position += speed * deltaTime * -Orientation;
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+		{
+			Position += speed * deltaTime * glm::normalize(glm::cross(Orientation, Up));
+		}
+
+
+
+		//OTHER CONTROLS
+		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS or glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+		{
+			Position += speed * deltaTime * Up;
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS or glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+		{
+			Position += speed * deltaTime * -Up;
+		}
 	}
-
-	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-	{
-		Position += speed * deltaTime * -glm::normalize(glm::cross(Orientation, Up));
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-	{
-		Position += speed * deltaTime * -Orientation;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-	{
-		Position += speed * deltaTime * glm::normalize(glm::cross(Orientation, Up));
-	}
-
-
-
-	//OTHER CONTROLS
-	if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS or glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-	{
-		Position += speed * deltaTime * Up;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS or glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-	{
-		Position += speed * deltaTime * -Up;
-	}
+	
 
 
 	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS)

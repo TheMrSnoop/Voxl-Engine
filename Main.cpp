@@ -30,6 +30,11 @@
 #include"WorldStructure.h"
 #include"FBO.h"
 #include"MenuBar.h"
+#include"UserInterface.h"
+
+#define FMT_HEADER_ONLY
+#include<core.h>
+
 
 //Its cleaner if I just put this inside Camera.h
 float FOV = 70.0f;
@@ -50,9 +55,11 @@ int main()
 
 	MenuBar menuBar;
 
+	UI_Tools ui_Tools;
+
 	//Rendering resolution can be fixed like this
-	int width = 1920;
-	int height = 1080;
+	int width = 2560;
+	int height = 1440;
 
 	//Or it can take up the entire screen (still windowed) like this
 	//int width = voxlEngine.getDisplayResolution().x;
@@ -487,104 +494,37 @@ int main()
 
 
 		//User Interface
-		//Its all kinda messy right now, I should eventually move all of this to seperate UI classes
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		ImGui::SetNextWindowPos(ImVec2(20, 20), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2(800, 800));
+		//Developer Canvas
+		Canvas DeveloperMenu(ImVec2(20, 20), ImVec2(800, 800), "DEVELOPER MENU");
 
-		ImGui::PushFont(Doto_Bold);
-		//All the display data for the developer menu
-		ImGui::Begin("DEVELOPER MENU", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize);
-		//Using the default font right now
-		ImGui::Text("FPS: %.2f", voxlEngine.FPS);
-		ImGui::Text("Delta Time: %.10fs", voxlEngine.DTPS);
-		ImGui::Text("Runtime: %.1f seconds", currentTime);
-
-		ImGui::Text("Camera Speed %.1f", camera.speed);
-		ImGui::Text("Camera Rotation %.1f, %.1f, %.1f", camera.Orientation.x, camera.Orientation.y, camera.Orientation.z);
-		ImGui::Text("Camera Position %.1f, %.1f, %.1f", camera.Position.x, camera.Position.y, camera.Position.z);
-
-		ImGui::Text("Camera Block Placement Position %.1f, %.1f, %.1f", blockPlacementPosition.x, blockPlacementPosition.y, blockPlacementPosition.z);
-		ImGui::Text("[L-Alt] Camera Free: %s", camera.ImitatePlayer ? "FALSE" : "TRUE");
-		ImGui::Text("Engine Rendering Mode: %s", camera.RenderModeDisplayName);
-		ImGui::Text("Applying Shader: %s and %s", screenShader.VertexShaderName, screenShader.FragmentShaderName);
-		ImGui::Text("Display Resolution: %.1f/%.1f", voxlEngine.getDisplayResolution().x, voxlEngine.getDisplayResolution().y);
-
-		//When using custom fonts, make sure to UNCOMMENT this
-		ImGui::PopFont();
-		ImGui::End();
-
-		//Loading Crosshair Image
-		int crosshairWidth, crosshairHeight, crosshairChannels;
-		unsigned char* crosshair_image_data = stbi_load("C:/dev/Voxl-Engine/Images/CrossCropped.png", &crosshairWidth, &crosshairHeight, &crosshairChannels, 4);
-
-		//Creating the Crosshair Image
-		GLuint crosshairTextureID;
-		glGenTextures(1, &crosshairTextureID);
-		glBindTexture(GL_TEXTURE_2D, crosshairTextureID);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, crosshairWidth, crosshairHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, crosshair_image_data);
-		stbi_image_free(crosshair_image_data); // Free CPU memory after uploading to GPU
-
-		ImGui::SetNextWindowPos(ImVec2((width - (width * 0.5)) - 18.75, (height - (height * 0.5)) - 6.25), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2(100, 100));
-		ImGui::Begin("Center HUD", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
-		ImGui::Image((void*)(intptr_t)crosshairTextureID, ImVec2((float)25, (float)25));
-		ImGui::End();
+		//Perfomance Metrics
+		TextBlock txt_FPS(DeveloperMenu, fmt::format("FPS: {:.2f}", voxlEngine.FPS));
+		TextBlock txt_DeltaTime(DeveloperMenu, fmt::format("Delta Time: {:.10f}", voxlEngine.DTPS));
+		TextBlock txt_RunTime(DeveloperMenu, fmt::format("Runtime: {:.1f} seconds", currentTime));
 
 
+		//Camera
+		TextBlock txt_buffer01(DeveloperMenu, " ");
+		TextBlock txt_CameraSpeed(DeveloperMenu, fmt::format("Camera Speed {:.1f}", camera.speed));
+		TextBlock txt_CameraRotation(DeveloperMenu, fmt::format("Camera Rotation {:.1f}, {:.1f}, {:.1f}", camera.Orientation.x, camera.Orientation.y, camera.Orientation.z));
+		TextBlock txt_CameraPosition(DeveloperMenu, fmt::format("Camera Position {:.1f}, {:.1f}, {:.1f}", camera.Position.x, camera.Position.y, camera.Position.z));
+
+		//Misc UI
+		TextBlock txt_buffer02(DeveloperMenu, " ");
+		TextBlock txt_cameraMode(DeveloperMenu, fmt::format("[L-Alt] Camera Free: {:s}", camera.ImitatePlayer ? "FALSE" : "TRUE"));
+		TextBlock txt_resolution(DeveloperMenu, fmt::format("Display Resolution: {:1}/{:1}", voxlEngine.getDisplayResolution().x, voxlEngine.getDisplayResolution().y));
 
 
-		//Loading HUD Hearts
-		int heartsWidth, heartsHeight, heartsChannels;
-		unsigned char* hearts_image_data = stbi_load("C:/dev/Voxl-Engine/Images/HUD/PixelatedHearts.png", &heartsWidth, &heartsHeight, &heartsChannels, 4);
+		//Renders the DeveloperMenu
+		Canvas::Render(DeveloperMenu);
 
-		//Creating the Crosshair Image
-		GLuint heartsTextureID;
-		glGenTextures(1, &heartsTextureID);
-		glBindTexture(GL_TEXTURE_2D, heartsTextureID);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, heartsWidth, heartsHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, hearts_image_data);
-		stbi_image_free(hearts_image_data); // Free CPU memory after uploading to GPU
-
-		ImGui::SetNextWindowPos(ImVec2(32, height - 64));
-		ImGui::SetNextWindowSize(ImVec2(750, 128));
-		ImGui::Begin("Hearts", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
-		ImGui::Image((void*)(intptr_t)heartsTextureID, ImVec2((float)200, (float)32));
-		ImGui::End();
-
-
-		//Loading HUD Toolbar
-		int toolbarWidth, toolbarHeight, toolbarChannels;
-		unsigned char* toolbar_image_data = stbi_load("C:/dev/Voxl-Engine/Images/HUD/Toolbar.png", &toolbarWidth, &toolbarHeight, &toolbarChannels, 4);
-
-		//Creating the Crosshair Image
-		GLuint toolbarTextureID;
-		glGenTextures(1, &toolbarTextureID);
-		glBindTexture(GL_TEXTURE_2D, toolbarTextureID);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, toolbarWidth, toolbarHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, toolbar_image_data);
-		stbi_image_free(toolbar_image_data); // Free CPU memory after uploading to GPU
-
-		ImGui::SetNextWindowPos(ImVec2((width / 2) - 450, (height / 2) + 250));
-		ImGui::SetNextWindowSize(ImVec2(1000, 300));
-		ImGui::Begin("Toolbar", nullptr, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar);
-		ImGui::Image((void*)(intptr_t)toolbarTextureID, ImVec2((float)900, (float)150));
-		ImGui::End();
-
-		//IM GUI SHOULD ALWAYS RENDER AFTER THE EVERYTHING ELSE
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		glfwSwapBuffers(window);
-
 		//While window is not closed, allow for input and such.
 		glfwPollEvents();
 	}
