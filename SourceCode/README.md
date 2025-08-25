@@ -17,3 +17,4 @@ The following is the main source code for core features of the Engine, like Bloc
 - `VoxlEngine.cpp` A developer friendly class containing engine related functions, like returning engine FPS and DeltaTime
 - `shaderClass.cpp` Defines the logic on how shaders are rendered
 - `stb.cpp` *Depricated*
+- `UserInterface.cpp` Defines the logic for using ImGUI for spawning Text Blocks, with specific properties, and layering them to specific Canvas objects. 
