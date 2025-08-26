@@ -31,6 +31,7 @@
 #include"FBO.h"
 #include"MenuBar.h"
 #include"UserInterface.h"
+#include"Terrain.h"
 
 #define FMT_HEADER_ONLY
 #include<core.h>
@@ -440,12 +441,11 @@ int main()
 		//Spawns the stone floor
 		Block::SpawnAreaOfBlocks("Stone", glm::vec3(15.0f, -1.0f, 10.0f), glm::vec2(-3.0f, 4.0f), glm::vec2(0.0f, 1.0f), glm::vec2(-3.0f, 4.0f), shaderProgram);
 
-		// ! WARNING !, this is a temporary solution, and murders the FPS.
-		Block::SpawnAreaOfBlocks("Grass Top", glm::vec3(0.0f, -1.0f, 0.0f), glm::vec2(-25.0f, 25.0f), glm::vec2(0.0f, 1.0f), glm::vec2(-25.0f, 25.0f), shaderProgram);
-
 		Block::SpawnBlock("Light Block", glm::vec3(0.0f, 1.0f, -3.0f), shaderProgram);
 
+		Chunk CenterChunk(glm::vec3(0, -1.0f, 0), shaderProgram);
 
+		Chunk::SpawnChunks(2, shaderProgram);
 
 		//Spawns a block on the camera's current position
 
@@ -514,7 +514,7 @@ int main()
 		TextBlock txt_CameraRotation(DeveloperMenu, fmt::format("Camera Rotation {:.1f}, {:.1f}, {:.1f}", camera.Orientation.x, camera.Orientation.y, camera.Orientation.z));
 		TextBlock txt_CameraPosition(DeveloperMenu, fmt::format("Camera Position {:.1f}, {:.1f}, {:.1f}", camera.Position.x, camera.Position.y, camera.Position.z));
 
-		//Misc UI
+		//Misc
 		TextBlock txt_buffer02(DeveloperMenu, " ");
 		TextBlock txt_cameraMode(DeveloperMenu, fmt::format("[L-Alt] Camera Free: {:s}", camera.ImitatePlayer ? "FALSE" : "TRUE"));
 		TextBlock txt_resolution(DeveloperMenu, fmt::format("Display Resolution: {:1}/{:1}", voxlEngine.getDisplayResolution().x, voxlEngine.getDisplayResolution().y));
