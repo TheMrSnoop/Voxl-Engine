@@ -6,7 +6,6 @@ The following is the main source code for core features of the Engine, like Bloc
 
 - `Block.cpp` Contains the code for basic geometry rendering (just cubes), a database for user created blocks, and the logic for block spawning and such.
 - `Camera.cpp` Contains the code for Engine Input/Camera Controls, and the actual Camera Transform, and Screen Rendering.
-- `DeltaTime.cpp` *Depricated*
 - `EBO.cpp` Edge Buffer Object
 - `FBO.cpp` Frame Buffer Object
 - `MenuBar.cpp` Renders the top MenuBar for the Engine Window
@@ -17,4 +16,5 @@ The following is the main source code for core features of the Engine, like Bloc
 - `VoxlEngine.cpp` A developer friendly class containing engine related functions, like returning engine FPS and DeltaTime
 - `shaderClass.cpp` Defines the logic on how shaders are rendered
 - `stb.cpp` *Depricated*
-- `UserInterface.cpp` Defines the logic for using ImGUI for spawning Text Blocks, with specific properties, and layering them to specific Canvas objects. 
+- `UserInterface.cpp` Defines the logic for using ImGUI for spawning Text Blocks, with specific properties, and layering them to specific Canvas objects.
+- `Terrain.cpp` Defines the logic for Chunk spawning, Chunk rendering, and eventually, the rest of the terrain code. 
