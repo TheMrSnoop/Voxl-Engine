@@ -145,7 +145,6 @@
   <ItemGroup>
     <ClCompile Include="SourceCode\Block.cpp" />
     <ClCompile Include="SourceCode\Camera.cpp" />
-    <ClCompile Include="SourceCode\DeltaTime.cpp" />
     <ClCompile Include="SourceCode\EBO.cpp" />
     <ClCompile Include="SourceCode\FBO.cpp" />
     <ClCompile Include="glad.c" />
@@ -184,7 +183,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="FBO.h" />
     <ClInclude Include="imgui\imconfig.h" />
