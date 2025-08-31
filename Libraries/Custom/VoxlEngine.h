@@ -5,6 +5,7 @@
 
 
 #include <iostream>
+#include <random>
 
 class VoxlEngine
 {
@@ -14,12 +15,18 @@ public:
 	glm::vec3 getForwardVector();
 	
 	glm::vec3 multiplyVectorWithFloat(glm::vec3, float);
+
+	static int getRandomInt(int min, int max);
+
+	//only works with strings. I gotta make more, or a better single one.
+	static std::string getRandomVectorMember_STR(std::vector<std::string> inputVector);
+
 	
 	//For calculating FPS and DeltaTime
 	float currentTime = 0.0f;
 	float deltaTime = 0.0f;
-	float DTPS = 0.0f;
-	float FPS = 0.0f;
+	static float DTPS;
+	static float FPS;
 	int roundedFPS = 0;
 	void CalculateFPS();
 

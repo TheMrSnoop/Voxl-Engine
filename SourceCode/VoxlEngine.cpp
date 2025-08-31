@@ -9,6 +9,9 @@
 #include "Camera.h"
 #include "Block.h"
 
+float VoxlEngine::FPS = 0.0f;
+float VoxlEngine::DTPS = 0.0f;
+
 VoxlEngine::VoxlEngine()
 {
 	//Initalizes for FPS calculations
@@ -46,6 +49,20 @@ void VoxlEngine::CalculateFPS()
 	}
 }
 
+int VoxlEngine::getRandomInt(int min, int max)
+{
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dist(min, max);
+	return dist(gen);
+}
+
+std::string VoxlEngine::getRandomVectorMember_STR(std::vector<std::string> inputVector)
+{
+	int MaxIndex = inputVector.size() - 1;
+
+	return (inputVector[getRandomInt(0, MaxIndex)]);
+}
 
 glm::vec3 VoxlEngine::getForwardVector()
 {

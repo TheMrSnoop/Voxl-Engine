@@ -12,6 +12,7 @@
 class Block
 {
 public:
+	Block(std::string ID, glm::vec3 position);
 
 	//Defines the block types
 	enum BlockType
@@ -46,6 +47,7 @@ public:
 	//Creates the array of Texture objects, which should be in the same exact order as the Blocks Array
 	static std::vector<Texture> allBlockTextures;
 
+	std::string blockID;
 	glm::vec3 Position;
 
 	//This function links the blockTextureIndex to the Block Texture array

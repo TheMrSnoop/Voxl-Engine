@@ -191,14 +191,17 @@ Block::BlockData Block::ReturnBlock(std::string BlockDataID)
 }
 
 
-
+Block::Block(std::string ID, glm::vec3 position)
+{
+	Position = position;
+	blockID = ID;
+}
 
 
 //Required for SpawnBlock
 int indexCount = sizeof(indices) / sizeof(GLuint);
 
 //Spawns the block, given the ID, position, and a reference to the shaderProgram
-
 void Block::SpawnBlock(std::string BlockDataID, glm::vec3 position, Shader shaderProgram)
 {
 	//Block::TotalBlockCount += 1;
@@ -217,11 +220,11 @@ void Block::SpawnBlock(std::string BlockDataID, glm::vec3 position, Shader shade
 
 
 	//Actually spawns/draws the block
-	glm::mat4 model = glm::mat4(1.0f);
-	model = glm::translate(model, roundedPosition);
-	shaderProgram.setMat4("model", model);
+	//glm::mat4 model = glm::mat4(1.0f);
+	//model = glm::translate(model, roundedPosition);
+	//shaderProgram.setMat4("model", model);
 
-	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+	//glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 
 	if (blockReference.emmitsLight)
 	{

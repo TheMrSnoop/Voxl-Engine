@@ -9,6 +9,9 @@
 class Tree
 {
 public:
+
+	static std::vector<Tree> AllTrees;
+
 	struct TreePart {
 		Block::BlockData treeBlock;
 		std::vector<glm::vec3> relativePos;
@@ -16,13 +19,9 @@ public:
 
 	std::vector<TreePart> parts; 
 
-	
-	//static std::vector<glm::vec3> allTreePositions;
+	glm::vec3 TreePosition;
 
-	static void fillOutRandomTreePositions(glm::vec2 sizeX, glm::vec2 sizeZ, float height, int TreeCount);
+	static void RenderAllTrees(Shader shaderProgram);
 
-	static void SpawnTree(glm::vec3 TreePosition, Tree treeObject, Shader shaderProgram);
-
-
-	Tree(const std::string& TreeDisplayName, const Block::BlockData& trunkBlock, const Block::BlockData& leafBlock);
+	Tree(const std::string TreeDisplayName, const Block::BlockData& trunkBlock, const Block::BlockData& leafBlock, glm::vec3 InputTreePosition);
 };

@@ -1,4 +1,5 @@
 #include"Camera.h"
+#include"Terrain.h"
 #include<iostream>
 
 
@@ -31,13 +32,11 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 {
 	glm::mat4 view = glm::mat4(1.0f);
 	glm::mat4 projection = glm::mat4(1.0f);
-
+	
 	view = glm::lookAt(Position, Position + Orientation, Up);
 	projection = glm::perspective(glm::radians(FOVdeg), (float)width / (float)height, nearPlane, farPlane);
 
-
 	glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view));
-
 }
 
 float lastTime = glfwGetTime();
@@ -170,8 +169,10 @@ void Camera::Inputs(GLFWwindow* window)
 
 		if (ImitatePlayer)
 		{
-			//This locks the camera position to Y = 1, to immiate a basic player camera
-			Position = glm::vec3(Position.x, 1.0f, Position.z);
+			//This locks the camera position to the top of the the chunks, to immiate a basic player camera
+			unsigned int PlayerHeight = 2;
+			Position = glm::vec3(Position.x, Chunk::ChunkHeight + PlayerHeight, Position.z);
+			speed = 4.5f;
 		}
 
 

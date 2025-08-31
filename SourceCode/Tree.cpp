@@ -8,52 +8,39 @@
 #include<iostream>
 #include <random>
 
+std::vector<Tree> Tree::AllTrees;
 
-void Tree::SpawnTree(glm::vec3 TreePosition, Tree treeObject, Shader shaderProgram)
+void Tree::RenderAllTrees(Shader shaderProgram)
 {
-	//Cycles through both the log and leaf parts to build the tree.
-	// (Since the trunk is defined first, it builds the trunk, then the leaves)
-
-
-
-	for (int p = 0; p < treeObject.parts.size(); p++)
+	//Does this for every tree in the vector
+	for (Tree treeObject : AllTrees)
 	{
-		for (auto& offset : treeObject.parts[p].relativePos)
+		
+		for (int p = 0; p < treeObject.parts.size(); p++)
 		{
-			Block::SpawnBlock(treeObject.parts[p].treeBlock.DisplayName, TreePosition + offset, shaderProgram);
+			//Cycles through both the log and leaf parts to build the tree.
+			// (Since the trunk is defined first, it builds the trunk, then the leaves)
+
+
+
+			for (auto& offset : treeObject.parts[p].relativePos)
+			{
+				std::cout << "Placing: " << treeObject.parts[p].treeBlock.DisplayName << std::endl;
+				Block::SpawnBlock(treeObject.parts[p].treeBlock.DisplayName, treeObject.TreePosition + offset, shaderProgram);
+			}
 		}
 	}
 }
 
 
-int getRandomInt(int min, int max) {
-	static std::random_device rd;
-	static std::mt19937 gen(rd());
-	std::uniform_int_distribution<int> dist(min, max);
-	return dist(gen);
-}
 
-void Tree::fillOutRandomTreePositions(glm::vec2 sizeX, glm::vec2 sizeZ, float height, int TreeCount)
+Tree::Tree(const std::string TreeDisplayName, const Block::BlockData& trunkBlock, const Block::BlockData& leafBlock, glm::vec3 InputTreePosition)
 {
-	for (int i = 0; i < TreeCount; i++)
-	{
-
-		float generatedX = (getRandomInt(round(sizeX.x), round(sizeX.y)) * 1.0f);
-		float generatedZ = (getRandomInt(round(sizeZ.x), round(sizeZ.y)) * 1.0f);
-
-		glm::vec3 generatedVec3 = glm::vec3(generatedX, height, generatedZ);
-
-		//Tree::allTreePositions.push_back(generatedVec3);
-
-	}
-}
+	TreePosition = InputTreePosition;
 
 
 
 
-
-Tree::Tree(const std::string& TreeDisplayName, const Block::BlockData& trunkBlock, const Block::BlockData& leafBlock)
-{
 	if (TreeDisplayName == "Oak")
 	{
 		//Trunk

@@ -1,15 +1,7 @@
-﻿  Main.cpp
-C:\dev\Voxl-Engine\Main.cpp(1,9): warning C4005: 'IMGUI_IMPL_OPENGL_LOADER_GLAD': macro redefinition
-      C:\dev\Voxl-Engine\Main.cpp(1,9):
-      'IMGUI_IMPL_OPENGL_LOADER_GLAD' previously declared on the command line
+﻿  Terrain.cpp
+C:\dev\Voxl-Engine\Libraries\Custom\Terrain.h(30,16): warning C4091: 'static ': ignored on left of 'Chunk::worldChunkData' when no variable is declared
+  (compiling source file 'SourceCode/Terrain.cpp')
   
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
-  (compiling source file 'Main.cpp')
-      C:\dev\Voxl-Engine\Libraries\include\glad\glad.h(32,9):
-      see previous definition of 'APIENTRY'
-  
-C:\dev\Voxl-Engine\Main.cpp(286,26): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(287,29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(374,21): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(59,11): warning C4101: 'ui_Tools': unreferenced local variable
+C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(235,12): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(278,43): warning C4018: '<=': signed/unsigned mismatch
   Voxl-Engine.vcxproj -> C:\dev\Voxl-Engine\x64\Debug\Voxl-Engine.exe
