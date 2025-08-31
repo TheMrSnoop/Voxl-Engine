@@ -10,6 +10,10 @@ public:
 
 	static void SpawnChunks(glm::uint Iterations, Shader shaderProgram);
 
+	static int returnChunk(glm::vec3 position);
+
+	static void InitTerrainAtlas();
+
 	glm::vec3 cordinates;
 
 	static int ChunkWidth;
@@ -24,6 +28,7 @@ public:
 		GLuint VAO = 0, VBO = 0, EBO = 0;
 		int indexCount = 0;
 		int textureIndex = -1; // index into Block::allBlockTextures (for now use first block's texture)
+		std::vector<int> textureIndexArray;
 	};
 
 
@@ -35,12 +40,4 @@ public:
 		ChunkMesh mesh;
 	};
 
-
-
-
-	//All of this is for the Chunk Mesh
-
-
-
-	
 };

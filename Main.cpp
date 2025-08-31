@@ -44,6 +44,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
+
     VoxlEngine voxlEngine;
     MenuBar menuBar;
     UI_Tools ui_Tools;
@@ -65,8 +66,13 @@ int main()
     gladLoadGL();
     glViewport(0, 0, width, height);
 
+
+    //An Aditional Engine Optimization: Hides faces that face away from the camera (essentially only rendering a single side of a plane)
+    glEnable(GL_CULL_FACE);
+
     // Initialize block textures 
     Block::InitTextures();
+
 
     glClearColor(0.753f, 0.847f, 1.0f, 1.0f); // Sky white
     glClear(GL_COLOR_BUFFER_BIT);
@@ -86,6 +92,8 @@ int main()
     images[0].height = iconHeight;
     images[0].pixels = iconPixels;
     glfwSetWindowIcon(window, 1, images);
+
+    Chunk::InitTerrainAtlas();
 
     // Shaders
     Shader shaderProgram("Shaders/default.vert", "Shaders/default.frag");
@@ -328,8 +336,10 @@ int main()
         TextBlock txt_CameraSpeed(DeveloperMenu, fmt::format("Camera Speed {:.1f}", camera.speed));
         TextBlock txt_CameraRotation(DeveloperMenu, fmt::format("Camera Rotation {:.1f}, {:.1f}, {:.1f}", camera.Orientation.x, camera.Orientation.y, camera.Orientation.z));
         TextBlock txt_CameraPosition(DeveloperMenu, fmt::format("Camera Position {:.1f}, {:.1f}, {:.1f}", camera.Position.x, camera.Position.y, camera.Position.z));
-        TextBlock txt_ChunkPosition(DeveloperMenu, fmt::format("Chunk: {:.1f}, {:.1f}, {:.1f}", CurrentChunkPosition.x, CurrentChunkPosition.y, CurrentChunkPosition.z));
         TextBlock txt_buffer02(DeveloperMenu, " ");
+        TextBlock txt_ChunkPosition(DeveloperMenu, fmt::format("Chunk: {:.1f}, {:.1f}, {:.1f}", CurrentChunkPosition.x, CurrentChunkPosition.y, CurrentChunkPosition.z));
+        TextBlock txt_ChunkIndex(DeveloperMenu, fmt::format("Chunk: {:1}", Chunk::returnChunk(CurrentChunkPosition)));
+        TextBlock txt_buffer03(DeveloperMenu, " ");
         TextBlock txt_cameraMode(DeveloperMenu, fmt::format("[L-Alt] Camera Free: {:s}", camera.ImitatePlayer ? "FALSE" : "TRUE"));
         TextBlock txt_resolution(DeveloperMenu, fmt::format("Display Resolution: {:1}/{:1}", voxlEngine.getDisplayResolution().x, voxlEngine.getDisplayResolution().y));
         Canvas::Render(DeveloperMenu);

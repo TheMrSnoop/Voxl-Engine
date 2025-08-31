@@ -21,6 +21,8 @@ public:
 	//only works with strings. I gotta make more, or a better single one.
 	static std::string getRandomVectorMember_STR(std::vector<std::string> inputVector);
 
+	static bool isVectorEqual(glm::vec3 vec1, glm::vec3 vec2); 
+
 	
 	//For calculating FPS and DeltaTime
 	float currentTime = 0.0f;

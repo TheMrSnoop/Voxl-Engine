@@ -90,6 +90,15 @@ glm::vec3 VoxlEngine::multiplyVectorWithFloat(glm::vec3 inVector, float multipli
 	return productVector;
 }
 
+bool VoxlEngine::isVectorEqual(glm::vec3 vec1, glm::vec3 vec2)
+{
+	if (vec1.x == vec2.x && vec1.y == vec2.y && vec1.z == vec2.z) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
 
 
 VoxlEngine::RaycastHit VoxlEngine::Raycast(glm::vec3 origin, glm::vec3 dir, int maxSteps)
