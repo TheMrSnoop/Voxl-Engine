@@ -19,7 +19,6 @@ public:
 	static int ChunkWidth;
 	static int ChunkHeight;
 
-
 	struct ChunkMesh
 	{
 		std::vector<float> vertices;
@@ -40,4 +39,19 @@ public:
 		ChunkMesh mesh;
 	};
 
+};
+
+class TerrainGeneration
+{
+public:
+
+	//Noise DATA
+
+	//for some reason, const float doesnt work, so I need to do constexpr float instead.
+	//const ints work though...?
+
+	static constexpr float freq = 10.0f;          // big flat areas -> lower; more detail -> higher
+	static constexpr float amplitude = 20.0f;      // ±1 block typical; use 2.0 for ±2 blocks
+	static const int quantizeLevels = 1;      // 1 = continuous; 2 = stronger plateaus
+	static uint64_t seed;          // global seed if you want determinism
 };

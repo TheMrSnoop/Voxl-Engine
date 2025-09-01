@@ -11,20 +11,31 @@ class VoxlEngine
 {
 public:
 	VoxlEngine();
+
+	//VECTORS
 	glm::vec2 getDisplayResolution();
 	glm::vec3 getForwardVector();
-	
 	glm::vec3 multiplyVectorWithFloat(glm::vec3, float);
+	static bool isVectorEqual(glm::vec3 vec1, glm::vec3 vec2);
 
+	
+
+	//RANDOMNESS
 	static int getRandomInt(int min, int max);
 
 	//only works with strings. I gotta make more, or a better single one.
 	static std::string getRandomVectorMember_STR(std::vector<std::string> inputVector);
 
-	static bool isVectorEqual(glm::vec3 vec1, glm::vec3 vec2); 
+	//generates the world seed
+	static uint64_t generateSeed();
 
 	
-	//For calculating FPS and DeltaTime
+	
+	//STRINGS
+	static std::string returnConsoleBar(float percentage, std::string Label = "");
+
+	
+	//ENGINE METRICS
 	float currentTime = 0.0f;
 	float deltaTime = 0.0f;
 	static float DTPS;

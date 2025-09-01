@@ -13,7 +13,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
 		activeCamera->speed += yoffset * 0.5f;
 		activeCamera->speed = glm::clamp(activeCamera->speed, 0.0001f, 50.0f);
-		std::cout << "scroll speed: " << activeCamera->speed << std::endl;
+		std::cout << "Camera speed: " << activeCamera->speed << std::endl;
 	}
 }
 

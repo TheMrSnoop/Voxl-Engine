@@ -11,6 +11,11 @@
 
 #include <unordered_map>
 
+#include "Noise.h"
+
+#define FMT_HEADER_ONLY
+#include <core.h>
+
 
 std::vector<Chunk::worldChunkData> allWorldChunkData;
 
@@ -30,6 +35,7 @@ bool GeneratedChunks = false;
 
 using namespace std;
 
+
 //this should eventually be tied to different biomes 
 std::vector<std::string> PossibleTreeSpawns = { "Oak", "Oak_Large", "Pine" };
 
@@ -41,6 +47,9 @@ static const int ATLAS_TILE_PX = 16;
 static const int ATLAS_COLS = ATLAS_SIZE_PX / ATLAS_TILE_PX; // 4
 static const int ATLAS_ROWS = ATLAS_COLS; //makes it a square
 
+uint64_t TerrainGeneration::seed = VoxlEngine::generateSeed();
+
+
 
 // file-scope pointer — initially null
 Texture* terrainAtlasTexture = nullptr;
@@ -48,12 +57,16 @@ Texture* terrainAtlasTexture = nullptr;
 // call after GL context is created 
 void Chunk::InitTerrainAtlas()
 {
+    //Initalizes the terrain
     if (terrainAtlasTexture == nullptr)
     {
         terrainAtlasTexture = new Texture("C:/dev/Voxl-Engine/Images/BlockTextures/TerrainAtlas.jpg", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
         // could be used for a chunk shader later
         // terrainAtlasTexture->texUnit(yourChunkShader, "uAtlas", 0); // where 0 = texture unit index for GL_TEXTURE0
     }
+
+    //Prints the generated seed.
+    cout << "World Seed: " << TerrainGeneration::seed << endl;
 }
 
 
@@ -308,8 +321,10 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+    std::cout << VoxlEngine::returnConsoleBar((((allWorldChunkData.size() + 1) * 1.0f) / 9), "Generating Terrain") << std::endl;
 
-    std::cout << "[Generated Chunk Mesh " << allWorldChunkData.size() + 1 << "|" << "27" << "] verts = " << (mesh.vertices.size()) << " indices = " << mesh.indices.size() << std::endl;
+    //std::cout << "Generating Terrain: " << round((((allWorldChunkData.size() + 1) * 1.0f) / 27) * 100) << "%" << std::endl;
+
 
     return mesh;
 }
@@ -364,8 +379,62 @@ void RenderAllChunks(Shader& shaderProgram)
 
 std::vector<Block> allNewChunkBlocks;
 
-//This method is slower, but removes all the weird holes in the terrain.
-void SpawnChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightRange)
+std::vector<glm::vec3> allTreePositions;
+
+void GenerateTrees(int Count)
+{
+    for (int i = 0; i < Count; i++)
+    {
+        Tree newTree = Tree::ReturnTree("Oak");
+
+        glm::vec3 treeSpawnPosition = glm::vec3(Chunk_X_Position + (float)VoxlEngine::getRandomInt(-8, 8), 15.0f, Chunk_Z_Position + (float)VoxlEngine::getRandomInt(-8, 8));
+
+        //there is only 2 parts, so this should happen twice.
+        for (Tree::TreePart part : newTree.parts)
+        {
+            for (glm::vec3 logPositions : part.relativePos)
+            {
+                //remember, textures are still mismatched.
+                Block newChunkBlock(part.treeBlock.DisplayName, logPositions + treeSpawnPosition);
+
+                allNewChunkBlocks.push_back(newChunkBlock);
+            }
+        }
+    }
+}
+
+void GenerateWater()
+{
+    glm::vec3 relativeOffset = glm::vec3(0.0f, 0.0f, 0.0f);
+
+    // Spawns a column of stone blocks in a row (Z Axis)
+    for (int z = Chunk::ChunkWidth * -1; z < Chunk::ChunkWidth; z++)
+    {
+        //Spawns a column of blocks in a row (X Axis)
+        for (int x = Chunk::ChunkWidth * -1; x < Chunk::ChunkWidth; x++)
+        {
+            int Y_Min_Height;
+            int Y_Max_Height;
+
+
+            //spawns a column of blocks, normally.
+            for (int y = 10; y < 16; y++)
+            {
+                relativeOffset = glm::vec3(x * 1.0f, 1.0f, z * 1.0f);
+
+                if (!doesThisChunkHaveABlockAtLocation(relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position), allNewChunkBlocks))
+                {
+                    //remember, textures are still mismatched.
+                    Block newChunkBlock("Stone", relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
+
+                    allNewChunkBlocks.push_back(newChunkBlock);
+                }
+            }
+        }
+    }
+}
+
+void GenerateChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightRange, bool isSurfaceLayer)
 {
     glm::vec3 relativeOffset = glm::vec3(0.0f, 0.0f, 0.0f);
 
@@ -376,17 +445,63 @@ void SpawnChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightRang
         //Spawns a column of blocks in a row (X Axis)
         for (int x = Chunk::ChunkWidth * -1; x < Chunk::ChunkWidth; x++)
         {
-            //Spawns a column  of blocks
-            for (int y = 0; y < VoxlEngine::getRandomInt(maxHeightRange.x, maxHeightRange.y); y++)
-            {
-                relativeOffset = glm::vec3(x * 1.0f, 1.0f, z * 1.0f);
-                Block newChunkBlock(BlockID, relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
+            int Y_Min_Height;
+            int Y_Max_Height;
 
-                allNewChunkBlocks.push_back(newChunkBlock);
+            if (!isSurfaceLayer)
+            {
+                Y_Min_Height = maxHeightRange.x;
+                Y_Max_Height = maxHeightRange.y;
+
+                //spawns a column of blocks, normally.
+                for (int y = 0; y < VoxlEngine::getRandomInt(maxHeightRange.x, maxHeightRange.y); y++)
+                {
+                    relativeOffset = glm::vec3(x * 1.0f, 1.0f, z * 1.0f);
+
+                    //if true, then the chunk already has a block at location, so I inverse it with !.
+                    //speeds up chunk generation by about 1.75x, because it only adds a new block if it doesnt already exsist.
+                    if (!doesThisChunkHaveABlockAtLocation(relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position), allNewChunkBlocks))
+                    {
+                        Block newChunkBlock(BlockID, relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
+
+                        allNewChunkBlocks.push_back(newChunkBlock);
+                    }
+                }
+            }
+            else
+            {
+                //Noise DATA
+                float freq = 0.1f;          // big flat areas -> lower; more detail -> higher
+                float amplitude = 1.0f;      // ±1 block typical; use 2.0 for ±2 blocks
+                int quantizeLevels = 2;      // 1 = continuous; 2 = stronger plateaus
+
+                int baseMax = (int)maxHeightRange.y; // your intended base height
+
+                int minClamp = maxHeightRange.y - 1;
+                int maxClamp = maxHeightRange.y + 20; // or any world cap you use
+
+                Y_Max_Height = PerlinNoise::computeHeightFromPerlinColumn(baseMax, Chunk_X_Position + x, Chunk_Z_Position + z,
+                    freq, amplitude, quantizeLevels, TerrainGeneration::seed,
+                    minClamp, maxClamp);
+
+
+                //spawns a collumn of blocks using perlin noise
+                for (int y = 0; y < Y_Max_Height; y++)
+                {
+                    relativeOffset = glm::vec3(x * 1.0f, 1.0f, z * 1.0f);
+                    //speeds up chunk generation by about 1.75x, because it only adds a new block if it doesnt already exsist.
+                    if (!doesThisChunkHaveABlockAtLocation(relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position), allNewChunkBlocks))
+                    {
+                        Block newChunkBlock(BlockID, relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
+
+                        allNewChunkBlocks.push_back(newChunkBlock);
+
+                        //Should only generate trees (sometimes) on the highest block, on the surface.
+                    }
+                }
             }
         }
     }
-
 }
 
 
@@ -420,43 +535,28 @@ void Chunk::SpawnChunks(glm::uint Iterations, Shader shaderProgram)
                 //I know the ID doesnt make any sense, but the atlas texture array or smth is mismatched with the block database...
                 // 
                 //Stone Layer
-                SpawnChunkLayer("Water", 0, glm::vec2(5, 7));
+                GenerateChunkLayer("Water", 0, glm::vec2(5, 7), false);
 
                 //Dirt Layer
-                SpawnChunkLayer("Sand", 7, glm::vec2(9, 11));
+                GenerateChunkLayer("Sand", 7, glm::vec2(11, 13), false);
 
                 //Grass Layer
-                SpawnChunkLayer("Gold Ore", 10, glm::vec2(12, 12));
+                GenerateChunkLayer("Gold Ore", 10, glm::vec2(-1, 15), true);
+
+                //GenerateWater();
+
+                GenerateTrees(VoxlEngine::getRandomInt(1, 2));
+
 
 
                 // avoids rebuilding every frame
                 Chunk::worldChunkData worldData;
-                worldData.chunkPosition = glm::vec3(Chunk_X_Position, 0.0f, Chunk_Z_Position);
+                worldData.chunkPosition = glm::vec3(Chunk_X_Position, 0.0f, Chunk_Z_Position); 
                 worldData.chunkBlocks = std::move(allNewChunkBlocks);
 
                 // build mesh and store inside worldData
                 worldData.mesh = BuildChunkMesh(shaderProgram, worldData.chunkBlocks);
 
-                // Spawns trees randomly
-                if (VoxlEngine::getRandomInt(0, 1) == 0)
-                {
-                    Tree ChunkTree(std::string(VoxlEngine::getRandomVectorMember_STR(PossibleTreeSpawns)),
-                        Block::ReturnBlock("Log"),
-                        Block::ReturnBlock("Leaves"),
-                        glm::vec3(Chunk_X_Position, 0.0f, Chunk_Z_Position));
-
-                    
-                    for (auto treePart : ChunkTree.parts)
-                    {
-                        for (auto treePosition : treePart.relativePos)
-                        {
-                            Block newTreeBlock(treePart.treeBlock.DisplayName, treePosition);
-                            worldData.chunkBlocks.push_back(newTreeBlock);
-                        }
-                    }
-
-                    Tree::AllTrees.push_back(ChunkTree);
-                }
 
                 allWorldChunkData.push_back(std::move(worldData));
 

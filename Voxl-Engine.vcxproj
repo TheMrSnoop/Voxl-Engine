@@ -156,6 +156,7 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SourceCode\Noise.cpp" />
     <ClCompile Include="SourceCode\shaderClass.cpp" />
     <ClCompile Include="SourceCode\MenuBar.cpp" />
     <ClCompile Include="SourceCode\stb.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="Libraries\Custom\Block.h" />
     <ClInclude Include="Libraries\Custom\MenuBar.h" />
+    <ClInclude Include="Libraries\Custom\Noise.h" />
     <ClInclude Include="Libraries\Custom\Terrain.h" />
     <ClInclude Include="Libraries\Custom\Tree.h" />
     <ClInclude Include="Libraries\Custom\UserInterface.h" />

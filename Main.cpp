@@ -283,7 +283,7 @@ int main()
         Block::SpawnBlock("Light Block", glm::vec3(0.0f, 1.0f, -3.0f), shaderProgram);
 
         // Spawn chunks
-        Chunk::SpawnChunks(2, shaderProgram);
+        Chunk::SpawnChunks(1, shaderProgram);
 
         glm::vec3 blockPlacementPosition = camera.Position + voxlEngine.multiplyVectorWithFloat(camera.Orientation, 2.0f);
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
@@ -329,7 +329,7 @@ int main()
         CurrentChunkPosition.z = round(camera.Position.z / 32.0f);
 
         Canvas DeveloperMenu(ImVec2(20, 20), ImVec2(800, 800), "DEVELOPER MENU");
-        TextBlock txt_FPS(DeveloperMenu, fmt::format("FPS: {:.2f}", VoxlEngine::FPS));
+        TextBlock txt_FPS(DeveloperMenu, fmt::format("FPS: {:1}", round(VoxlEngine::FPS)));
         TextBlock txt_DeltaTime(DeveloperMenu, fmt::format("Delta Time: {:.10f}", VoxlEngine::DTPS));
         TextBlock txt_RunTime(DeveloperMenu, fmt::format("Runtime: {:.1f} seconds", currentTime));
         TextBlock txt_buffer01(DeveloperMenu, " ");

@@ -57,6 +57,17 @@ int VoxlEngine::getRandomInt(int min, int max)
 	return dist(gen);
 }
 
+uint64_t VoxlEngine::generateSeed()
+{
+	std::random_device rd;
+
+	std::mt19937_64 gen(rd());
+
+	uint64_t random_seed = gen();
+
+	return random_seed;
+}
+
 std::string VoxlEngine::getRandomVectorMember_STR(std::vector<std::string> inputVector)
 {
 	int MaxIndex = inputVector.size() - 1;
@@ -98,6 +109,33 @@ bool VoxlEngine::isVectorEqual(glm::vec3 vec1, glm::vec3 vec2)
 	else {
 		return false;
 	}
+}
+
+std::string VoxlEngine::returnConsoleBar(float percentage, std::string Label)
+{
+	int filled = round(percentage * 10);
+
+	int notFilled = 10 - filled;
+
+	std::string finalString;
+
+
+	for (int i = 1; i <= 10; i++)
+	{
+		if (i <= filled)
+		{
+			finalString += "#";
+		}
+		else
+		{
+			finalString += ".";
+		}
+		
+	}
+
+	finalString = "[" + Label + "]" + " " + finalString;
+
+	return finalString;
 }
 
 

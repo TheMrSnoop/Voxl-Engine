@@ -8,38 +8,15 @@
 #include<iostream>
 #include <random>
 
-std::vector<Tree> Tree::AllTrees;
-
-void Tree::RenderAllTrees(Shader shaderProgram)
+Tree Tree::ReturnTree(const std::string TreeDisplayName)
 {
-	//Does this for every tree in the vector
-	for (Tree treeObject : AllTrees)
-	{
-		
-		for (int p = 0; p < treeObject.parts.size(); p++)
-		{
-			//Cycles through both the log and leaf parts to build the tree.
-			// (Since the trunk is defined first, it builds the trunk, then the leaves)
-
-
-
-			for (auto& offset : treeObject.parts[p].relativePos)
-			{
-				std::cout << "Placing: " << treeObject.parts[p].treeBlock.DisplayName << std::endl;
-				Block::SpawnBlock(treeObject.parts[p].treeBlock.DisplayName, treeObject.TreePosition + offset, shaderProgram);
-			}
-		}
-	}
+	//Texture mismatch
+	Tree newTree("Oak", Block::ReturnBlock("Lava"), Block::ReturnBlock("Iron Ore"));
+	return newTree;
 }
 
-
-
-Tree::Tree(const std::string TreeDisplayName, const Block::BlockData& trunkBlock, const Block::BlockData& leafBlock, glm::vec3 InputTreePosition)
+Tree::Tree(const std::string TreeDisplayName, const Block::BlockData& trunkBlock, const Block::BlockData& leafBlock)
 {
-	TreePosition = InputTreePosition;
-
-
-
 
 	if (TreeDisplayName == "Oak")
 	{
