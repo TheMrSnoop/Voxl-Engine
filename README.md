@@ -5,7 +5,6 @@ Created in C++ to force myself to learn it, at least to an intermediate level.
 
 # Still left to do
 * Shadows
-* Voxel Terrain
   
 # Concept Art
 How I would want the engine to look if I don't give up
