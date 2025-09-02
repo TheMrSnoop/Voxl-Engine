@@ -2,19 +2,21 @@
 
 My attempt at a custom made game engine.
 Created in C++ to force myself to learn it, at least to an intermediate level.
-
-# Still left to do
-* Shadows
   
 # Concept Art
 How I would want the engine to look if I don't give up
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Voxl%20Concept.png)
+![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Voxl%20Concept%20New.png)
 
 # Engine Screenshots
-Pixelation Shader
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/pixels.png)
+Trees
+![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/trees.png)
 
-Black Outline Shader
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/outline.png)
+Basic Island Generation
+![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/islands.png)
 
-
+# Still left to do
+* Shadows
+- [x] Add Voxel Based Terrain
+- [x] Add basic Engine UI
+- [ ] Implement the ability to add Custom Biomes
+- [ ] Implement Real Time Shadows
