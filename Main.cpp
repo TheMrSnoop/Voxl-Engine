@@ -36,6 +36,8 @@
 //Its cleaner if I just put this inside Camera.h
 float FOV = 70.0f;
 
+bool closeWindow = false;
+
 int main()
 {
     glfwInit();
@@ -53,7 +55,7 @@ int main()
     int height = 1080;
 
     GLFWwindow* window = glfwCreateWindow(width, height, "Voxl Engine", NULL, NULL);
-    menuBar.CreateMenuBar(window, glfwGetWin32Window(window));
+    //menuBar.CreateMenuBar(window, glfwGetWin32Window(window));
 
     if (window == NULL) {
         std::cout << "Failed to create GLFW Window" << std::endl;
@@ -202,7 +204,7 @@ int main()
     int blockDataBaseLength = (int)allBlocks.size();
     int blockTextureBaseLength = (int)allBlockTextures.size();
 
-    Camera camera(width, height, glm::vec3(0.0f, 1.0f, 2.0f));
+    Camera camera(width, height, glm::vec3(0.0f, 24.0f, 2.0f));
 
     WorldStructure Ruins(std::string("Ruins"),
         {
@@ -246,7 +248,7 @@ int main()
     glDepthMask(GL_TRUE);
 
     // render loop
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(window) and !closeWindow)
     {
         voxlEngine.CalculateFPS();
         float currentTime = (float)glfwGetTime();
@@ -259,6 +261,7 @@ int main()
         sceneFBO.Bind();
         glEnable(GL_DEPTH_TEST);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
         // sunlight 
         glm::vec3 sunDir = glm::normalize(glm::vec3(currentTime, -1.0f, -0.2f));
@@ -318,9 +321,6 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 6);
         quadVAO.Unbind();
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
 
         glm::vec3 CurrentChunkPosition;
 
@@ -328,7 +328,11 @@ int main()
         CurrentChunkPosition.y = 1.0f;
         CurrentChunkPosition.z = round(camera.Position.z / 32.0f);
 
-        Canvas DeveloperMenu(ImVec2(20, 20), ImVec2(800, 800), "DEVELOPER MENU");
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        Canvas DeveloperMenu(ImVec2(20, 700), ImVec2(800, 800), "DEVELOPER MENU");
         TextBlock txt_FPS(DeveloperMenu, fmt::format("FPS: {:1}", round(VoxlEngine::FPS)));
         TextBlock txt_DeltaTime(DeveloperMenu, fmt::format("Delta Time: {:.10f}", VoxlEngine::DTPS));
         TextBlock txt_RunTime(DeveloperMenu, fmt::format("Runtime: {:.1f} seconds", currentTime));
@@ -343,6 +347,163 @@ int main()
         TextBlock txt_cameraMode(DeveloperMenu, fmt::format("[L-Alt] Camera Free: {:s}", camera.ImitatePlayer ? "FALSE" : "TRUE"));
         TextBlock txt_resolution(DeveloperMenu, fmt::format("Display Resolution: {:1}/{:1}", voxlEngine.getDisplayResolution().x, voxlEngine.getDisplayResolution().y));
         Canvas::Render(DeveloperMenu);
+
+
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_MenuBarBg, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
+
+        ImGui::PushStyleColor(ImGuiCol_PopupBg, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
+
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.227, 0.176, 0.467, 1.0f));
+
+
+
+        //Loading Crosshair Image
+        int uiTextData_floppy_W, uiTextData_floppy_H, uiTextData_floppy_C;
+        unsigned char* uiTextData_floppy = stbi_load("C:/dev/Voxl-Engine/Images/UI_Icons/floppy.png", &uiTextData_floppy_W, &uiTextData_floppy_H, &uiTextData_floppy_C, 4);
+
+        //Creating the Crosshair Image
+        GLuint uiTex_floppy;
+        glGenTextures(1, &uiTex_floppy);
+        glBindTexture(GL_TEXTURE_2D, uiTex_floppy);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, uiTextData_floppy);
+        stbi_image_free(uiTextData_floppy); // Free CPU memory after uploading to GPU
+
+        if (ImGui::BeginMainMenuBar())
+        {
+            if (ImGui::BeginMenu("File"))
+            {
+
+                if (ImGui::MenuItem("New", "Ctrl+N")) {
+                    // do action
+                }
+
+                if (ImGui::MenuItem("Open...", "Ctrl+O")) {
+                    // open action
+                }
+
+                //ImGui::Image((void*)uiTex_floppy, ImVec2(uiTextData_floppy_W, uiTextData_floppy_H)); ImGui::SameLine();;
+                if (ImGui::MenuItem("Save Project...", "Ctrl+S")) {
+                    // open action
+                }
+
+                //ImGui::Image((void*)uiTex_floppy, ImVec2(uiTextData_floppy_W, uiTextData_floppy_H)); ImGui::SameLine();;
+                if (ImGui::MenuItem("Save Project As...", "Ctrl+Shift+S")) {
+                    // open action
+                }
+
+                ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(1, 0.357, 0.357, 1.0f));
+                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+                if (ImGui::MenuItem("Exit Voxl")) {
+                    closeWindow = true;
+                }
+                ImGui::PopStyleColor(2);
+
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("Edit"))
+            {
+                if (ImGui::MenuItem("Project Settings")) {
+                    // do action
+                }
+                if (ImGui::MenuItem("Editor Settings")) {
+                    // open action
+                }
+                ImGui::EndMenu();
+            }
+
+
+            if (ImGui::BeginMenu("View"))
+            {
+                if (ImGui::MenuItem("Viewmode")) {
+                    // do action
+                }
+                if (ImGui::MenuItem("Camera FOV")) {
+                    // open action
+                }
+                if (ImGui::MenuItem("Engine Metrics")) {
+                    // open action
+                }
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("Add"))
+            {
+                if (ImGui::MenuItem("Game Object")) {
+                    // do action
+                }
+                if (ImGui::MenuItem("Player Object")) {
+                    // open action
+                }
+                if (ImGui::MenuItem("Character Object")) {
+                    // open action
+                }
+                if (ImGui::MenuItem("Light Block")) {
+                    // open action
+                }
+                if (ImGui::MenuItem("Directional Light")) {
+                    // open action
+                }
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("Help"))
+            {
+                if (ImGui::MenuItem("Voxl Documentation")) {
+                    // do action
+                }
+                if (ImGui::MenuItem("Created By TheMrSnoop")) {
+                    // do action
+                }
+                ImGui::EndMenu();
+            }
+
+            ImGui::EndMainMenuBar();
+        }
+
+        ImGui::PopStyleColor(4);
+
+
+
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_Tab, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_TabHovered, ImVec4(0.369, 0.369, 0.369, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_TabActive, ImVec4(0.251, 0.251, 0.251, 1.0f));
+        ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
+
+        ImGui::PushStyleVar(ImGuiStyleVar_TabRounding, 0.0f);
+
+        //ImGui::PushStyleColor(ImGuiCol_PopupBg, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
+
+        ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiCond_Always);
+        ImGui::SetNextWindowSize(ImVec2(width, 15));
+
+        ImGui::Begin("##null", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar);
+        
+        if (ImGui::BeginTabBar("Bar")) {
+            if (ImGui::BeginTabItem("World")) {
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Texture Editor")) {
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Voxel Creator")) {
+                ImGui::EndTabItem();
+            }
+            ImGui::EndTabBar();
+        }
+
+        ImGui::End();
+
+        ImGui::PopStyleVar();
+        ImGui::PopStyleColor(5);
+
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(window);
         glfwPollEvents();

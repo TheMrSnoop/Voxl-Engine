@@ -12,6 +12,7 @@
 #include <unordered_map>
 
 #include "Noise.h"
+#include "UserInterface.h"
 
 #define FMT_HEADER_ONLY
 #include <core.h>
@@ -322,6 +323,12 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     std::cout << VoxlEngine::returnConsoleBar((((allWorldChunkData.size() + 1) * 1.0f) / 9), "Generating Terrain") << std::endl;
+
+    //Canvas TerrainMenu(ImVec2(20, 20), ImVec2(800, 800), "GENERATING TERRAIN");
+
+    //TextBlock txt_terrainGen(TerrainMenu, fmt::format("Generating Terrain: {:1}%", round((((allWorldChunkData.size() + 1))))));
+
+    //Canvas::Render(TerrainMenu);
 
     //std::cout << "Generating Terrain: " << round((((allWorldChunkData.size() + 1) * 1.0f) / 27) * 100) << "%" << std::endl;
 

@@ -49,6 +49,4 @@ void Canvas::Render(Canvas canvas)
 
 	ImGui::End();
 
-	ImGui::Render();
-	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
