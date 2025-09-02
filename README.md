@@ -15,7 +15,6 @@ Basic Island Generation
 ![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/islands.png)
 
 # Still left to do
-* Shadows
 - [x] Add Voxel Based Terrain
 - [x] Add basic Engine UI
 - [ ] Implement the ability to add Custom Biomes
