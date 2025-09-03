@@ -52,3 +52,33 @@ void Texture::Delete()
 {
 	glDeleteTextures(1, &ID);
 }
+
+
+
+
+
+GLuint Image::GenerateImage(const char* imagePath)
+{
+	int width, height, channels;
+	unsigned char* imageData = stbi_load(imagePath, &width, &height, &channels, 4);
+	if (!imageData) {
+		std::cerr << "Failed to load image: " << imagePath << std::endl;
+		return 0;
+	}
+
+	GLuint imageObject;
+	glGenTextures(1, &imageObject);
+	glBindTexture(GL_TEXTURE_2D, imageObject);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+
+	glBindTexture(GL_TEXTURE_2D, 0); // unbind
+	stbi_image_free(imageData);
+
+	return imageObject;
+}

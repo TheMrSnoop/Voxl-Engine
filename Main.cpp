@@ -37,6 +37,7 @@
 float FOV = 70.0f;
 
 bool VoxlEngine::engineClosed = false;
+bool VoxlEngine::showEngineMetrics = false;
 
 
 int main()
@@ -287,7 +288,7 @@ int main()
         Block::SpawnBlock("Light Block", glm::vec3(0.0f, 1.0f, -3.0f), shaderProgram);
 
         // Spawn chunks
-        Chunk::SpawnChunks(1, shaderProgram);
+        Chunk::SpawnChunks(0, shaderProgram);
 
         glm::vec3 blockPlacementPosition = camera.Position + voxlEngine.multiplyVectorWithFloat(camera.Orientation, 2.0f);
         if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
@@ -333,37 +334,34 @@ int main()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        Canvas DeveloperMenu(ImVec2(20, 700), ImVec2(800, 800), "DEVELOPER MENU");
-        TextBlock txt_FPS(DeveloperMenu, fmt::format("FPS: {:1}", round(VoxlEngine::FPS)));
-        TextBlock txt_DeltaTime(DeveloperMenu, fmt::format("Delta Time: {:.10f}", VoxlEngine::DTPS));
-        TextBlock txt_RunTime(DeveloperMenu, fmt::format("Runtime: {:.1f} seconds", currentTime));
-        TextBlock txt_buffer01(DeveloperMenu, " ");
-        TextBlock txt_CameraSpeed(DeveloperMenu, fmt::format("Camera Speed {:.1f}", camera.speed));
-        TextBlock txt_CameraRotation(DeveloperMenu, fmt::format("Camera Rotation {:.1f}, {:.1f}, {:.1f}", camera.Orientation.x, camera.Orientation.y, camera.Orientation.z));
-        TextBlock txt_CameraPosition(DeveloperMenu, fmt::format("Camera Position {:.1f}, {:.1f}, {:.1f}", camera.Position.x, camera.Position.y, camera.Position.z));
-        TextBlock txt_buffer02(DeveloperMenu, " ");
-        TextBlock txt_ChunkPosition(DeveloperMenu, fmt::format("Chunk: {:.1f}, {:.1f}, {:.1f}", CurrentChunkPosition.x, CurrentChunkPosition.y, CurrentChunkPosition.z));
-        TextBlock txt_ChunkIndex(DeveloperMenu, fmt::format("Chunk: {:1}", Chunk::returnChunk(CurrentChunkPosition)));
-        TextBlock txt_buffer03(DeveloperMenu, " ");
-        TextBlock txt_cameraMode(DeveloperMenu, fmt::format("[L-Alt] Camera Free: {:s}", camera.ImitatePlayer ? "FALSE" : "TRUE"));
-        TextBlock txt_resolution(DeveloperMenu, fmt::format("Display Resolution: {:1}/{:1}", voxlEngine.getDisplayResolution().x, voxlEngine.getDisplayResolution().y));
-        Canvas::Render(DeveloperMenu);
+        //Only renders Engine metrics if user clicks the button on the navbar
+        if (VoxlEngine::showEngineMetrics)
+        {
+            ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(1.0f, 1.0f, 1.0f, 0.0f));
+            Canvas DeveloperMenu(ImVec2(50, 700), ImVec2(800, 800), "DEVELOPER MENU");
+            TextBlock txt_FPS(DeveloperMenu, fmt::format("FPS: {:1}", round(VoxlEngine::FPS)));
+            TextBlock txt_DeltaTime(DeveloperMenu, fmt::format("Delta Time: {:.10f}", VoxlEngine::DTPS));
+            TextBlock txt_RunTime(DeveloperMenu, fmt::format("Runtime: {:.1f} seconds", currentTime));
+            TextBlock txt_buffer01(DeveloperMenu, " ");
+            TextBlock txt_CameraSpeed(DeveloperMenu, fmt::format("Camera Speed {:.1f}", camera.speed));
+            TextBlock txt_CameraRotation(DeveloperMenu, fmt::format("Camera Rotation {:.1f}, {:.1f}, {:.1f}", camera.Orientation.x, camera.Orientation.y, camera.Orientation.z));
+            TextBlock txt_CameraPosition(DeveloperMenu, fmt::format("Camera Position {:.1f}, {:.1f}, {:.1f}", camera.Position.x, camera.Position.y, camera.Position.z));
+            TextBlock txt_buffer02(DeveloperMenu, " ");
+            TextBlock txt_ChunkPosition(DeveloperMenu, fmt::format("Chunk: {:.1f}, {:.1f}, {:.1f}", CurrentChunkPosition.x, CurrentChunkPosition.y, CurrentChunkPosition.z));
+            TextBlock txt_ChunkIndex(DeveloperMenu, fmt::format("Chunk: {:1}", Chunk::returnChunk(CurrentChunkPosition)));
+            TextBlock txt_buffer03(DeveloperMenu, " ");
+            TextBlock txt_cameraMode(DeveloperMenu, fmt::format("[L-Alt] Camera Free: {:s}", camera.ImitatePlayer ? "FALSE" : "TRUE"));
+            TextBlock txt_resolution(DeveloperMenu, fmt::format("Display Resolution: {:1}/{:1}", voxlEngine.getDisplayResolution().x, voxlEngine.getDisplayResolution().y));
+            Canvas::Render(DeveloperMenu);
+            ImGui::PopStyleColor();
+        }
 
 
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_MenuBarBg, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
-
-        ImGui::PushStyleColor(ImGuiCol_PopupBg, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
-
-        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.227, 0.176, 0.467, 1.0f));
-
-
-
-        //Loading Crosshair Image
+        //Loading Image
         int uiTextData_floppy_W, uiTextData_floppy_H, uiTextData_floppy_C;
         unsigned char* uiTextData_floppy = stbi_load("C:/dev/Voxl-Engine/Images/UI_Icons/floppy.png", &uiTextData_floppy_W, &uiTextData_floppy_H, &uiTextData_floppy_C, 4);
 
-        //Creating the Crosshair Image
+        //Creating the Image
         GLuint uiTex_floppy;
         glGenTextures(1, &uiTex_floppy);
         glBindTexture(GL_TEXTURE_2D, uiTex_floppy);
@@ -374,6 +372,8 @@ int main()
 
 
         //MENUBAR
+
+        EngineUI::ApplyDarkTheme(EngineUI::MenuBar);
         if (ImGui::BeginMainMenuBar())
         {
             //FILE
@@ -415,26 +415,17 @@ int main()
             ImGui::EndMainMenuBar();
         }
 
-        ImGui::PopStyleColor(4);
-
-
-
         //Tabs
+        EngineUI::ApplyDarkTheme(EngineUI::Tabs);
 
-        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_Tab, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_TabHovered, ImVec4(0.369, 0.369, 0.369, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_TabActive, ImVec4(0.251, 0.251, 0.251, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
+        ImGuiWindowFlags BGP_Tabs_F =
+            ImGuiWindowFlags_NoCollapse |
+            ImGuiWindowFlags_NoResize |
+            ImGuiWindowFlags_NoMove |
+            ImGuiWindowFlags_NoTitleBar |
+            ImGuiWindowFlags_NoScrollbar;
 
-        ImGui::PushStyleVar(ImGuiStyleVar_TabRounding, 0.0f);
-
-        //ImGui::PushStyleColor(ImGuiCol_PopupBg, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
-
-        ImGui::SetNextWindowPos(ImVec2(0, 20), ImGuiCond_Always);
-        ImGui::SetNextWindowSize(ImVec2(width, 15));
-
-        ImGui::Begin("##null", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar);
+        EngineUI::CreatePanel("##TabBar", BGP_Tabs_F, ImVec2(0, 20), ImVec2(width, 15));
         
         if (ImGui::BeginTabBar("Bar")) {
             EngineUI::CreateTab("World");
@@ -444,12 +435,27 @@ int main()
 
             ImGui::EndTabBar();
         }
-
-        //MUST be called before ImGui::Render();
+        //Remember, ImGui::End(), CLOSES panels, I must fill them first though.
         ImGui::End();
 
-        ImGui::PopStyleVar();
-        ImGui::PopStyleColor(5);
+        //Toolbar
+        EngineUI::ApplyDarkTheme(EngineUI::Button);
+        ImGuiWindowFlags BGP_Toolbar_F =
+            ImGuiWindowFlags_NoCollapse |
+            ImGuiWindowFlags_NoResize |
+            ImGuiWindowFlags_NoMove;
+        
+        GLuint img_add = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/add.png");
+
+
+        EngineUI::CreatePanel("##Toolbar", BGP_Toolbar_F, ImVec2(0, 30), ImVec2(40, height));
+        
+        if (ImGui::ImageButton("addButton", img_add, ImVec2(32, 32))) {
+            // clicked
+        }
+
+        ImGui::End();
+
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

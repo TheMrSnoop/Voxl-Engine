@@ -43,13 +43,28 @@ public:
 class EngineUI
 {
 public:
-	static void CreateTab(const char* headerText);
+	//CUSTOM DATA TYPES
+	static enum UI_TYPE
+	{
+		MenuBar,
+		Tabs,
+		Panel,
+		Button
+	};
 
 	static struct MenuBarData
 	{
 		const char* itemText;
 		const char* keyBind;
 	};
+
+
+	//Functions
+	static void ApplyDarkTheme(UI_TYPE type);
+
+	static void CreatePanel(const char* titleBar, ImGuiWindowFlags flags, ImVec2 screenPos, ImVec2 screenSize);
+
+	static void CreateTab(const char* headerText);
 
 	//NOTE: If there is no keybind, simply put #.
 	static void CreateMenuBarDropdown(const char* dropdownName, std::vector<MenuBarData> data);

@@ -41,8 +41,9 @@ public:
 	int roundedFPS = 0;
 	void CalculateFPS();
 
-	//RENDER LOOP
+	//GLOBAL ENGINE BOOLS
 	static bool engineClosed;
+	static bool showEngineMetrics;
 
 
 	struct RaycastHit

@@ -199,11 +199,11 @@
     <ClInclude Include="Libraries\Custom\MenuBar.h" />
     <ClInclude Include="Libraries\Custom\Noise.h" />
     <ClInclude Include="Libraries\Custom\Terrain.h" />
+    <ClInclude Include="Libraries\Custom\Texture.h" />
     <ClInclude Include="Libraries\Custom\Tree.h" />
     <ClInclude Include="Libraries\Custom\UserInterface.h" />
     <ClInclude Include="Libraries\Custom\VoxlEngine.h" />
     <ClInclude Include="shaderClass.h" />
-    <ClInclude Include="Texture.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
     <ClInclude Include="WorldStructure.h" />

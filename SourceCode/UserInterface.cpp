@@ -56,6 +56,54 @@ void Canvas::Render(Canvas canvas)
 
 //ENGINE UI
 
+//STYLE
+
+//Const Colors
+const ImVec4 DefaultGray = ImVec4(0.063f, 0.063f, 0.063f, 1.0f); //#101010
+const ImVec4 White = ImVec4(1.0f, 1.0f, 1.0f, 1.0f); //#101010
+
+void EngineUI::ApplyDarkTheme(UI_TYPE type)
+{
+	ImGuiStyle& style = ImGui::GetStyle();
+
+	//Text Color is basically shared by all the types.
+	style.Colors[ImGuiCol_Text] = White;
+
+	//Applying specific, custom color settings.
+	switch (type)
+	{
+	case EngineUI::MenuBar:
+		style.Colors[ImGuiCol_MenuBarBg] = DefaultGray;
+		style.Colors[ImGuiCol_PopupBg] = DefaultGray;
+		style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.227, 0.176, 0.467, 1.0f);
+	case EngineUI::Tabs:
+		//Colors
+		style.Colors[ImGuiCol_Tab] = DefaultGray;
+		style.Colors[ImGuiCol_TabHovered] = ImVec4(0.369, 0.369, 0.369, 1.0f);
+		style.Colors[ImGuiCol_TabActive] = ImVec4(0.251, 0.251, 0.251, 1.0f);
+		style.Colors[ImGuiCol_WindowBg] = DefaultGray;
+
+		//Variables
+		style.TabRounding = 0.0f;
+	case EngineUI::Button:
+		style.Colors[ImGuiCol_Button] = DefaultGray;
+		style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.251, 0.251, 0.251, 1.0f);
+		style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.369, 0.369, 0.369, 1.0f);
+	}
+}
+
+
+//UI RENDERING
+
+
+void EngineUI::CreatePanel(const char* titleBar, ImGuiWindowFlags flags, ImVec2 screenPos, ImVec2 screenSize)
+{
+	ImGui::SetNextWindowPos(ImVec2(screenPos.x, screenPos.y), ImGuiCond_Always);
+	ImGui::SetNextWindowSize(ImVec2(screenSize.x, screenSize.y));
+
+	ImGui::Begin(titleBar, nullptr, flags);
+}
+
 void EngineUI::CreateTab(const char* headerText)
 {
 	if (ImGui::BeginTabItem(headerText))
@@ -88,6 +136,12 @@ void CreateMenuBarItems(std::vector<EngineUI::MenuBarData> data)
 			}
 
 			ImGui::PopStyleColor(2);
+		}
+		else if (menuBarData.itemText == "Engine Metrics")
+		{
+			if (ImGui::MenuItem(menuBarData.itemText)) {
+				VoxlEngine::showEngineMetrics = !VoxlEngine::showEngineMetrics;
+			}
 		}
 		else
 		{

@@ -5,6 +5,7 @@
 #include<stb/stb_image.h>
 
 #include"shaderClass.h"
+#include"imgui.h"
 
 class Texture
 {
@@ -17,6 +18,12 @@ public:
 	void Bind();
 	void Unbind();
 	void Delete();
+};
+
+class Image
+{
+public:
+	static GLuint GenerateImage(const char* imagePath);
 };
 
 #endif
