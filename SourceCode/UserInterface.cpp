@@ -5,6 +5,7 @@
 #include"imgui.h"
 #include"imgui_impl_glfw.h"
 #include"imgui_impl_opengl3.h"
+#include"VoxlEngine.h"
 
 
 
@@ -49,4 +50,61 @@ void Canvas::Render(Canvas canvas)
 
 	ImGui::End();
 
+}
+
+
+
+//ENGINE UI
+
+void EngineUI::CreateTab(const char* headerText)
+{
+	if (ImGui::BeginTabItem(headerText))
+	{
+		//Do stuff
+		ImGui::EndTabItem();
+	}
+}
+
+void CreateMenuBarItems(std::vector<EngineUI::MenuBarData> data)
+{
+	//Loops through all the given data.
+	for (EngineUI::MenuBarData menuBarData : data)
+	{
+		auto keybind = menuBarData.keyBind;
+		//# == no keybind
+		if (keybind == "#")
+		{
+			keybind = NULL;
+		}
+
+
+		if (menuBarData.itemText == "Exit Voxl")
+		{
+			ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(1, 0.357, 0.357, 1.0f));
+			ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+			if (ImGui::MenuItem(menuBarData.itemText)) {
+				VoxlEngine::engineClosed = true;
+			}
+
+			ImGui::PopStyleColor(2);
+		}
+		else
+		{
+			if (ImGui::MenuItem(menuBarData.itemText, keybind)) {
+				// do action
+			}
+		}
+	}
+
+}
+
+
+void EngineUI::CreateMenuBarDropdown(const char* dropdownName, std::vector<MenuBarData> data)
+{
+	if (ImGui::BeginMenu(dropdownName))
+	{
+		CreateMenuBarItems(data);
+		ImGui::EndMenu();
+	}
 }

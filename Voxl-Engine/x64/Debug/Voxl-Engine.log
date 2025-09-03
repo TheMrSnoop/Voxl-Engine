@@ -1,49 +1,35 @@
-﻿  Terrain.cpp
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(1,1): warning C4828: The file contains a character starting at offset 0x475 that is illegal in the current source character set (codepage 65001).
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(1,1): warning C4828: The file contains a character starting at offset 0x3d31 that is illegal in the current source character set (codepage 65001).
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(1,1): warning C4828: The file contains a character starting at offset 0x3d4f that is illegal in the current source character set (codepage 65001).
+﻿  Main.cpp
+C:\dev\Voxl-Engine\Main.cpp(1,9): warning C4005: 'IMGUI_IMPL_OPENGL_LOADER_GLAD': macro redefinition
+      C:\dev\Voxl-Engine\Main.cpp(1,9):
+      'IMGUI_IMPL_OPENGL_LOADER_GLAD' previously declared on the command line
+  
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(130,9): warning C4005: 'APIENTRY': macro redefinition
+  (compiling source file 'Main.cpp')
+      C:\dev\Voxl-Engine\Libraries\include\glad\glad.h(32,9):
+      see previous definition of 'APIENTRY'
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UserInterface.h(48,16): warning C4091: 'static ': ignored on left of 'EngineUI::MenuBarData' when no variable is declared
+  (compiling source file 'Main.cpp')
+  
 C:\dev\Voxl-Engine\Libraries\Custom\Terrain.h(1,1): warning C4828: The file contains a character starting at offset 0x4ac that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'SourceCode/Terrain.cpp')
+  (compiling source file 'Main.cpp')
   
 C:\dev\Voxl-Engine\Libraries\Custom\Terrain.h(1,1): warning C4828: The file contains a character starting at offset 0x4ca that is illegal in the current source character set (codepage 65001).
-  (compiling source file 'SourceCode/Terrain.cpp')
+  (compiling source file 'Main.cpp')
   
 C:\dev\Voxl-Engine\Libraries\Custom\Terrain.h(34,16): warning C4091: 'static ': ignored on left of 'Chunk::worldChunkData' when no variable is declared
-  (compiling source file 'SourceCode/Terrain.cpp')
+  (compiling source file 'Main.cpp')
   
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(351,12): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(423,17): warning C4101: 'Y_Min_Height': unreferenced local variable
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(424,17): warning C4101: 'Y_Max_Height': unreferenced local variable
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(460,46): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(460,46): warning C4244:         with
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(460,46): warning C4244:         [
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(460,46): warning C4244:             T=float
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(460,46): warning C4244:         ]
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(461,46): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(461,46): warning C4244:         with
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(461,46): warning C4244:         [
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(461,46): warning C4244:             T=float
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(461,46): warning C4244:         ]
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,94): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,94): warning C4244:         with
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,94): warning C4244:         [
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,94): warning C4244:             T=float
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,94): warning C4244:         ]
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,76): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,76): warning C4244:         with
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,76): warning C4244:         [
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,76): warning C4244:             T=float
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(464,76): warning C4244:         ]
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(487,30): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(487,30): warning C4244:         with
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(487,30): warning C4244:         [
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(487,30): warning C4244:             T=float
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(487,30): warning C4244:         ]
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(488,30): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(488,30): warning C4244:         with
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(488,30): warning C4244:         [
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(488,30): warning C4244:             T=float
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(488,30): warning C4244:         ]
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(491,73): warning C4244: 'argument': conversion from 'uint64_t' to 'uint32_t', possible loss of data
-C:\dev\Voxl-Engine\SourceCode\Terrain.cpp(519,43): warning C4018: '<=': signed/unsigned mismatch
+C:\dev\Voxl-Engine\Main.cpp(358,76): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(358,69): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(358,62): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(426,73): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(426,66): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(426,59): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(427,72): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(427,65): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(427,58): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\Main.cpp(435,41): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\Main.cpp(53,14): warning C4101: 'ui_Tools': unreferenced local variable
+C:\dev\Voxl-Engine\Main.cpp(52,13): warning C4101: 'menuBar': unreferenced local variable
   Voxl-Engine.vcxproj -> C:\dev\Voxl-Engine\x64\Debug\Voxl-Engine.exe

@@ -18,8 +18,6 @@ public:
 	glm::vec3 multiplyVectorWithFloat(glm::vec3, float);
 	static bool isVectorEqual(glm::vec3 vec1, glm::vec3 vec2);
 
-	
-
 	//RANDOMNESS
 	static int getRandomInt(int min, int max);
 
@@ -42,6 +40,9 @@ public:
 	static float FPS;
 	int roundedFPS = 0;
 	void CalculateFPS();
+
+	//RENDER LOOP
+	static bool engineClosed;
 
 
 	struct RaycastHit

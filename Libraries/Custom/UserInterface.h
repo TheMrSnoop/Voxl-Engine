@@ -38,3 +38,19 @@ public:
 
 	static void Render(Canvas canvas);
 };
+
+
+class EngineUI
+{
+public:
+	static void CreateTab(const char* headerText);
+
+	static struct MenuBarData
+	{
+		const char* itemText;
+		const char* keyBind;
+	};
+
+	//NOTE: If there is no keybind, simply put #.
+	static void CreateMenuBarDropdown(const char* dropdownName, std::vector<MenuBarData> data);
+};

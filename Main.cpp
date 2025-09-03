@@ -36,7 +36,8 @@
 //Its cleaner if I just put this inside Camera.h
 float FOV = 70.0f;
 
-bool closeWindow = false;
+bool VoxlEngine::engineClosed = false;
+
 
 int main()
 {
@@ -248,7 +249,7 @@ int main()
     glDepthMask(GL_TRUE);
 
     // render loop
-    while (!glfwWindowShouldClose(window) and !closeWindow)
+    while (!glfwWindowShouldClose(window) and !VoxlEngine::engineClosed)
     {
         voxlEngine.CalculateFPS();
         float currentTime = (float)glfwGetTime();
@@ -371,96 +372,45 @@ int main()
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, uiTextData_floppy);
         stbi_image_free(uiTextData_floppy); // Free CPU memory after uploading to GPU
 
+
+        //MENUBAR
         if (ImGui::BeginMainMenuBar())
         {
-            if (ImGui::BeginMenu("File"))
+            //FILE
+            std::vector<EngineUI::MenuBarData> fileItems =
             {
+                {"New", "Ctrl+N"},
+                {"Open...", "Ctrl+O"},
+                {"Save Project...", "Ctrl+S"},
+                {"Save Project As...", "Ctrl+Shift+S"},
+                {"Exit Voxl", "#"}
+            };
+            EngineUI::CreateMenuBarDropdown("File", fileItems);
 
-                if (ImGui::MenuItem("New", "Ctrl+N")) {
-                    // do action
-                }
-
-                if (ImGui::MenuItem("Open...", "Ctrl+O")) {
-                    // open action
-                }
-
-                //ImGui::Image((void*)uiTex_floppy, ImVec2(uiTextData_floppy_W, uiTextData_floppy_H)); ImGui::SameLine();;
-                if (ImGui::MenuItem("Save Project...", "Ctrl+S")) {
-                    // open action
-                }
-
-                //ImGui::Image((void*)uiTex_floppy, ImVec2(uiTextData_floppy_W, uiTextData_floppy_H)); ImGui::SameLine();;
-                if (ImGui::MenuItem("Save Project As...", "Ctrl+Shift+S")) {
-                    // open action
-                }
-
-                ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(1, 0.357, 0.357, 1.0f));
-                ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.0f, 0.0f, 0.0f, 1.0f));
-
-                if (ImGui::MenuItem("Exit Voxl")) {
-                    closeWindow = true;
-                }
-                ImGui::PopStyleColor(2);
-
-                ImGui::EndMenu();
-            }
-
-            if (ImGui::BeginMenu("Edit"))
+            //EDIT
+            std::vector<EngineUI::MenuBarData> editItems =
             {
-                if (ImGui::MenuItem("Project Settings")) {
-                    // do action
-                }
-                if (ImGui::MenuItem("Editor Settings")) {
-                    // open action
-                }
-                ImGui::EndMenu();
-            }
+                {"Project Settings", "#"},
+                {"Editor Settings", "#"}
+            };
+            EngineUI::CreateMenuBarDropdown("Edit", editItems);
 
-
-            if (ImGui::BeginMenu("View"))
+            //VIEW
+            std::vector<EngineUI::MenuBarData> viewItems =
             {
-                if (ImGui::MenuItem("Viewmode")) {
-                    // do action
-                }
-                if (ImGui::MenuItem("Camera FOV")) {
-                    // open action
-                }
-                if (ImGui::MenuItem("Engine Metrics")) {
-                    // open action
-                }
-                ImGui::EndMenu();
-            }
+                {"Viewmode", "#"},
+                {"Camera FOV", "#"},
+                {"Engine Metrics", "#"}
+            };
+            EngineUI::CreateMenuBarDropdown("View", viewItems);
 
-            if (ImGui::BeginMenu("Add"))
+            //HELP
+            std::vector<EngineUI::MenuBarData> helpItems =
             {
-                if (ImGui::MenuItem("Game Object")) {
-                    // do action
-                }
-                if (ImGui::MenuItem("Player Object")) {
-                    // open action
-                }
-                if (ImGui::MenuItem("Character Object")) {
-                    // open action
-                }
-                if (ImGui::MenuItem("Light Block")) {
-                    // open action
-                }
-                if (ImGui::MenuItem("Directional Light")) {
-                    // open action
-                }
-                ImGui::EndMenu();
-            }
-
-            if (ImGui::BeginMenu("Help"))
-            {
-                if (ImGui::MenuItem("Voxl Documentation")) {
-                    // do action
-                }
-                if (ImGui::MenuItem("Created By TheMrSnoop")) {
-                    // do action
-                }
-                ImGui::EndMenu();
-            }
+                {"Documentation", "#"},
+                {"Created by TheMrSnoop", "#"},
+            };
+            EngineUI::CreateMenuBarDropdown("Help", helpItems);
 
             ImGui::EndMainMenuBar();
         }
@@ -468,6 +418,8 @@ int main()
         ImGui::PopStyleColor(4);
 
 
+
+        //Tabs
 
         ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
         ImGui::PushStyleColor(ImGuiCol_Tab, ImVec4(0.063f, 0.063f, 0.063f, 1.0f));
@@ -485,18 +437,15 @@ int main()
         ImGui::Begin("##null", NULL, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar);
         
         if (ImGui::BeginTabBar("Bar")) {
-            if (ImGui::BeginTabItem("World")) {
-                ImGui::EndTabItem();
-            }
-            if (ImGui::BeginTabItem("Texture Editor")) {
-                ImGui::EndTabItem();
-            }
-            if (ImGui::BeginTabItem("Voxel Creator")) {
-                ImGui::EndTabItem();
-            }
+            EngineUI::CreateTab("World");
+            EngineUI::CreateTab("Texture Editor");
+            EngineUI::CreateTab("Voxel Creator");
+            EngineUI::CreateTab("Character Creator");
+
             ImGui::EndTabBar();
         }
 
+        //MUST be called before ImGui::Render();
         ImGui::End();
 
         ImGui::PopStyleVar();
