@@ -52,11 +52,28 @@ public:
 		Button
 	};
 
+
 	static struct MenuBarData
 	{
 		const char* itemText;
 		const char* keyBind;
 	};
+
+
+	static enum iconType
+	{
+		block,
+		cloud,
+		sun
+	};
+
+	static struct buttonData
+	{
+		const char* text;
+		iconType icon;
+	};
+
+
 
 
 	//Functions
@@ -65,6 +82,8 @@ public:
 	static void CreatePanel(const char* titleBar, ImGuiWindowFlags flags, ImVec2 screenPos, ImVec2 screenSize);
 
 	static void CreateTab(const char* headerText);
+
+	static void CreateButton(const char* buttonText, ImVec2 size);
 
 	//NOTE: If there is no keybind, simply put #.
 	static void CreateMenuBarDropdown(const char* dropdownName, std::vector<MenuBarData> data);

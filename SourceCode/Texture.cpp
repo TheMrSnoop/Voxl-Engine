@@ -55,11 +55,13 @@ void Texture::Delete()
 
 
 
-
+//! WARNING !: This ONLY GENERATES images, and when called multiple times everyframe (like it is), creates a memory leak, leading to a system crash.
 
 GLuint Image::GenerateImage(const char* imagePath)
 {
 	int width, height, channels;
+	stbi_set_flip_vertically_on_load(false);
+
 	unsigned char* imageData = stbi_load(imagePath, &width, &height, &channels, 4);
 	if (!imageData) {
 		std::cerr << "Failed to load image: " << imagePath << std::endl;

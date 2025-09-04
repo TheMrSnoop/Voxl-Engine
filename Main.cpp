@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #define GLFW_EXPOSE_NATIVE_WIN32
@@ -357,22 +358,7 @@ int main()
         }
 
 
-        //Loading Image
-        int uiTextData_floppy_W, uiTextData_floppy_H, uiTextData_floppy_C;
-        unsigned char* uiTextData_floppy = stbi_load("C:/dev/Voxl-Engine/Images/UI_Icons/floppy.png", &uiTextData_floppy_W, &uiTextData_floppy_H, &uiTextData_floppy_C, 4);
-
-        //Creating the Image
-        GLuint uiTex_floppy;
-        glGenTextures(1, &uiTex_floppy);
-        glBindTexture(GL_TEXTURE_2D, uiTex_floppy);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 16, 16, 0, GL_RGBA, GL_UNSIGNED_BYTE, uiTextData_floppy);
-        stbi_image_free(uiTextData_floppy); // Free CPU memory after uploading to GPU
-
-
         //MENUBAR
-
         EngineUI::ApplyDarkTheme(EngineUI::MenuBar);
         if (ImGui::BeginMainMenuBar())
         {
@@ -412,6 +398,9 @@ int main()
             };
             EngineUI::CreateMenuBarDropdown("Help", helpItems);
 
+
+            ImGui::SetNextWindowPos(ImVec2(width / 2, 0), ImGuiCond_Always);
+
             ImGui::EndMainMenuBar();
         }
 
@@ -445,17 +434,93 @@ int main()
             ImGuiWindowFlags_NoResize |
             ImGuiWindowFlags_NoMove;
         
-        GLuint img_add = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/add.png");
+        GLuint img_transform = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/add.png");
+        GLuint img_add = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/Move.png");
+        GLuint img_brush = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/paint.png");
 
-
-        EngineUI::CreatePanel("##Toolbar", BGP_Toolbar_F, ImVec2(0, 30), ImVec2(40, height));
-        
-        if (ImGui::ImageButton("addButton", img_add, ImVec2(32, 32))) {
+        EngineUI::CreatePanel("##Toolbar", BGP_Toolbar_F, ImVec2(0, 30), ImVec2(50, height));
+        if (ImGui::ImageButton("btn_transform", img_transform, ImVec2(32, 32))) {
             // clicked
         }
-
+        if (ImGui::ImageButton("btn_add", img_add, ImVec2(32, 32))) {
+            // clicked
+        }
+        if (ImGui::ImageButton("btn_brush", img_brush, ImVec2(32, 32))) {
+            // clicked
+        }
+        //Closes Toolbar
         ImGui::End();
 
+
+
+        //Project Title
+        ImGuiWindowFlags BGP_ProjectName_F =
+            ImGuiWindowFlags_NoCollapse |
+            ImGuiWindowFlags_NoResize |
+            ImGuiWindowFlags_NoMove |
+            ImGuiWindowFlags_NoScrollbar;
+        EngineUI::CreatePanel("##projectName", BGP_ProjectName_F, ImVec2((width / 2) + 20, -25), ImVec2(100, 50));
+        ImGui::Text("NEW PROJECT");
+        //Closes Project Title
+        ImGui::End();
+
+        
+
+        //Scene Panel
+        ImGuiWindowFlags BGP_Scene_F =
+            ImGuiWindowFlags_NoCollapse |
+            ImGuiWindowFlags_NoResize |
+            ImGuiWindowFlags_NoMove;
+        EngineUI::CreatePanel("##SceneCollection", BGP_Scene_F, ImVec2(width - 250, 0), ImVec2(250, height / 2));
+        ImGui::Text("SCENE COLLECTION");
+        //Buttons
+
+        std::vector<EngineUI::buttonData> sceneButtons =
+        {
+            { "Voxel Landscape",  EngineUI::block },
+            { "Directional Lighting", EngineUI::sun },
+            { "Player", EngineUI::block },
+            { "Master Shader", EngineUI::block },
+            { "Voxel Foliage", EngineUI::block },
+            { "Volumetric Clouds", EngineUI::cloud },
+            { "Day Cycle Manager", EngineUI::block },
+            { "Weather Manager", EngineUI::cloud },
+            { "Season Manager", EngineUI::block },
+            { "Biome Manager", EngineUI::block },
+            { "World Settings", EngineUI::block }
+        };
+
+        const ImVec2 sceneButtonSize = ImVec2(250, 16);
+        const char* buttonImagePath;
+        const char* buttonID;
+
+        for (EngineUI::buttonData btn : sceneButtons)
+        {
+            switch (btn.icon)
+            {
+            case EngineUI::block:
+                buttonImagePath = "C:/dev/Voxl-Engine/Images/UI_Icons/16x16/cube.png";
+                break;
+            case EngineUI::sun:
+                buttonImagePath = "C:/dev/Voxl-Engine/Images/UI_Icons/16x16/sun.png";
+                break;
+            case EngineUI::cloud:
+                buttonImagePath = "C:/dev/Voxl-Engine/Images/UI_Icons/16x16/cloud.png";
+                break;
+            default:
+                buttonImagePath = "C:/dev/Voxl-Engine/Images/UI_Icons/16x16/cube.png";
+                break;
+            }
+            GLuint newImageData = Image::GenerateImage(buttonImagePath);
+
+            ImGui::Image((ImTextureID)(intptr_t)newImageData, ImVec2(25, 25));
+
+            ImGui::SameLine();
+
+            EngineUI::CreateButton(btn.text, ImVec2(250, 25));
+        }
+        
+        ImGui::End();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

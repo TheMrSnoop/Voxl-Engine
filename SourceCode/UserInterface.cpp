@@ -89,6 +89,8 @@ void EngineUI::ApplyDarkTheme(UI_TYPE type)
 		style.Colors[ImGuiCol_Button] = DefaultGray;
 		style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.251, 0.251, 0.251, 1.0f);
 		style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.369, 0.369, 0.369, 1.0f);
+		//Text-Align: Left
+		style.ButtonTextAlign = ImVec2(0.0f, 0.0f);
 	}
 }
 
@@ -110,6 +112,14 @@ void EngineUI::CreateTab(const char* headerText)
 	{
 		//Do stuff
 		ImGui::EndTabItem();
+	}
+}
+
+void EngineUI::CreateButton(const char* buttonText, ImVec2 size)
+{
+	if (ImGui::Button(buttonText, size))
+	{
+		//Do stuff
 	}
 }
 
