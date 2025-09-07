@@ -17,5 +17,6 @@ The following is the main source code for core features of the Engine, like Bloc
 - `shaderClass.cpp` Defines the logic on how shaders are rendered
 - `stb.cpp` *Depricated*
 - `UserInterface.cpp` Defines the logic for using ImGUI for spawning Text Blocks, with specific properties, and layering them to specific Canvas objects.
+- `UI_Engine.cpp` Sets the style and logic for the Engine windows. 
 - `Terrain.cpp` Defines the logic for Chunk spawning, Chunk rendering, Surface Generation, Chunk Tree Generation, Layer Generation, and basic water generation.
 - `Noise.cpp` Defines the logic for Perlin Noise, to be used in `Terrain.cpp`.
