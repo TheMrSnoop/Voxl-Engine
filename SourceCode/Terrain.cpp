@@ -579,6 +579,7 @@ void Chunk::SpawnChunks(glm::uint Iterations, Shader shaderProgram)
         }
 
         GeneratedChunks = true;
+        VoxlEngine::Print("All Chunks have been generated!");
     }
     else
     {

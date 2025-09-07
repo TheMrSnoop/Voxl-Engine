@@ -47,6 +47,7 @@ public:
 	//Creates the array of Texture objects, which should be in the same exact order as the Blocks Array
 	static std::vector<Texture> allBlockTextures;
 
+
 	std::string blockID;
 	glm::vec3 Position;
 

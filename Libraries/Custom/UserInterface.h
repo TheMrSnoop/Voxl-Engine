@@ -11,12 +11,6 @@
 
 class Canvas; // "forward declaration" or something idk
 
-class UI_Tools
-{
-public:
-	ImVec4 convertToNormalized(float Red, float Green, float Blue, float Alpha);
-};
-
 class TextBlock
 {
 public:
@@ -39,52 +33,24 @@ public:
 	static void Render(Canvas canvas);
 };
 
-
-class EngineUI
+class Colors
 {
 public:
-	//CUSTOM DATA TYPES
-	static enum UI_TYPE
-	{
-		MenuBar,
-		Tabs,
-		Panel,
-		Button
-	};
+
+	static ImVec4 RGB_To_Normalized(float Red, float Green, float Blue, float Alpha);
+
+	//Const Colors
+	const ImVec4 White = ImVec4(1.0f, 1.0f, 1.0f, 1.0f); //#101010
+	const ImVec4 Silver = ImVec4(0.66f, 0.66f, 0.66f, 1.0f); //#A9A9A9
+	const ImVec4 DarkGray = ImVec4(0.063f, 0.063f, 0.063f, 1.0f); //#101010
+
+	const ImVec4 Amethyst = ImVec4(0.62f, 0.42f, 0.78f, 1.0f); //#9E6BC7
+	const ImVec4 LightBlue = ImVec4(0.278f, 0.521f, 0.761f, 1.0f); 
+	const ImVec4 LightPurple = ImVec4(0.773f, 0.651f, 0.867f, 1.0f); 
+	const ImVec4 FernGreen = ImVec4(0.247f, 0.471f, 0.298f, 1.0f); //#3F784C
+
+	const ImVec4 LightRed = ImVec4(0.959f, 0.419f, 0.419f, 1.0f);
+	const ImVec4 Orange = ImVec4(1.0f, 0.56f, 0.0f, 1.0f);
 
 
-	static struct MenuBarData
-	{
-		const char* itemText;
-		const char* keyBind;
-	};
-
-
-	static enum iconType
-	{
-		block,
-		cloud,
-		sun
-	};
-
-	static struct buttonData
-	{
-		const char* text;
-		iconType icon;
-	};
-
-
-
-
-	//Functions
-	static void ApplyDarkTheme(UI_TYPE type);
-
-	static void CreatePanel(const char* titleBar, ImGuiWindowFlags flags, ImVec2 screenPos, ImVec2 screenSize);
-
-	static void CreateTab(const char* headerText);
-
-	static void CreateButton(const char* buttonText, ImVec2 size);
-
-	//NOTE: If there is no keybind, simply put #.
-	static void CreateMenuBarDropdown(const char* dropdownName, std::vector<MenuBarData> data);
 };

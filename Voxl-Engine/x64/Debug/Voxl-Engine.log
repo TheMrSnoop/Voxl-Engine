@@ -1,4 +1,23 @@
-﻿  Main.cpp
+﻿  Block.cpp
+C:\dev\Voxl-Engine\Libraries\Custom\Texture.h(28,16): warning C4091: 'static ': ignored on left of 'Image::imageData' when no variable is declared
+  (compiling source file 'SourceCode/Block.cpp')
+  
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(219,13): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(219,13): warning C4244:         with
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(219,13): warning C4244:         [
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(219,13): warning C4244:             T=float
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(219,13): warning C4244:         ]
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(221,14): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(221,14): warning C4244:         with
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(221,14): warning C4244:         [
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(221,14): warning C4244:             T=float
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(221,14): warning C4244:         ]
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(223,15): warning C4244: 'initializing': conversion from 'T' to 'int', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(223,15): warning C4244:         with
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(223,15): warning C4244:         [
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(223,15): warning C4244:             T=float
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(223,15): warning C4244:         ]
+  Main.cpp
 C:\dev\Voxl-Engine\Main.cpp(1,9): warning C4005: 'IMGUI_IMPL_OPENGL_LOADER_GLAD': macro redefinition
       C:\dev\Voxl-Engine\Main.cpp(1,9):
       'IMGUI_IMPL_OPENGL_LOADER_GLAD' previously declared on the command line
@@ -8,16 +27,28 @@ C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\minwindef.h(1
       C:\dev\Voxl-Engine\Libraries\include\glad\glad.h(32,9):
       see previous definition of 'APIENTRY'
   
-C:\dev\Voxl-Engine\Libraries\Custom\UserInterface.h(47,14): warning C4091: 'static ': ignored on left of 'EngineUI::UI_TYPE' when no variable is declared
+C:\dev\Voxl-Engine\Libraries\Custom\texture.h(28,16): warning C4091: 'static ': ignored on left of 'Image::imageData' when no variable is declared
   (compiling source file 'Main.cpp')
   
-C:\dev\Voxl-Engine\Libraries\Custom\UserInterface.h(56,16): warning C4091: 'static ': ignored on left of 'EngineUI::MenuBarData' when no variable is declared
+C:\dev\Voxl-Engine\Libraries\Custom\VoxlEngine.h(54,14): warning C4091: 'static ': ignored on left of 'VoxlEngine::TabModes' when no variable is declared
   (compiling source file 'Main.cpp')
   
-C:\dev\Voxl-Engine\Libraries\Custom\UserInterface.h(63,14): warning C4091: 'static ': ignored on left of 'EngineUI::iconType' when no variable is declared
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(20,14): warning C4091: 'static ': ignored on left of 'EngineUI_Class::UI_TYPE' when no variable is declared
   (compiling source file 'Main.cpp')
   
-C:\dev\Voxl-Engine\Libraries\Custom\UserInterface.h(70,16): warning C4091: 'static ': ignored on left of 'EngineUI::buttonData' when no variable is declared
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(29,16): warning C4091: 'static ': ignored on left of 'EngineUI_Class::MenuBarData' when no variable is declared
+  (compiling source file 'Main.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(36,14): warning C4091: 'static ': ignored on left of 'EngineUI_Class::iconType' when no variable is declared
+  (compiling source file 'Main.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(43,16): warning C4091: 'static ': ignored on left of 'EngineUI_Class::buttonData' when no variable is declared
+  (compiling source file 'Main.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(49,14): warning C4091: 'static ': ignored on left of 'EngineUI_Class::fileType' when no variable is declared
+  (compiling source file 'Main.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(56,16): warning C4091: 'static ': ignored on left of 'EngineUI_Class::fileData' when no variable is declared
   (compiling source file 'Main.cpp')
   
 C:\dev\Voxl-Engine\Libraries\Custom\Terrain.h(1,1): warning C4828: The file contains a character starting at offset 0x4ac that is illegal in the current source character set (codepage 65001).
@@ -29,15 +60,70 @@ C:\dev\Voxl-Engine\Libraries\Custom\Terrain.h(1,1): warning C4828: The file cont
 C:\dev\Voxl-Engine\Libraries\Custom\Terrain.h(34,16): warning C4091: 'static ': ignored on left of 'Chunk::worldChunkData' when no variable is declared
   (compiling source file 'Main.cpp')
   
-C:\dev\Voxl-Engine\Main.cpp(402,50): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(417,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(441,85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(462,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(474,78): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(474,108): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-C:\dev\Voxl-Engine\Main.cpp(55,14): warning C4101: 'ui_Tools': unreferenced local variable
-C:\dev\Voxl-Engine\Main.cpp(54,13): warning C4101: 'menuBar': unreferenced local variable
-C:\dev\Voxl-Engine\Main.cpp(495,21): warning C4101: 'buttonID': unreferenced local variable
-  Texture.cpp
+C:\dev\Voxl-Engine\Main.cpp(59,13): warning C4101: 'menuBar': unreferenced local variable
+  Noise.cpp
+C:\dev\Voxl-Engine\SourceCode\Noise.cpp(14,21): warning C4554: '>>': check operator precedence for possible error; use parentheses to clarify precedence
+C:\dev\Voxl-Engine\SourceCode\Noise.cpp(17,21): warning C4554: '>>': check operator precedence for possible error; use parentheses to clarify precedence
+C:\dev\Voxl-Engine\SourceCode\Noise.cpp(19,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  UI_Engine.cpp
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(20,14): warning C4091: 'static ': ignored on left of 'EngineUI_Class::UI_TYPE' when no variable is declared
+  (compiling source file 'SourceCode/UI_Engine.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(29,16): warning C4091: 'static ': ignored on left of 'EngineUI_Class::MenuBarData' when no variable is declared
+  (compiling source file 'SourceCode/UI_Engine.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(36,14): warning C4091: 'static ': ignored on left of 'EngineUI_Class::iconType' when no variable is declared
+  (compiling source file 'SourceCode/UI_Engine.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(43,16): warning C4091: 'static ': ignored on left of 'EngineUI_Class::buttonData' when no variable is declared
+  (compiling source file 'SourceCode/UI_Engine.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(49,14): warning C4091: 'static ': ignored on left of 'EngineUI_Class::fileType' when no variable is declared
+  (compiling source file 'SourceCode/UI_Engine.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\UI_Engine.h(56,16): warning C4091: 'static ': ignored on left of 'EngineUI_Class::fileData' when no variable is declared
+  (compiling source file 'SourceCode/UI_Engine.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\VoxlEngine.h(54,14): warning C4091: 'static ': ignored on left of 'VoxlEngine::TabModes' when no variable is declared
+  (compiling source file 'SourceCode/UI_Engine.cpp')
+  
+C:\dev\Voxl-Engine\Libraries\Custom\Texture.h(28,16): warning C4091: 'static ': ignored on left of 'Image::imageData' when no variable is declared
+  (compiling source file 'SourceCode/UI_Engine.cpp')
+  
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(37,60): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(37,53): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(37,46): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(38,59): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(38,52): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(38,45): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(45,62): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(45,55): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(45,48): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(46,63): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(46,56): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(46,49): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(116,67): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(116,60): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(270,40): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(286,76): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(319,86): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(349,85): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(362,77): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(362,108): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(383,14): warning C4101: 'buttonID': unreferenced local variable
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(426,96): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(426,82): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(426,121): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(438,75): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(438,96): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(453,110): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(453,96): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\dev\Voxl-Engine\SourceCode\UI_Engine.cpp(465,102): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  WorldStructure.cpp
+C:\dev\Voxl-Engine\Libraries\Custom\Texture.h(28,16): warning C4091: 'static ': ignored on left of 'Image::imageData' when no variable is declared
+  (compiling source file 'SourceCode/WorldStructure.cpp')
+  
   Generating Code...
+C:\dev\Voxl-Engine\SourceCode\Block.cpp(163,1): warning C4715: 'Block::ReturnBlock': not all control paths return a value
+  glad.c
   Voxl-Engine.vcxproj -> C:\dev\Voxl-Engine\x64\Debug\Voxl-Engine.exe

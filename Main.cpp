@@ -29,6 +29,7 @@
 #include "FBO.h"
 #include "MenuBar.h"
 #include "UserInterface.h"
+#include "UI_Engine.h"
 #include "Terrain.h"
 
 #define FMT_HEADER_ONLY
@@ -39,6 +40,10 @@ float FOV = 70.0f;
 
 bool VoxlEngine::engineClosed = false;
 bool VoxlEngine::showEngineMetrics = false;
+
+VoxlEngine::TabModes VoxlEngine::currentTabMode = VoxlEngine::World;
+
+std::string VoxlEngine::ConsoleText = "Voxl Engine 2025 v0.1.2.stable.alpha.52861 \nOpenGL API #330 \nC:/dev/VoxlEngine/newproject/\n";
 
 
 int main()
@@ -52,10 +57,9 @@ int main()
 
     VoxlEngine voxlEngine;
     MenuBar menuBar;
-    UI_Tools ui_Tools;
 
-    int width = 1920;
-    int height = 1080;
+    int width = VoxlEngine::windowWidth;
+    int height = VoxlEngine::windowHeight;
 
     GLFWwindow* window = glfwCreateWindow(width, height, "Voxl Engine", NULL, NULL);
     //menuBar.CreateMenuBar(window, glfwGetWin32Window(window));
@@ -109,6 +113,7 @@ int main()
 
     shaderProgram.Activate();
     shaderProgram.setInt("tex0", 0);
+
 
     glActiveTexture(GL_TEXTURE0);
 
@@ -283,31 +288,10 @@ int main()
         // Bind cube VAO so SpawnBlock can draw
         cubeVAO.Bind();
 
-        // Draw world objects that still use SpawnBlock
-        WorldStructure::SpawnStructure(glm::vec3(15.0f, -1.0f, 10.0f), Ruins, shaderProgram);
-        Block::SpawnAreaOfBlocks("Stone", glm::vec3(15.0f, -1.0f, 10.0f), glm::vec2(-3.0f, 4.0f), glm::vec2(0.0f, 1.0f), glm::vec2(-3.0f, 4.0f), shaderProgram);
-        Block::SpawnBlock("Light Block", glm::vec3(0.0f, 1.0f, -3.0f), shaderProgram);
-
         // Spawn chunks
         Chunk::SpawnChunks(0, shaderProgram);
 
-        glm::vec3 blockPlacementPosition = camera.Position + voxlEngine.multiplyVectorWithFloat(camera.Orientation, 2.0f);
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
-            allPlacedBlocksPos.push_back(blockPlacementPosition);
-        }
-
-        // Re-render placed blocks
-        if (!allPlacedBlocksPos.empty())
-        {
-            for (int i = 0; i < (int)allPlacedBlocksPos.size(); i++)
-            {
-                Block::SpawnBlock("Stone", allPlacedBlocksPos[i], shaderProgram);
-            }
-        }
-
         cubeVAO.Unbind();
-
-
         sceneFBO.Unbind();
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glClear(GL_COLOR_BUFFER_BIT);
@@ -357,170 +341,27 @@ int main()
             ImGui::PopStyleColor();
         }
 
+        //Default Engine UI
+        EngineUI_Defaults::MenuBar();
+        EngineUI_Defaults::TabBar();
+        EngineUI_Defaults::ProjectName();
+        EngineUI_Defaults::ObjectProperties();
+        EngineUI_Defaults::Console();
+        EngineUI_Defaults::ProjectFiles();
 
-        //MENUBAR
-        EngineUI::ApplyDarkTheme(EngineUI::MenuBar);
-        if (ImGui::BeginMainMenuBar())
+        switch (VoxlEngine::currentTabMode)
         {
-            //FILE
-            std::vector<EngineUI::MenuBarData> fileItems =
-            {
-                {"New", "Ctrl+N"},
-                {"Open...", "Ctrl+O"},
-                {"Save Project...", "Ctrl+S"},
-                {"Save Project As...", "Ctrl+Shift+S"},
-                {"Exit Voxl", "#"}
-            };
-            EngineUI::CreateMenuBarDropdown("File", fileItems);
-
-            //EDIT
-            std::vector<EngineUI::MenuBarData> editItems =
-            {
-                {"Project Settings", "#"},
-                {"Editor Settings", "#"}
-            };
-            EngineUI::CreateMenuBarDropdown("Edit", editItems);
-
-            //VIEW
-            std::vector<EngineUI::MenuBarData> viewItems =
-            {
-                {"Viewmode", "#"},
-                {"Camera FOV", "#"},
-                {"Engine Metrics", "#"}
-            };
-            EngineUI::CreateMenuBarDropdown("View", viewItems);
-
-            //HELP
-            std::vector<EngineUI::MenuBarData> helpItems =
-            {
-                {"Documentation", "#"},
-                {"Created by TheMrSnoop", "#"},
-            };
-            EngineUI::CreateMenuBarDropdown("Help", helpItems);
-
-
-            ImGui::SetNextWindowPos(ImVec2(width / 2, 0), ImGuiCond_Always);
-
-            ImGui::EndMainMenuBar();
+        case (VoxlEngine::World):
+            EngineUI_Defaults::SceneCollection();
+            EngineUI_Defaults::ToolBar_World();
+            break;
+        case (VoxlEngine::TextureEditor):
+            EngineUI_Defaults::TexturePanel();
+            break;
         }
 
-        //Tabs
-        EngineUI::ApplyDarkTheme(EngineUI::Tabs);
-
-        ImGuiWindowFlags BGP_Tabs_F =
-            ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_NoResize |
-            ImGuiWindowFlags_NoMove |
-            ImGuiWindowFlags_NoTitleBar |
-            ImGuiWindowFlags_NoScrollbar;
-
-        EngineUI::CreatePanel("##TabBar", BGP_Tabs_F, ImVec2(0, 20), ImVec2(width, 15));
-        
-        if (ImGui::BeginTabBar("Bar")) {
-            EngineUI::CreateTab("World");
-            EngineUI::CreateTab("Texture Editor");
-            EngineUI::CreateTab("Voxel Creator");
-            EngineUI::CreateTab("Character Creator");
-
-            ImGui::EndTabBar();
-        }
-        //Remember, ImGui::End(), CLOSES panels, I must fill them first though.
-        ImGui::End();
-
-        //Toolbar
-        EngineUI::ApplyDarkTheme(EngineUI::Button);
-        ImGuiWindowFlags BGP_Toolbar_F =
-            ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_NoResize |
-            ImGuiWindowFlags_NoMove;
-        
-        GLuint img_transform = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/add.png");
-        GLuint img_add = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/Move.png");
-        GLuint img_brush = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/paint.png");
-
-        EngineUI::CreatePanel("##Toolbar", BGP_Toolbar_F, ImVec2(0, 30), ImVec2(50, height));
-        if (ImGui::ImageButton("btn_transform", img_transform, ImVec2(32, 32))) {
-            // clicked
-        }
-        if (ImGui::ImageButton("btn_add", img_add, ImVec2(32, 32))) {
-            // clicked
-        }
-        if (ImGui::ImageButton("btn_brush", img_brush, ImVec2(32, 32))) {
-            // clicked
-        }
-        //Closes Toolbar
-        ImGui::End();
-
-
-
-        //Project Title
-        ImGuiWindowFlags BGP_ProjectName_F =
-            ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_NoResize |
-            ImGuiWindowFlags_NoMove |
-            ImGuiWindowFlags_NoScrollbar;
-        EngineUI::CreatePanel("##projectName", BGP_ProjectName_F, ImVec2((width / 2) + 20, -25), ImVec2(100, 50));
-        ImGui::Text("NEW PROJECT");
-        //Closes Project Title
-        ImGui::End();
 
         
-
-        //Scene Panel
-        ImGuiWindowFlags BGP_Scene_F =
-            ImGuiWindowFlags_NoCollapse |
-            ImGuiWindowFlags_NoResize |
-            ImGuiWindowFlags_NoMove;
-        EngineUI::CreatePanel("##SceneCollection", BGP_Scene_F, ImVec2(width - 250, 0), ImVec2(250, height / 2));
-        ImGui::Text("SCENE COLLECTION");
-        //Buttons
-
-        std::vector<EngineUI::buttonData> sceneButtons =
-        {
-            { "Voxel Landscape",  EngineUI::block },
-            { "Directional Lighting", EngineUI::sun },
-            { "Player", EngineUI::block },
-            { "Master Shader", EngineUI::block },
-            { "Voxel Foliage", EngineUI::block },
-            { "Volumetric Clouds", EngineUI::cloud },
-            { "Day Cycle Manager", EngineUI::block },
-            { "Weather Manager", EngineUI::cloud },
-            { "Season Manager", EngineUI::block },
-            { "Biome Manager", EngineUI::block },
-            { "World Settings", EngineUI::block }
-        };
-
-        const ImVec2 sceneButtonSize = ImVec2(250, 16);
-        const char* buttonImagePath;
-        const char* buttonID;
-
-        for (EngineUI::buttonData btn : sceneButtons)
-        {
-            switch (btn.icon)
-            {
-            case EngineUI::block:
-                buttonImagePath = "C:/dev/Voxl-Engine/Images/UI_Icons/16x16/cube.png";
-                break;
-            case EngineUI::sun:
-                buttonImagePath = "C:/dev/Voxl-Engine/Images/UI_Icons/16x16/sun.png";
-                break;
-            case EngineUI::cloud:
-                buttonImagePath = "C:/dev/Voxl-Engine/Images/UI_Icons/16x16/cloud.png";
-                break;
-            default:
-                buttonImagePath = "C:/dev/Voxl-Engine/Images/UI_Icons/16x16/cube.png";
-                break;
-            }
-            GLuint newImageData = Image::GenerateImage(buttonImagePath);
-
-            ImGui::Image((ImTextureID)(intptr_t)newImageData, ImVec2(25, 25));
-
-            ImGui::SameLine();
-
-            EngineUI::CreateButton(btn.text, ImVec2(250, 25));
-        }
-        
-        ImGui::End();
 
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

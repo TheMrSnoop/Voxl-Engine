@@ -1,6 +1,8 @@
 #include"Camera.h"
 #include"Terrain.h"
+#include"VoxlEngine.h"
 #include<iostream>
+#include<string>
 
 
 
@@ -13,7 +15,6 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	{
 		activeCamera->speed += yoffset * 0.5f;
 		activeCamera->speed = glm::clamp(activeCamera->speed, 0.0001f, 50.0f);
-		std::cout << "Camera speed: " << activeCamera->speed << std::endl;
 	}
 }
 

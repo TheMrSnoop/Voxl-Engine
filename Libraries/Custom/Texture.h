@@ -7,6 +7,8 @@
 #include"shaderClass.h"
 #include"imgui.h"
 
+#include<vector>
+
 class Texture
 {
 public:
@@ -23,6 +25,15 @@ public:
 class Image
 {
 public:
+	static struct imageData
+	{
+		GLuint GL_DATA;
+		const char* imagePath;
+	};
+
+	static std::vector<imageData> imageDatabase;
+
+	static int ReturnImage(const char* imagePath);
 	static GLuint GenerateImage(const char* imagePath);
 };
 

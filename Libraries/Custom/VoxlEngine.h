@@ -41,9 +41,25 @@ public:
 	int roundedFPS = 0;
 	void CalculateFPS();
 
-	//GLOBAL ENGINE BOOLS
+	//GLOBAL ENGINE DATA
 	static bool engineClosed;
 	static bool showEngineMetrics;
+
+	static std::string ConsoleText;
+	static void Print(std::string text);
+
+	static const int windowWidth = 2560;
+	static const int windowHeight = 1440;
+
+	static enum TabModes
+	{
+		World,
+		TextureEditor,
+		VoxelCreator,
+		CharacterCreator
+	};
+
+	static TabModes currentTabMode;
 
 
 	struct RaycastHit

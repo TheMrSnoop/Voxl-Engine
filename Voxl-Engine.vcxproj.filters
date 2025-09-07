@@ -105,6 +105,9 @@
     <ClCompile Include="SourceCode\Noise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\UI_Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\default.vert">
@@ -142,9 +145,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="shaderClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="VBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -212,6 +212,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Libraries\Custom\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Custom\shaderClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Libraries\Custom\UI_Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

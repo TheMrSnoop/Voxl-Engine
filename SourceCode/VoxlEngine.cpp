@@ -9,6 +9,9 @@
 #include "Camera.h"
 #include "Block.h"
 
+#define FMT_HEADER_ONLY
+#include <core.h>
+
 float VoxlEngine::FPS = 0.0f;
 float VoxlEngine::DTPS = 0.0f;
 
@@ -193,4 +196,11 @@ VoxlEngine::RaycastHit VoxlEngine::Raycast(glm::vec3 origin, glm::vec3 dir, int 
 	hitResult.hit = false;
 	hitResult.hitPosition = origin + dir * glm::min(tMax.x, glm::min(tMax.y, tMax.z));
 	return hitResult;
+}
+
+
+
+void VoxlEngine::Print(std::string text)
+{
+	VoxlEngine::ConsoleText += text + "\n";
 }

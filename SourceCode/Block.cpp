@@ -9,6 +9,7 @@
 
 std::vector<glm::vec3> Block::allBlockPositions;
 
+
 //Defines all the vertices for a cube
 
 GLfloat vertices[] =

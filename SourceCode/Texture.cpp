@@ -1,4 +1,5 @@
 #include"Texture.h"
+std::vector<Image::imageData> Image::imageDatabase;
 
 Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType)
 {
@@ -54,33 +55,58 @@ void Texture::Delete()
 }
 
 
+int Image::ReturnImage(const char* imagePath)
+{
+	if (Image::imageDatabase.size() > 0)
+	{
+		for (int i = 0; i < Image::imageDatabase.size() - 1; i++)
+		{
+			Image::imageData data = Image::imageDatabase[i];
 
-//! WARNING !: This ONLY GENERATES images, and when called multiple times everyframe (like it is), creates a memory leak, leading to a system crash.
+			if (data.imagePath == imagePath)
+				return i;
+		}
+	}
+
+	//failed to find.
+	return -1;
+}
+
 
 GLuint Image::GenerateImage(const char* imagePath)
 {
-	int width, height, channels;
-	stbi_set_flip_vertically_on_load(false);
+	if (Image::ReturnImage(imagePath) == -1)
+	{
+		int width, height, channels;
+		stbi_set_flip_vertically_on_load(false);
 
-	unsigned char* imageData = stbi_load(imagePath, &width, &height, &channels, 4);
-	if (!imageData) {
-		std::cerr << "Failed to load image: " << imagePath << std::endl;
-		return 0;
+		unsigned char* imageData = stbi_load(imagePath, &width, &height, &channels, 4);
+		if (!imageData) {
+			std::cerr << "Failed to load image: " << imagePath << std::endl;
+			return 0;
+		}
+
+		GLuint imageObject;
+		glGenTextures(1, &imageObject);
+		glBindTexture(GL_TEXTURE_2D, imageObject);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+
+		glBindTexture(GL_TEXTURE_2D, 0); // unbind
+		stbi_image_free(imageData);
+
+		Image::imageDatabase.push_back({ imageObject, imagePath });
+
+		//Returns the index of this data inside the database.
+		return Image::imageDatabase[Image::imageDatabase.size() - 1].GL_DATA;
 	}
-
-	GLuint imageObject;
-	glGenTextures(1, &imageObject);
-	glBindTexture(GL_TEXTURE_2D, imageObject);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
-
-	glBindTexture(GL_TEXTURE_2D, 0); // unbind
-	stbi_image_free(imageData);
-
-	return imageObject;
+	else
+	{
+		return Image::imageDatabase[Image::ReturnImage(imagePath)].GL_DATA;
+	}
 }
