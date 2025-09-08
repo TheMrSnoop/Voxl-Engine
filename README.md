@@ -9,7 +9,7 @@ How I would want the engine to look if I don't give up
 
 # Engine Screenshots
 Trees
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/Trees.png)
+![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/trees.png)
 
 Chunk Generation
 ![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/chunk.png)
