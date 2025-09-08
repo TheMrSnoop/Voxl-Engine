@@ -9,10 +9,10 @@ How I would want the engine to look if I don't give up
 
 # Engine Screenshots
 Trees
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/trees.png)
+![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/Trees.png)
 
-Basic Island Generation
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/islands.png)
+Chunk Generation
+![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/chunk.png)
 
 # Still left to do
 - [x] Add Voxel Based Terrain
