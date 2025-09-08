@@ -28,30 +28,21 @@
     <Filter Include="Source Files\json">
       <UniqueIdentifier>{db1e4941-7cf7-4b91-888c-75b163d55116}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Terrain">
+      <UniqueIdentifier>{50d2886d-2f2d-4bab-a9bd-048e28417b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Rendering">
+      <UniqueIdentifier>{f59839c8-f60e-4c50-8a9c-adae46c7564d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{ef0c9497-d2b0-4ffe-8872-08fe56500db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{14ebb97b-97ed-4643-8a88-7aef334d2bc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\shaderClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\VBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\VAO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\EBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
@@ -75,38 +66,62 @@
     <ClCompile Include="imgui\imgui_widgets.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\Tree.cpp">
+    <ClCompile Include="SourceCode\Terrain\Noise.cpp">
+      <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Terrain\Terrain.cpp">
+      <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Terrain\Tree.cpp">
+      <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Terrain\WorldStructure.cpp">
+      <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Rendering\FBO.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Rendering\VAO.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Rendering\VBO.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Rendering\EBO.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\UI\MenuBar.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\UI\UserInterface.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Rendering\Texture.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Rendering\shaderClass.cpp">
+      <Filter>Source Files\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Core\VoxlEngine.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Core\Block.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Core\Camera.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Core\stb.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\Block.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SourceCode\UI\UI_Engine_Class.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\WorldStructure.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\FBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\VoxlEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\MenuBar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\UserInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\Terrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\stb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\Noise.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\UI_Engine.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SourceCode\UI\UI_Engine_Defaults.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,9 +9,20 @@
 #include <glad/glad.h> 
 #include<vector>
 #include<iostream>
+#include<variant>
 
+#include "UI_Engine.h"
+#include "UserInterface.h"
+#include"VoxlEngine.h"
+#include"Texture.h"
+#include"Block.h"
 
+#include <GLFW/glfw3.h>
+#define GLFW_EXPOSE_NATIVE_WIN32
+#include <GLFW/glfw3native.h>
+#include <stb/stb_image.h>
 
+extern Colors engineColors;
 
 class EngineUI_Class
 {
@@ -55,8 +66,23 @@ public:
 
 	static struct fileData
 	{
-		const char* name;
+		std::string name;
 		fileType type;
+	};
+
+
+	static struct ObjectPropertyData
+	{
+		std::string DataName;
+
+		//Data can only either be an int or string.
+		std::variant<int, std::string> Data;
+	};
+
+	static struct ObjectProperty
+	{
+		std::string Header;
+		std::vector<ObjectPropertyData> PropetyData;
 	};
 
 
@@ -76,8 +102,9 @@ public:
 
 	static void CreateFolder(std::string folderName, std::vector<fileData> childrenData);
 
+	static void CreateProjectEntry(std::string projectDetails, float w, float h, int index);
 
-
+	static void CreateObjectProperties(EngineUI_Class::ObjectProperty properties);
 
 };
 
@@ -99,4 +126,12 @@ public:
 	static void ToolBar_World();
 	static void SceneCollection();
 	static void TexturePanel();
+
+};
+
+class EngineUI_NewProject
+{
+public:
+	//Project Menu
+	static void CreateMainProjectsMenu(GLFWwindow* window);
 };

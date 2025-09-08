@@ -27,8 +27,7 @@ public:
 	//generates the world seed
 	static uint64_t generateSeed();
 
-	
-	
+
 	//STRINGS
 	static std::string returnConsoleBar(float percentage, std::string Label = "");
 
@@ -50,6 +49,14 @@ public:
 
 	static const int windowWidth = 2560;
 	static const int windowHeight = 1440;
+
+	static enum programModes
+	{
+		ProjectMenu,
+		RunningProject
+	};
+
+	static programModes currentProgramMode;
 
 	static enum TabModes
 	{

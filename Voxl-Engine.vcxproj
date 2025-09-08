@@ -86,6 +86,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\dev\Voxl-Engine\Libraries\include\fs\include;C:\dev\Voxl-Engine\Libraries\include\fmt\include\fmt;imgui;C:\dev\Voxl-Engine\Libraries\Custom;C:\dev\Voxl-Engine\Libraries\include\json\single_include\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -103,6 +104,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>C:\dev\Voxl-Engine\Libraries\include\fs\include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,6 +121,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\dev\Voxl-Engine\Libraries\include\fs\include;C:\dev\Voxl-Engine\Libraries\include\fmt\include\fmt;imgui;C:\dev\Voxl-Engine\Libraries\Custom;C:\dev\Voxl-Engine\Libraries\include\json\single_include\nlohmann;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -136,6 +139,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>C:\dev\Voxl-Engine\Libraries\include\fs\include;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,10 +149,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="SourceCode\Block.cpp" />
-    <ClCompile Include="SourceCode\Camera.cpp" />
-    <ClCompile Include="SourceCode\EBO.cpp" />
-    <ClCompile Include="SourceCode\FBO.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_demo.cpp" />
@@ -157,20 +157,25 @@
     <ClCompile Include="imgui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="SourceCode\Noise.cpp" />
-    <ClCompile Include="SourceCode\shaderClass.cpp" />
-    <ClCompile Include="SourceCode\MenuBar.cpp" />
-    <ClCompile Include="SourceCode\stb.cpp" />
-    <ClCompile Include="SourceCode\Terrain.cpp" />
-    <ClCompile Include="SourceCode\Texture.cpp" />
-    <ClCompile Include="SourceCode\Tree.cpp" />
-    <ClCompile Include="SourceCode\UI_Engine.cpp" />
-    <ClCompile Include="SourceCode\UserInterface.cpp" />
-    <ClCompile Include="SourceCode\VAO.cpp" />
-    <ClCompile Include="SourceCode\VBO.cpp" />
-    <ClCompile Include="SourceCode\VoxlEngine.cpp" />
-    <ClCompile Include="SourceCode\WorldStructure.cpp" />
+    <ClCompile Include="SourceCode\Core\Block.cpp" />
+    <ClCompile Include="SourceCode\Core\Camera.cpp" />
+    <ClCompile Include="SourceCode\Core\stb.cpp" />
+    <ClCompile Include="SourceCode\Core\VoxlEngine.cpp" />
+    <ClCompile Include="SourceCode\Main.cpp" />
+    <ClCompile Include="SourceCode\Rendering\EBO.cpp" />
+    <ClCompile Include="SourceCode\Rendering\FBO.cpp" />
+    <ClCompile Include="SourceCode\Rendering\shaderClass.cpp" />
+    <ClCompile Include="SourceCode\Rendering\Texture.cpp" />
+    <ClCompile Include="SourceCode\Rendering\VAO.cpp" />
+    <ClCompile Include="SourceCode\Rendering\VBO.cpp" />
+    <ClCompile Include="SourceCode\Terrain\Noise.cpp" />
+    <ClCompile Include="SourceCode\Terrain\Terrain.cpp" />
+    <ClCompile Include="SourceCode\Terrain\Tree.cpp" />
+    <ClCompile Include="SourceCode\Terrain\WorldStructure.cpp" />
+    <ClCompile Include="SourceCode\UI\MenuBar.cpp" />
+    <ClCompile Include="SourceCode\UI\UI_Engine_Class.cpp" />
+    <ClCompile Include="SourceCode\UI\UI_Engine_Defaults.cpp" />
+    <ClCompile Include="SourceCode\UI\UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="json\MenuBar.json" />
