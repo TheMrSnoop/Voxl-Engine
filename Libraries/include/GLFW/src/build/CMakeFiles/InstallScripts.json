@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/dev/Voxl-Engine/Libraries/include/GLFW/src/build/cmake_install.cmake",
+		"C:/dev/Voxl-Engine/Libraries/include/GLFW/src/build/src/cmake_install.cmake",
+		"C:/dev/Voxl-Engine/Libraries/include/GLFW/src/build/examples/cmake_install.cmake",
+		"C:/dev/Voxl-Engine/Libraries/include/GLFW/src/build/tests/cmake_install.cmake",
+		"C:/dev/Voxl-Engine/Libraries/include/GLFW/src/build/docs/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

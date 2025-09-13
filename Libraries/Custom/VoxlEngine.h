@@ -50,7 +50,8 @@ public:
 	static const int windowWidth = 2560;
 	static const int windowHeight = 1440;
 
-	static enum programModes
+	//apparently I need to drop the static keyword.
+	enum programModes
 	{
 		ProjectMenu,
 		RunningProject
@@ -58,7 +59,7 @@ public:
 
 	static programModes currentProgramMode;
 
-	static enum TabModes
+	enum TabModes
 	{
 		World,
 		TextureEditor,

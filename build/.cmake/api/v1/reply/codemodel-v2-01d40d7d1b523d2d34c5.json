@@ -1,0 +1,164 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"build" : "Libraries/include/GLFW/src",
+					"childIndexes" : 
+					[
+						2,
+						3
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Libraries.include.GLFW.src-Debug-13d35ddaa29efca0888a.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "Libraries/include/GLFW/src",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "Libraries/include/GLFW/src/src",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-Libraries.include.GLFW.src.src-Debug-543b37d086e3750ced01.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "Libraries/include/GLFW/src/src",
+					"targetIndexes" : 
+					[
+						2,
+						4
+					]
+				},
+				{
+					"build" : "Libraries/include/GLFW/src/docs",
+					"jsonFile" : "directory-Libraries.include.GLFW.src.docs-Debug-1e309ff6fc631d6811f0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.4"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 1,
+					"source" : "Libraries/include/GLFW/src/docs"
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "VoxlEngine",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"name" : "GLFW",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "VoxlEngine::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-VoxlEngine-Debug-c75b891b9d078a3b4806.json",
+					"name" : "VoxlEngine",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "copy_assets::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-copy_assets-Debug-7def406a3a275c20b3f2.json",
+					"name" : "copy_assets",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "glfw::@a20de4353a28d27b6b34",
+					"jsonFile" : "target-glfw-Debug-05895838dfd69f625957.json",
+					"name" : "glfw",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "uninstall::@0a648619327355d69496",
+					"jsonFile" : "target-uninstall-Debug-bdb0958ecc3fd22a254f.json",
+					"name" : "uninstall",
+					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "update_mappings::@a20de4353a28d27b6b34",
+					"jsonFile" : "target-update_mappings-Debug-7934ec526137800650b0.json",
+					"name" : "update_mappings",
+					"projectIndex" : 1
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/dev/Voxl-Engine/build",
+		"source" : "C:/dev/Voxl-Engine"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 8
+	}
+}

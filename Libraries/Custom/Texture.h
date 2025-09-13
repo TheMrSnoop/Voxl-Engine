@@ -22,10 +22,14 @@ public:
 	void Delete();
 };
 
+
+
 class Image
 {
 public:
-	static struct imageData
+
+	//apparently I need to drop the static keyword.
+	struct imageData
 	{
 		GLuint GL_DATA;
 		const char* imagePath;

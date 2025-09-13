@@ -1,0 +1,290 @@
+[
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Core\\Block.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Core\\Block.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Core/Block.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Core/Block.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Core\\Camera.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Core\\Camera.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Core/Camera.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Core/Camera.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Core\\VoxlEngine.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Core\\VoxlEngine.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Core/VoxlEngine.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Core/VoxlEngine.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Core\\stb.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Core\\stb.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Core/stb.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Core/stb.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Main.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Main.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Main.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Main.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Rendering\\EBO.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Rendering\\EBO.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Rendering/EBO.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Rendering/EBO.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Rendering\\FBO.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Rendering\\FBO.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Rendering/FBO.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Rendering/FBO.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Rendering\\Texture.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Rendering\\Texture.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Rendering/Texture.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Rendering/Texture.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Rendering\\VAO.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Rendering\\VAO.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Rendering/VAO.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Rendering/VAO.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Rendering\\VBO.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Rendering\\VBO.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Rendering/VBO.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Rendering/VBO.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Rendering\\shaderClass.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Rendering\\shaderClass.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Rendering/shaderClass.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Rendering/shaderClass.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Terrain\\Noise.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Terrain\\Noise.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Terrain/Noise.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Terrain/Noise.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Terrain\\Terrain.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Terrain\\Terrain.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Terrain/Terrain.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Terrain/Terrain.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Terrain\\Tree.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Terrain\\Tree.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Terrain/Tree.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Terrain/Tree.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Terrain\\WorldStructure.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Terrain\\WorldStructure.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Terrain/WorldStructure.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Terrain/WorldStructure.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\UI\\MenuBar.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\UI\\MenuBar.cpp",
+  "file": "C:/dev/Voxl-Engine/src/UI/MenuBar.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/UI/MenuBar.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\UI\\UI_Engine_Class.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\UI\\UI_Engine_Class.cpp",
+  "file": "C:/dev/Voxl-Engine/src/UI/UI_Engine_Class.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Class.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\UI\\UI_Engine_Defaults.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\UI\\UI_Engine_Defaults.cpp",
+  "file": "C:/dev/Voxl-Engine/src/UI/UI_Engine_Defaults.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Defaults.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\UI\\UI_ProjectsPanel.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\UI\\UI_ProjectsPanel.cpp",
+  "file": "C:/dev/Voxl-Engine/src/UI/UI_ProjectsPanel.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\UI\\UserInterface.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\UI\\UserInterface.cpp",
+  "file": "C:/dev/Voxl-Engine/src/UI/UserInterface.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\glad.cpp.obj -c C:\\dev\\Voxl-Engine\\glad.cpp",
+  "file": "C:/dev/Voxl-Engine/glad.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/glad.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\imgui\\imgui.cpp.obj -c C:\\dev\\Voxl-Engine\\imgui\\imgui.cpp",
+  "file": "C:/dev/Voxl-Engine/imgui/imgui.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\imgui\\imgui_draw.cpp.obj -c C:\\dev\\Voxl-Engine\\imgui\\imgui_draw.cpp",
+  "file": "C:/dev/Voxl-Engine/imgui/imgui_draw.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\imgui\\imgui_tables.cpp.obj -c C:\\dev\\Voxl-Engine\\imgui\\imgui_tables.cpp",
+  "file": "C:/dev/Voxl-Engine/imgui/imgui_tables.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\imgui\\imgui_widgets.cpp.obj -c C:\\dev\\Voxl-Engine\\imgui\\imgui_widgets.cpp",
+  "file": "C:/dev/Voxl-Engine/imgui/imgui_widgets.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\imgui\\imgui_impl_glfw.cpp.obj -c C:\\dev\\Voxl-Engine\\imgui\\imgui_impl_glfw.cpp",
+  "file": "C:/dev/Voxl-Engine/imgui/imgui_impl_glfw.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\imgui\\imgui_impl_opengl3.cpp.obj -c C:\\dev\\Voxl-Engine\\imgui\\imgui_impl_opengl3.cpp",
+  "file": "C:/dev/Voxl-Engine/imgui/imgui_impl_opengl3.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\context.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\context.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/context.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/context.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\init.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\init.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/init.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/init.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\input.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\input.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/input.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/input.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\monitor.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\monitor.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/monitor.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/monitor.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\platform.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\platform.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/platform.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/platform.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\vulkan.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\vulkan.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/vulkan.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/vulkan.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\window.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\window.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/window.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/window.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\egl_context.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\egl_context.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/egl_context.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/egl_context.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\osmesa_context.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\osmesa_context.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/osmesa_context.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/osmesa_context.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\null_init.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\null_init.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/null_init.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/null_init.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\null_monitor.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\null_monitor.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/null_monitor.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/null_monitor.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\null_window.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\null_window.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/null_window.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/null_window.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\null_joystick.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\null_joystick.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/null_joystick.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/null_joystick.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\win32_module.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\win32_module.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/win32_module.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/win32_module.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\win32_time.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\win32_time.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/win32_time.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/win32_time.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\win32_thread.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\win32_thread.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/win32_thread.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/win32_thread.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\win32_init.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\win32_init.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/win32_init.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/win32_init.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\win32_joystick.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\win32_joystick.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/win32_joystick.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/win32_joystick.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\win32_monitor.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\win32_monitor.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/win32_monitor.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/win32_monitor.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\win32_window.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\win32_window.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/win32_window.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/win32_window.c.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build/Libraries/include/GLFW/src/src",
+  "command": "C:\\msys64\\mingw64\\bin\\gcc.exe -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE @CMakeFiles/glfw.dir/includes_C.rsp -g -std=c99 -Wall -o CMakeFiles\\glfw.dir\\wgl_context.c.obj -c C:\\dev\\Voxl-Engine\\Libraries\\include\\GLFW\\src\\src\\wgl_context.c",
+  "file": "C:/dev/Voxl-Engine/Libraries/include/GLFW/src/src/wgl_context.c",
+  "output": "Libraries/include/GLFW/src/src/CMakeFiles/glfw.dir/wgl_context.c.obj"
+}
+]

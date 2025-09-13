@@ -88,10 +88,10 @@ void EngineUI_Defaults::ToolBar_World()
 		ImGuiWindowFlags_NoMove |
 		ImGuiWindowFlags_NoScrollbar;
 
-	GLuint img_select = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/select.png");
-	GLuint img_transform = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/Move.png");
-	GLuint img_rotate = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/rotate.png");
-	GLuint img_scale = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/scale.png");
+	const GLuint img_select = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/select.png");
+	const GLuint img_transform = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/Move.png");
+	const GLuint img_rotate = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/rotate.png");
+	const GLuint img_scale = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/scale.png");
 
 	GLuint img_add = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/add.png");
 	GLuint img_brush = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/paint.png");
@@ -135,7 +135,9 @@ void EngineUI_Defaults::ProjectName()
 void EngineUI_Defaults::SceneCollection()
 {
 	//Scene Panel
-	ImGuiWindowFlags BGP_Scene_F =
+	//const vs constexpr
+	//uh, basically constexpr allows for potential performance gains
+	constexpr ImGuiWindowFlags BGP_Scene_F =
 		ImGuiWindowFlags_NoCollapse |
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoMove;
@@ -180,9 +182,7 @@ void EngineUI_Defaults::SceneCollection()
 			break;
 		}
 
-		GLuint newImageData;
-
-		newImageData = Image::GenerateImage(buttonImagePath);
+		const GLuint newImageData = Image::GenerateImage(buttonImagePath);
 
 		ImGui::Image((ImTextureID)(intptr_t)newImageData, ImVec2(25, 25));
 
@@ -260,6 +260,7 @@ void EngineUI_Defaults::TexturePanel()
 
 void EngineUI_Defaults::ProjectFiles()
 {
+
 	//Texture Editor
 	ImGuiWindowFlags BGP_ProjectFiles_F =
 		ImGuiWindowFlags_NoCollapse |
@@ -289,67 +290,10 @@ void EngineUI_Defaults::ProjectFiles()
 		}
 	}
 
-
-
 	EngineUI_Class::CreateFolder("Scripts", files_scripts);
 
 	EngineUI_Class::CreateFolder("Textures", files_textures);
 
 
 	ImGui::End();
-}
-
-
-
-
-
-
-
-
-
-//Project Menu
-void EngineUI_NewProject::CreateMainProjectsMenu(GLFWwindow* projectsWindow)
-{
-	ImGuiWindowFlags BGP_Projects_F =
-		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_NoResize |
-		ImGuiWindowFlags_NoScrollbar |
-		ImGuiWindowFlags_NoMove;
-
-	int w, h;
-	glfwGetFramebufferSize(projectsWindow, &w, &h);
-	
-	ImGuiIO& io = ImGui::GetIO();
-	ImFont* MainFont = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/SpaceMono-Regular.ttf", 18.0f);
-	ImGui::PushFont(MainFont);
-
-	ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.251, 0.251, 0.251, 1.0f));
-	EngineUI_Class::CreatePanel("##mainProjectsWindow", BGP_Projects_F, ImVec2(0, 0), ImVec2((float)w, (float)h));
-	ImGui::PopStyleColor();
-	
-		EngineUI_Class::CreatePanel("##mainProjectsTab", BGP_Projects_F, ImVec2(0, 0), ImVec2(1280, 75));
-		if (ImGui::BeginTabBar("ProjectBar")) {
-			EngineUI_Class::CreateTab("Local Projects", engineColors.FernGreen);
-			EngineUI_Class::CreateTab("Templates", engineColors.FernGreen);
-			ImGui::EndTabBar();
-		}
-		ImGui::PopFont();
-		//Ends the Tab Bar
-		ImGui::End();
-
-		std::vector<std::string> projects =
-		{
-			"TerraVox",
-			"new project"
-		};
-
-		for (int i = 0; i < projects.size(); i++)
-		{
-			EngineUI_Class::CreateProjectEntry(projects[i], w, h, i);
-		}
-
-
-	//Ends the whole window panel
-	ImGui::End();
-
 }

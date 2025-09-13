@@ -30,8 +30,8 @@ public:
 		std::vector<int> textureIndexArray;
 	};
 
-
-	static struct worldChunkData
+	//apparently I need to drop the static keyword.
+	struct worldChunkData
 	{
 		glm::vec3 chunkPosition;
 		std::vector<Block> chunkBlocks;
@@ -51,7 +51,7 @@ public:
 	//const ints work though...?
 
 	static constexpr float freq = 10.0f;          // big flat areas -> lower; more detail -> higher
-	static constexpr float amplitude = 20.0f;      // ±1 block typical; use 2.0 for ±2 blocks
+	static constexpr float amplitude = 20.0f;      // ï¿½1 block typical; use 2.0 for ï¿½2 blocks
 	static const int quantizeLevels = 1;      // 1 = continuous; 2 = stronger plateaus
 	static uint64_t seed;          // global seed if you want determinism
 };

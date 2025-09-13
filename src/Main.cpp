@@ -1,21 +1,19 @@
 #define IMGUI_IMPL_OPENGL_LOADER_GLAD
+#define GLFW_EXPOSE_NATIVE_WIN32
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
-
 #include <iostream>
 #include <vector>
 #include <string>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#define GLFW_EXPOSE_NATIVE_WIN32
 #include <GLFW/glfw3native.h>
 #include <stb/stb_image.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 #include "texture.h"
 #include "shaderClass.h"
 #include "VAO.h"
@@ -30,9 +28,8 @@
 #include "MenuBar.h"
 #include "UserInterface.h"
 #include "UI_Engine.h"
+#include "UI_ProjectsPanel.h"
 #include "Terrain.h"
-
-#define FMT_HEADER_ONLY
 #include <core.h>
 
 //Its cleaner if I just put this inside Camera.h
@@ -45,7 +42,7 @@ VoxlEngine::TabModes VoxlEngine::currentTabMode = VoxlEngine::World;
 
 std::string VoxlEngine::ConsoleText = "Voxl Engine 2025 v0.1.2.stable.alpha.52861 \nOpenGL API #330 \nC:/dev/VoxlEngine/newproject/\n";
 
-VoxlEngine::programModes VoxlEngine::currentProgramMode = VoxlEngine::RunningProject;
+VoxlEngine::programModes VoxlEngine::currentProgramMode = VoxlEngine::ProjectMenu;
 
 
 
@@ -54,7 +51,7 @@ MenuBar menuBar;
 
 
 GLFWwindow* CreateProjectsWindow() {
-    GLFWwindow* win = glfwCreateWindow(1280, 720, "Voxl Projects", NULL, NULL);
+    GLFWwindow* win = glfwCreateWindow(1280, 720, "Voxl Projects", nullptr, nullptr);
     if (!win) return nullptr;
 
     glfwMakeContextCurrent(win);
@@ -80,10 +77,23 @@ GLFWwindow* CreateEngineWindow(int width, int height) {
 
 void RunProjectMenu(GLFWwindow* window)
 {
+    //Sets the window icon
+    int iconWidth, iconHeight, iconChannels;
+    stbi_set_flip_vertically_on_load(false);
+    unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/TerracubeGradient_Small.png", &iconWidth, &iconHeight, &iconChannels, 4);
+    GLFWimage images[1];
+    images[0].width = iconWidth;
+    images[0].height = iconHeight;
+    images[0].pixels = iconPixels;
+    glfwSetWindowIcon(window, 1, images);
+
+    Font::InitializeAllFonts();
+
+
     EngineUI_Class::ApplyDarkTheme(EngineUI_Class::UI_TYPE::Tabs);
 
 
-    EngineUI_NewProject::CreateMainProjectsMenu(window);
+    ProjectsPanel::CreateMainProjectsMenu(window);
 }
 
 void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cubeVAO, VAO quadVAO, int width, int height, GLFWwindow* window, Camera &camera)
@@ -107,7 +117,7 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
     glUniform3f(glGetUniformLocation(shaderProgram.ID, "sunColor"), 1.0f, 1.0f, 1.0f);
     glUniform1f(glGetUniformLocation(shaderProgram.ID, "sunStrength"), 0.8f);
 
-    //Camera Properities
+    //Camera Properties
     camera.Inputs(window);
     glfwGetFramebufferSize(window, &width, &height);
     glViewport(0, 0, width, height);
@@ -119,7 +129,7 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
     cubeVAO.Bind();
 
     // Spawn chunks
-    Chunk::SpawnChunks(2, shaderProgram);
+    Chunk::SpawnChunks(0, shaderProgram);
 
     cubeVAO.Unbind();
     sceneFBO.Unbind();
@@ -262,7 +272,7 @@ int main()
     gladLoadGL();
     glViewport(0, 0, width, height);
 
-    //An Aditional Engine Optimization: Hides faces that face away from the camera (essentially only rendering a single side of a plane)
+    //An additional Engine Optimization: Hides faces that face away from the camera (essentially only rendering a single side of a plane)
     glEnable(GL_CULL_FACE);
     // Initialize block textures 
     Block::InitTextures();
@@ -278,6 +288,7 @@ int main()
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_TEXTURE_2D);
 
+    //Sets the window icon
     int iconWidth, iconHeight, iconChannels;
     stbi_set_flip_vertically_on_load(false);
     unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/TerracubeGradient_Small.png", &iconWidth, &iconHeight, &iconChannels, 4);
@@ -427,8 +438,6 @@ int main()
     ImFont* SpaceMono_Bold = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/SpaceMono-Bold.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
     ImFont* Doto = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Doto-Bold.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
     ImFont* Doto_Bold = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Doto-Black.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
-    ImFont* Pixeloid = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Pixeloid.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
-    ImFont* Pixeloid_Bold = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Pixeloid-Bold.ttf", DevMenuFontSize, NULL, io.Fonts->GetGlyphRangesDefault());
     DevMenuStyle.WindowBorderSize = 0.0f;
 
     glDisable(GL_TEXTURE_2D);
@@ -448,8 +457,6 @@ int main()
         ImGui::NewFrame();
 
         RunProject(shaderProgram, screenShader, sceneFBO, cubeVAO, quadVAO, width, height, window, camera);
-
-        
 
         ImGui::Render();
         

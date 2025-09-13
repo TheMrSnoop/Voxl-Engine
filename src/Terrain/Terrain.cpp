@@ -543,13 +543,13 @@ void Chunk::SpawnChunks(glm::uint Iterations, Shader shaderProgram)
                 //I know the ID doesnt make any sense, but the atlas texture array or smth is mismatched with the block database...
                 // 
                 //Stone Layer
-                GenerateChunkLayer("Water", 0, glm::vec2(5, 7), false);
+                GenerateChunkLayer("Water", 0, glm::vec2(9, 10), false);
 
                 //Dirt Layer
-                GenerateChunkLayer("Sand", 7, glm::vec2(11, 13), false);
+                GenerateChunkLayer("Sand", 11, glm::vec2(11, 13), false);
 
                 //Grass Layer
-                GenerateChunkLayer("Gold Ore", 10, glm::vec2(-1, 15), true);
+                GenerateChunkLayer("Gold Ore", 13, glm::vec2(-1, 15), true);
 
                 //GenerateWater();
 

@@ -1,13 +1,14 @@
 #include "UserInterface.h"
-#include<glm/glm.hpp>
-#include<glm/gtc/matrix_transform.hpp>
-#include<glm/gtc/type_ptr.hpp>
 #include"imgui.h"
-#include"imgui_impl_glfw.h"
-#include"imgui_impl_opengl3.h"
 #include"VoxlEngine.h"
+#include <filesystem>
 
+namespace fs = std::filesystem;
 
+ImFont* EngineFonts::LexendLight_12px;
+ImFont* EngineFonts::LexendLight_14px;
+ImFont* EngineFonts::LexendLight_18px;
+ImFont* EngineFonts::LexendLight_21px;
 
 ImVec4 Colors::RGB_To_Normalized(float Red, float Green, float Blue, float Alpha)
 {
@@ -49,8 +50,35 @@ void Canvas::Render(Canvas canvas)
 
 
 	ImGui::End();
-
 }
+
+
+void Font::InitializeAllFonts() {
+	ImGuiIO& io = ImGui::GetIO();
+	EngineFonts::LexendLight_12px = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Lexend/Lexend-Light.ttf", 14.0f);
+	EngineFonts::LexendLight_14px = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Lexend/Lexend-Light.ttf", 14.0f);
+	EngineFonts::LexendLight_18px = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Lexend/Lexend-Light.ttf", 18.0f);
+	EngineFonts::LexendLight_21px = io.Fonts->AddFontFromFileTTF("C:/dev/Voxl-Engine/Fonts/Lexend/Lexend-Light.ttf", 21.0f);
+}
+
+
+ImFont* Font::CreateFont(const char* fileDir, const float fontSize) {
+	const ImGuiIO& io = ImGui::GetIO();
+	ImFont* MainFont = io.Fonts->AddFontFromFileTTF(fileDir, fontSize);
+
+	return MainFont;
+}
+
+ImFont* Font::LoadFont(const char* fileName) {
+	for (Font::font fontEntry: Font::AllFonts) {
+		if (fontEntry.name == fileName) {
+			return fontEntry.ImFont;
+		}
+	}
+	return nullptr;
+}
+
+
 
 
 

@@ -1,0 +1,78 @@
+cmake_minimum_required(VERSION 3.20)
+project(VoxlEngine VERSION 0.1 LANGUAGES CXX)
+
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+set(PROJ_ROOT ${CMAKE_SOURCE_DIR})
+set(LIBRARIES_DIR ${PROJ_ROOT}/Libraries)
+set(IMGUI_DIR ${PROJ_ROOT}/imgui)
+set(SHADERS_DIR ${PROJ_ROOT}/Shaders)
+set(ASSETS_DIR ${PROJ_ROOT}/Images)
+
+# grab all cpp files
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
+        ${PROJ_ROOT}/src/*.cpp
+)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+        ${PROJ_ROOT}/src
+        ${LIBRARIES_DIR}/include
+        ${LIBRARIES_DIR}/Custom
+        ${LIBRARIES_DIR}/Custom/UI
+        #fmt
+        ${LIBRARIES_DIR}/include/fmt/include/fmt
+        #json
+        ${LIBRARIES_DIR}/include/json/include/nlohmann
+        ${IMGUI_DIR}
+
+)
+
+
+# glad
+set(GLAD_C ${PROJ_ROOT}/glad.cpp)
+if (EXISTS ${GLAD_C})
+    target_sources(${PROJECT_NAME} PRIVATE ${GLAD_C})
+    target_include_directories(${PROJECT_NAME} PRIVATE ${PROJ_ROOT})
+endif()
+
+
+
+# imgui
+if (EXISTS ${IMGUI_DIR})
+    target_sources(${PROJECT_NAME} PRIVATE
+            ${IMGUI_DIR}/imgui.cpp
+            ${IMGUI_DIR}/imgui_draw.cpp
+            ${IMGUI_DIR}/imgui_tables.cpp
+            ${IMGUI_DIR}/imgui_widgets.cpp
+            ${IMGUI_DIR}/imgui_impl_glfw.cpp
+            ${IMGUI_DIR}/imgui_impl_opengl3.cpp
+    )
+    target_include_directories(${PROJECT_NAME} PRIVATE ${IMGUI_DIR} ${IMGUI_DIR}/backends)
+endif()
+
+find_package(OpenGL REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE OpenGL::GL)
+
+add_subdirectory(${LIBRARIES_DIR}/include/GLFW/src)
+target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+
+
+if (WIN32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE gdi32 user32 shell32)
+endif()
+
+add_compile_definitions(FMT_HEADER_ONLY)
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)
+
+add_custom_target(copy_assets ALL
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${ASSETS_DIR} ${CMAKE_BINARY_DIR}/bin/Images
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${SHADERS_DIR} ${CMAKE_BINARY_DIR}/bin/Shaders
+)
+add_dependencies(${PROJECT_NAME} copy_assets)

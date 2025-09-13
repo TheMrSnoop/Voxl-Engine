@@ -31,6 +31,11 @@ void EngineUI_Class::ApplyDarkTheme(UI_TYPE type)
 		style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.369, 0.369, 0.369, 1.0f);
 		//Text-Align: Left
 		style.ButtonTextAlign = ImVec2(0.0f, 0.0f);
+
+	case EngineUI_Class::TreeNode:
+		style.Colors[ImGuiCol_Button] = engineColors.DarkGray;
+		style.Colors[ImGuiCol_ButtonActive] = engineColors.DarkGray;
+		style.Colors[ImGuiCol_ButtonHovered] = engineColors.DarkGray;
 	}
 }
 
@@ -39,16 +44,18 @@ void EngineUI_Class::ApplyDarkTheme(UI_TYPE type)
 //UI RENDERING
 
 
-void EngineUI_Class::CreatePanel(const char* titleBar, ImGuiWindowFlags flags, ImVec2 screenPos, ImVec2 screenSize)
+bool EngineUI_Class::CreatePanel(const char* titleBar, ImGuiWindowFlags flags, ImVec2 screenPos, ImVec2 screenSize)
 {
 	ImGui::SetNextWindowPos(ImVec2(screenPos.x, screenPos.y), ImGuiCond_Always);
 	ImGui::SetNextWindowSize(ImVec2(screenSize.x, screenSize.y));
 
-	ImGui::Begin(titleBar, nullptr, flags);
+	return ImGui::Begin(titleBar, nullptr, flags);
 }
 
 void EngineUI_Class::CreateTab(const char* headerText, ImVec4 color)
 {
+	EngineUI_Class::ApplyDarkTheme(EngineUI_Class::TreeNode);
+
 	if (ImGui::BeginTabItem(headerText))
 	{
 		if (headerText == "Texture Editor")
@@ -201,40 +208,6 @@ void EngineUI_Class::CreateFolder(std::string folderName, std::vector<fileData> 
 		ImGui::Indent(-20.0f);
 		ImGui::TreePop();
 	}
-}
-
-void EngineUI_Class::CreateProjectEntry(std::string projectDetails, float w, float h, int index)
-{
-
-
-	ImGuiWindowFlags BGP_Project_F =
-		ImGuiWindowFlags_NoCollapse |
-		ImGuiWindowFlags_NoResize |
-		ImGuiWindowFlags_NoScrollbar |
-		ImGuiWindowFlags_NoMove;
-
-	//Project Container
-	ImGui::PushStyleColor(ImGuiCol_WindowBg, engineColors.DarkGray);
-	EngineUI_Class::CreatePanel("##projectContainer", BGP_Project_F, ImVec2(0, 75), ImVec2(1280, (float)h));
-	ImGui::PopStyleColor();
-
-
-	std::string projectPanelID = "##newproject." + std::to_string(index);
-
-	//Project Item
-	EngineUI_Class::ApplyDarkTheme(EngineUI_Class::Button);
-	EngineUI_Class::CreatePanel(projectPanelID.c_str(), BGP_Project_F, ImVec2(0, (100 * index) + 75), ImVec2(1280, 100));
-
-	GLuint projectIcon = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/Grass64.png");
-	EngineUI_Class::CreateImage(projectIcon, ImVec2(64, 64));
-	ImGui::SameLine();
-	ImGui::Indent(64.0f);
-	EngineUI_Class::CreateButton(projectDetails.c_str(), ImVec2(1280 - 64, 64));
-
-	ImGui::End();
-
-	//Ends the Project Container
-	ImGui::End();
 }
 
 
