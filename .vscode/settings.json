@@ -6,6 +6,7 @@
         "OPENGL",
         "stbi",
         "Terracube",
+        "TERRAVOX",
         "Wwindow"
     ],
     "files.associations": {
@@ -80,6 +81,28 @@
         "iomanip": "cpp",
         "numbers": "cpp",
         "span": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "any": "cpp",
+        "bitset": "cpp",
+        "cfenv": "cpp",
+        "chrono": "cpp",
+        "complex": "cpp",
+        "condition_variable": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "unordered_set": "cpp",
+        "regex": "cpp",
+        "source_location": "cpp",
+        "mutex": "cpp",
+        "ranges": "cpp",
+        "semaphore": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp",
+        "typeindex": "cpp",
+        "valarray": "cpp",
+        "xhash": "cpp",
+        "filesystem": "cpp"
     }
 }

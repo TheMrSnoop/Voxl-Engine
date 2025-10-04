@@ -51,6 +51,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Defaults.cpp.obj.d"
   "CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.obj"
   "CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.obj.d"
+  "CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj"
+  "CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj.d"
   "CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj"
   "CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj.d"
   "bin/VoxlEngine.exe"

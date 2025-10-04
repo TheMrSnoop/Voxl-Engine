@@ -5,7 +5,7 @@
 #include <vector>
 #include "Camera.h"
 
-//for checking if the texture exsists
+//for checking if the texture exists
 
 std::vector<glm::vec3> Block::allBlockPositions;
 
@@ -26,7 +26,7 @@ GLuint indices[] =
 };
 
 
-//Initalizes all the texture objects by creating the array of textures, given the file path
+//Initializes all the texture objects by creating the array of textures, given the file path
 //Then, every Block's "blockTextureIndex" is then "linked" to the index of the Texture Array
 
 //For example, when the Dirt texture is being created, the index of that Texture is stored into the Dirt Block, which can then be later used in reference to that block.
@@ -62,11 +62,11 @@ void Block::InitTextures()
 
 
 //ALL THE BLOCKS IN THE GAME NEED TO FIRST BE DEFINED HERE.
-//Display Name | Block Type | Path to Texture | Durrability (can be used if I want to add gameplay)
+//Display Name | Block Type | Path to Texture | Durability (can be used if I want to add gameplay)
 std::vector<Block::BlockData> Block::blockDatabase =
 {
 	{"Grass Top", Block::Natural, "C:/dev/Voxl-Engine/Images/BlockTextures/GrassTop.jpg", 5.0f, false},
-	{"Grass", Block::Natural, "C:/dev/Voxl-Engine/Images/BlockTextures/Grass.jpg", 5.0f, false},
+	{"Grass", Block::Natural, "C:/dev/Voxl-Engine/Images/BlockTextures/Unwrapped/grass.png", 5.0f, false},
 	{"Dirt", Block::Natural, "C:/dev/Voxl-Engine/Images/BlockTextures/Dirt.jpg", 5.0f, false},
 	{"Log", Block::Natural, "C:/dev/Voxl-Engine/Images/BlockTextures/Log.jpg", 10.0f, false},
 	{"Pine Log", Block::Natural, "C:/dev/Voxl-Engine/Images/BlockTextures/PineLog.jpg", 10.0f, false},
@@ -158,7 +158,7 @@ void Block::SpawnBlock(std::string BlockDataID, glm::vec3 position, Shader shade
 
 	//glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
 
-	if (blockReference.emmitsLight)
+	if (blockReference.emitsLight)
 	{
 		//Inputing shader light properties
 		glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), position.x, position.y, position.z); // example pos
@@ -190,11 +190,11 @@ void Block::SpawnAreaOfBlocks(std::string BlockDataID, glm::vec3 position, glm::
 }
 
 
-bool Block::doesBlockExsistAtLocation(glm::vec3 targetVector)
+bool Block::doesBlockExistAtLocation(glm::vec3 targetVector)
 {
 	for (int i = 0; i < Block::allBlockPositions.size(); i++)
 	{
-		//We are doing this instead of directly saying "== to" because this implementation allows for tollerance, in this case, by 0.001.
+		//We are doing this instead of directly saying "== to" because this implementation allows for tolerance, in this case, by 0.001.
 		if (glm::distance(allBlockPositions[i], targetVector) < 0.001f)
 		{
 			return true;

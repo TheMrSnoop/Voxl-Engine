@@ -356,11 +356,26 @@ CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.s"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\dev\Voxl-Engine\src\UI\UI_ProjectsPanel.cpp -o CMakeFiles\VoxlEngine.dir\src\UI\UI_ProjectsPanel.cpp.s
 
+CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj: CMakeFiles/VoxlEngine.dir/flags.make
+CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
+CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj: C:/dev/Voxl-Engine/src/UI/UI_ScriptEditor.cpp
+CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj -MF CMakeFiles\VoxlEngine.dir\src\UI\UI_ScriptEditor.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\src\UI\UI_ScriptEditor.cpp.obj -c C:\dev\Voxl-Engine\src\UI\UI_ScriptEditor.cpp
+
+CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.i"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\dev\Voxl-Engine\src\UI\UI_ScriptEditor.cpp > CMakeFiles\VoxlEngine.dir\src\UI\UI_ScriptEditor.cpp.i
+
+CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.s"
+	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\dev\Voxl-Engine\src\UI\UI_ScriptEditor.cpp -o CMakeFiles\VoxlEngine.dir\src\UI\UI_ScriptEditor.cpp.s
+
 CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj: CMakeFiles/VoxlEngine.dir/flags.make
 CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
 CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj: C:/dev/Voxl-Engine/src/UI/UserInterface.cpp
 CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj -MF CMakeFiles\VoxlEngine.dir\src\UI\UserInterface.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\src\UI\UserInterface.cpp.obj -c C:\dev\Voxl-Engine\src\UI\UserInterface.cpp
 
 CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.i: cmake_force
@@ -375,7 +390,7 @@ CMakeFiles/VoxlEngine.dir/glad.cpp.obj: CMakeFiles/VoxlEngine.dir/flags.make
 CMakeFiles/VoxlEngine.dir/glad.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
 CMakeFiles/VoxlEngine.dir/glad.cpp.obj: C:/dev/Voxl-Engine/glad.cpp
 CMakeFiles/VoxlEngine.dir/glad.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/VoxlEngine.dir/glad.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/VoxlEngine.dir/glad.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/glad.cpp.obj -MF CMakeFiles\VoxlEngine.dir\glad.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\glad.cpp.obj -c C:\dev\Voxl-Engine\glad.cpp
 
 CMakeFiles/VoxlEngine.dir/glad.cpp.i: cmake_force
@@ -390,7 +405,7 @@ CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj: CMakeFiles/VoxlEngine.dir/flags.m
 CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
 CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj: C:/dev/Voxl-Engine/imgui/imgui.cpp
 CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj -MF CMakeFiles\VoxlEngine.dir\imgui\imgui.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\imgui\imgui.cpp.obj -c C:\dev\Voxl-Engine\imgui\imgui.cpp
 
 CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.i: cmake_force
@@ -405,7 +420,7 @@ CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.obj: CMakeFiles/VoxlEngine.dir/fl
 CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.obj: C:/dev/Voxl-Engine/imgui/imgui_draw.cpp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.obj -MF CMakeFiles\VoxlEngine.dir\imgui\imgui_draw.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\imgui\imgui_draw.cpp.obj -c C:\dev\Voxl-Engine\imgui\imgui_draw.cpp
 
 CMakeFiles/VoxlEngine.dir/imgui/imgui_draw.cpp.i: cmake_force
@@ -420,7 +435,7 @@ CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.obj: CMakeFiles/VoxlEngine.dir/
 CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.obj: C:/dev/Voxl-Engine/imgui/imgui_tables.cpp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.obj -MF CMakeFiles\VoxlEngine.dir\imgui\imgui_tables.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\imgui\imgui_tables.cpp.obj -c C:\dev\Voxl-Engine\imgui\imgui_tables.cpp
 
 CMakeFiles/VoxlEngine.dir/imgui/imgui_tables.cpp.i: cmake_force
@@ -435,7 +450,7 @@ CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.obj: CMakeFiles/VoxlEngine.dir
 CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.obj: C:/dev/Voxl-Engine/imgui/imgui_widgets.cpp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.obj -MF CMakeFiles\VoxlEngine.dir\imgui\imgui_widgets.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\imgui\imgui_widgets.cpp.obj -c C:\dev\Voxl-Engine\imgui\imgui_widgets.cpp
 
 CMakeFiles/VoxlEngine.dir/imgui/imgui_widgets.cpp.i: cmake_force
@@ -450,7 +465,7 @@ CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.obj: CMakeFiles/VoxlEngine.d
 CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.obj: C:/dev/Voxl-Engine/imgui/imgui_impl_glfw.cpp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.obj -MF CMakeFiles\VoxlEngine.dir\imgui\imgui_impl_glfw.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\imgui\imgui_impl_glfw.cpp.obj -c C:\dev\Voxl-Engine\imgui\imgui_impl_glfw.cpp
 
 CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_glfw.cpp.i: cmake_force
@@ -465,7 +480,7 @@ CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.obj: CMakeFiles/VoxlEngin
 CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.obj: CMakeFiles/VoxlEngine.dir/includes_CXX.rsp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.obj: C:/dev/Voxl-Engine/imgui/imgui_impl_opengl3.cpp
 CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.obj: CMakeFiles/VoxlEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.obj"
 	C:\msys64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.obj -MF CMakeFiles\VoxlEngine.dir\imgui\imgui_impl_opengl3.cpp.obj.d -o CMakeFiles\VoxlEngine.dir\imgui\imgui_impl_opengl3.cpp.obj -c C:\dev\Voxl-Engine\imgui\imgui_impl_opengl3.cpp
 
 CMakeFiles/VoxlEngine.dir/imgui/imgui_impl_opengl3.cpp.i: cmake_force
@@ -497,6 +512,7 @@ VoxlEngine_OBJECTS = \
 "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Class.cpp.obj" \
 "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Defaults.cpp.obj" \
 "CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.obj" \
+"CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj" \
 "CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj" \
 "CMakeFiles/VoxlEngine.dir/glad.cpp.obj" \
 "CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj" \
@@ -528,6 +544,7 @@ bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/src/UI/MenuBar.cpp.obj
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Class.cpp.obj
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Defaults.cpp.obj
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.obj
+bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/glad.cpp.obj
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/imgui/imgui.cpp.obj
@@ -541,7 +558,7 @@ bin/VoxlEngine.exe: Libraries/include/GLFW/src/src/libglfw3.a
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/linkLibs.rsp
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/objects1.rsp
 bin/VoxlEngine.exe: CMakeFiles/VoxlEngine.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Linking CXX executable bin\VoxlEngine.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\dev\Voxl-Engine\build\CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Linking CXX executable bin\VoxlEngine.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\VoxlEngine.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

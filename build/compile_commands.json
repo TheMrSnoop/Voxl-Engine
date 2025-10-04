@@ -115,6 +115,12 @@
 },
 {
   "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\UI\\UI_ScriptEditor.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\UI\\UI_ScriptEditor.cpp",
+  "file": "C:/dev/Voxl-Engine/src/UI/UI_ScriptEditor.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
   "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\UI\\UserInterface.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\UI\\UserInterface.cpp",
   "file": "C:/dev/Voxl-Engine/src/UI/UserInterface.cpp",
   "output": "CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj"

@@ -18,7 +18,7 @@ public:
 	glm::vec3 multiplyVectorWithFloat(glm::vec3, float);
 	static bool isVectorEqual(glm::vec3 vec1, glm::vec3 vec2);
 
-	//RANDOMNESS
+	//--RANDOMNESS--//
 	static int getRandomInt(int min, int max);
 
 	//only works with strings. I gotta make more, or a better single one.
@@ -28,11 +28,11 @@ public:
 	static uint64_t generateSeed();
 
 
-	//STRINGS
+	//--STRINGS--//
 	static std::string returnConsoleBar(float percentage, std::string Label = "");
 
 	
-	//ENGINE METRICS
+	//--ENGINE METRICS--//
 	float currentTime = 0.0f;
 	float deltaTime = 0.0f;
 	static float DTPS;
@@ -40,7 +40,7 @@ public:
 	int roundedFPS = 0;
 	void CalculateFPS();
 
-	//GLOBAL ENGINE DATA
+	//--GLOBAL ENGINE DATA--//
 	static bool engineClosed;
 	static bool showEngineMetrics;
 
@@ -49,6 +49,9 @@ public:
 
 	static const int windowWidth = 2560;
 	static const int windowHeight = 1440;
+
+	//--DATA RETRIEVAL--//
+	static std::string returnLuaFile(std::string fileDir);
 
 	//apparently I need to drop the static keyword.
 	enum programModes
@@ -64,7 +67,8 @@ public:
 		World,
 		TextureEditor,
 		VoxelCreator,
-		CharacterCreator
+		CharacterCreator,
+		ScriptEditor
 	};
 
 	static TabModes currentTabMode;

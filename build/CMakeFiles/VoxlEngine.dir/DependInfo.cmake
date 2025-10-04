@@ -34,6 +34,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/dev/Voxl-Engine/src/UI/UI_Engine_Class.cpp" "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Class.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Class.cpp.obj.d"
   "C:/dev/Voxl-Engine/src/UI/UI_Engine_Defaults.cpp" "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Defaults.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/UI/UI_Engine_Defaults.cpp.obj.d"
   "C:/dev/Voxl-Engine/src/UI/UI_ProjectsPanel.cpp" "CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.obj.d"
+  "C:/dev/Voxl-Engine/src/UI/UI_ScriptEditor.cpp" "CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj.d"
   "C:/dev/Voxl-Engine/src/UI/UserInterface.cpp" "CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/UI/UserInterface.cpp.obj.d"
   )
 

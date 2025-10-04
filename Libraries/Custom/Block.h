@@ -33,7 +33,7 @@ public:
 		//The raw texture path
 		std::string texturePath;
 		float blockDurability;
-		bool emmitsLight = false;
+		bool emitsLight = false;
 
 		//Used to "link" the texture object with the block
 		int blockTextureIndex;
@@ -66,6 +66,6 @@ public:
 	
 	
 	static std::vector<glm::vec3> allBlockPositions;
-	static bool doesBlockExsistAtLocation(glm::vec3);
+	static bool doesBlockExistAtLocation(glm::vec3);
 
 };

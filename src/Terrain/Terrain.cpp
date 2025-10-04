@@ -14,7 +14,6 @@
 #include "Noise.h"
 #include "UserInterface.h"
 
-#define FMT_HEADER_ONLY
 #include <core.h>
 
 
@@ -52,7 +51,7 @@ uint64_t TerrainGeneration::seed = VoxlEngine::generateSeed();
 
 
 
-// file-scope pointer — initially null
+// file-scope pointer ï¿½ initially null
 Texture* terrainAtlasTexture = nullptr;
 
 // call after GL context is created 
@@ -393,7 +392,13 @@ void GenerateTrees(int Count)
 {
     for (int i = 0; i < Count; i++)
     {
-        Tree newTree = Tree::ReturnTree("Oak");
+        //Tree Spawn Rates
+        //OAK: 50%
+        //LARGE OAK: 50%
+        Tree newTree = (VoxlEngine::getRandomInt(0, 1) == 0) ? Tree::ReturnTree("Oak") : Tree::ReturnTree("Oak_Large");
+
+
+        
 
         glm::vec3 treeSpawnPosition = glm::vec3(Chunk_X_Position + (float)VoxlEngine::getRandomInt(-8, 8), 15.0f, Chunk_Z_Position + (float)VoxlEngine::getRandomInt(-8, 8));
 
@@ -480,7 +485,7 @@ void GenerateChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightR
             {
                 //Noise DATA
                 float freq = 0.1f;          // big flat areas -> lower; more detail -> higher
-                float amplitude = 1.0f;      // ±1 block typical; use 2.0 for ±2 blocks
+                float amplitude = 1.0f;      // ï¿½1 block typical; use 2.0 for ï¿½2 blocks
                 int quantizeLevels = 2;      // 1 = continuous; 2 = stronger plateaus
 
                 int baseMax = (int)maxHeightRange.y; // your intended base height

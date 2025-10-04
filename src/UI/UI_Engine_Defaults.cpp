@@ -2,6 +2,10 @@
 
 Colors engineColors;
 
+using namespace std;
+
+#include <filesystem>
+namespace fs = std::filesystem;
 
 //ENGINE UI
 void EngineUI_Defaults::MenuBar()
@@ -66,10 +70,10 @@ void EngineUI_Defaults::TabBar()
 	EngineUI_Class::CreatePanel("##TabBar", BGP_Tabs_F, ImVec2(0, 20), ImVec2(VoxlEngine::windowWidth, 15));
 
 	if (ImGui::BeginTabBar("Bar")) {
-		EngineUI_Class::CreateTab("New Scene", engineColors.Orange);
-		EngineUI_Class::CreateTab("grassblock.png", engineColors.LightRed);
-		EngineUI_Class::CreateTab("Campfire", engineColors.LightBlue);
-		EngineUI_Class::CreateTab("Character", engineColors.LightPurple);
+		EngineUI_Class::CreateTab("New Scene", engineColors.Orange, 0 );
+		EngineUI_Class::CreateTab("Script Editor", engineColors.Teal, 1);
+		EngineUI_Class::CreateTab("Texture Editor", engineColors.LightRed, 2);
+		EngineUI_Class::CreateTab("Character Creator", engineColors.LightBlue, 3);
 
 		ImGui::EndTabBar();
 	}
@@ -127,7 +131,7 @@ void EngineUI_Defaults::ProjectName()
 		ImGuiWindowFlags_NoMove |
 		ImGuiWindowFlags_NoScrollbar;
 	EngineUI_Class::CreatePanel("##projectName", BGP_ProjectName_F, ImVec2((VoxlEngine::windowWidth / 2) + 20, -25), ImVec2(100, 50));
-	ImGui::Text("NEW PROJECT");
+	ImGui::Text("TERRAVOX");
 	//Closes Project Title
 	ImGui::End();
 }
@@ -147,7 +151,7 @@ void EngineUI_Defaults::SceneCollection()
 
 	std::vector<EngineUI_Class::buttonData> sceneButtons =
 	{
-		{ "Voxel Landscape",  EngineUI_Class::block },
+		{ "Procedural Voxel Landscape",  EngineUI_Class::block },
 		{ "Directional Lighting", EngineUI_Class::sun },
 		{ "Player", EngineUI_Class::block },
 		{ "Master Shader", EngineUI_Class::block },
@@ -258,42 +262,114 @@ void EngineUI_Defaults::TexturePanel()
 	ImGui::End();
 }
 
+
+EngineFile::Type extensionRecognized(string ext)
+{
+	for (std::string ext_script : EngineFile::extensions_script)
+	{
+		if (ext_script == ext)
+		{
+			return EngineFile::script;
+		}
+	}
+
+	for (std::string ext_texture : EngineFile::extensions_texture)
+	{
+		if (ext_texture == ext)
+		{
+			return EngineFile::texture;
+		}
+	}
+
+	for (std::string ext_mesh : EngineFile::extensions_mesh)
+	{
+		if (ext_mesh == ext)
+		{
+			return EngineFile::mesh;
+		}
+	}
+
+	//if none were found, return script as the default
+	return EngineFile::script;
+}
+
+
+std::vector<EngineFile::Data> GetFilesInFolder(const std::string& folder)
+{
+    std::vector<EngineFile::Data> out;
+    if (!fs::exists(folder)) return out;
+
+    for (auto& entry : fs::directory_iterator(folder))
+    {
+        if (entry.is_regular_file())
+        {
+			std::string ext = entry.path().extension().string(); 
+
+            EngineFile::Data data;
+            data.name = entry.path().filename().string();
+            data.type = extensionRecognized(ext);
+            out.push_back(data);
+        }
+    }
+    return out;
+}
+
+
+
+std::vector<std::string> GetFoldersInRoot(const std::string& root)
+{
+    std::vector<std::string> out;
+    if (!fs::exists(root)) return out;
+
+    for (auto& entry : fs::directory_iterator(root))
+    {
+        if (entry.is_directory())
+        {
+            out.push_back(entry.path().filename().string()); 
+        }
+    }
+    return out;
+}
+
+
 void EngineUI_Defaults::ProjectFiles()
 {
-
-	//Texture Editor
+	//Pre Configuring the Panel
 	ImGuiWindowFlags BGP_ProjectFiles_F =
 		ImGuiWindowFlags_NoCollapse |
 		ImGuiWindowFlags_NoResize |
 		ImGuiWindowFlags_NoMove;
+
+
+	//Applying theme style
+	ImGui::PushStyleColor(ImGuiCol_Border, engineColors.Gray);
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 1.0f);
+
+	EngineUI_Class::ApplyDarkTheme(EngineUI_Class::TreeNode);
+
+
+	//Creating the panel
 	EngineUI_Class::CreatePanel("##projectFiles", BGP_ProjectFiles_F, ImVec2(0, 60), ImVec2(250, VoxlEngine::windowHeight - 235));
+
+
+	//Adding Header with text: "PROJECT CONTENT"
 	ImGui::Text("PROJECT CONTENT");
 
-	std::vector<EngineUI_Class::fileData> files_scripts =
+
+	//Specifying the project Directory
+	const std::string projectDirectory = "C:/Users/thoma/OneDrive/Desktop/Voxl Engine Projects/TerraVox";
+
+
+	//Getting all the project folder
+	std::vector<std::string> ProjectFolders = GetFoldersInRoot(projectDirectory);
+
+	for (std::string Subfolder : ProjectFolders)
 	{
-		{"player.lua", EngineUI_Class::script},
-		{"skeleton.lua", EngineUI_Class::script},
-		{"sword.lua", EngineUI_Class::script}
-	};
-
-	std::vector<EngineUI_Class::fileData> files_textures;
-
-
-	if (files_textures.size() != Block::blockDatabase.size())
-	{
-		for (Block::BlockData block : Block::blockDatabase)
-		{
-			EngineUI_Class::fileData newData;
-			newData.name = block.texturePath.erase(0, 40);
-			newData.type = EngineUI_Class::texture;
-			files_textures.push_back(newData);
-		}
+		EngineUI_Class::CreateFolder(Subfolder, GetFilesInFolder(projectDirectory + "/" + Subfolder));
 	}
 
-	EngineUI_Class::CreateFolder("Scripts", files_scripts);
-
-	EngineUI_Class::CreateFolder("Textures", files_textures);
-
+	ImGui::PopStyleVar();
+	ImGui::PopStyleColor();
 
 	ImGui::End();
 }

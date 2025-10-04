@@ -11,8 +11,19 @@
 Tree Tree::ReturnTree(const std::string TreeDisplayName)
 {
 	//Texture mismatch
-	Tree newTree("Oak", Block::ReturnBlock("Lava"), Block::ReturnBlock("Iron Ore"));
-	return newTree;
+
+	if (TreeDisplayName == "Oak" || TreeDisplayName == "Oak_Large")
+	{
+		Tree newTree(TreeDisplayName, Block::ReturnBlock("Lava"), Block::ReturnBlock("Iron Ore"));
+		return newTree;
+	}
+	else if (TreeDisplayName == "Pine")
+	{
+		Tree newTree(TreeDisplayName, Block::ReturnBlock("Emerald Ore"), Block::ReturnBlock("Opal Ore"));
+		return newTree;
+	}
+	
+
 }
 
 Tree::Tree(const std::string TreeDisplayName, const Block::BlockData& trunkBlock, const Block::BlockData& leafBlock)

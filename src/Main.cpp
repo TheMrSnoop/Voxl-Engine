@@ -42,7 +42,7 @@ VoxlEngine::TabModes VoxlEngine::currentTabMode = VoxlEngine::World;
 
 std::string VoxlEngine::ConsoleText = "Voxl Engine 2025 v0.1.2.stable.alpha.52861 \nOpenGL API #330 \nC:/dev/VoxlEngine/newproject/\n";
 
-VoxlEngine::programModes VoxlEngine::currentProgramMode = VoxlEngine::ProjectMenu;
+VoxlEngine::programModes VoxlEngine::currentProgramMode = VoxlEngine::RunningProject;
 
 
 
@@ -51,7 +51,7 @@ MenuBar menuBar;
 
 
 GLFWwindow* CreateProjectsWindow() {
-    GLFWwindow* win = glfwCreateWindow(1280, 720, "Voxl Projects", nullptr, nullptr);
+    GLFWwindow* win = glfwCreateWindow(1280, 720, "Voxl Engine | Project Manager", nullptr, nullptr);
     if (!win) return nullptr;
 
     glfwMakeContextCurrent(win);
@@ -182,19 +182,27 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
     //Default Engine UI
     EngineUI_Defaults::MenuBar();
     EngineUI_Defaults::TabBar();
+    EngineUI_Class::CreateCenterWindow("New Terrain", "Create a new terrain.", "CREATE", "CANCEL");
     EngineUI_Defaults::ProjectName();
-    EngineUI_Defaults::ObjectProperties();
     EngineUI_Defaults::Console();
+    EngineUI_Defaults::SceneCollection();
+    EngineUI_Defaults::ObjectProperties();
     EngineUI_Defaults::ProjectFiles();
+
+
+
 
     switch (VoxlEngine::currentTabMode)
     {
     case (VoxlEngine::World):
-        EngineUI_Defaults::SceneCollection();
         EngineUI_Defaults::ToolBar_World();
         break;
     case (VoxlEngine::TextureEditor):
         EngineUI_Defaults::TexturePanel();
+        break;
+    case (VoxlEngine::ScriptEditor):
+        //ScriptEditor::MainWindow("C:/Users/thoma/OneDrive/Desktop/Voxl Engine Projects/TerraVox/Scripts/PlayerMovement.lua");
+        ScriptEditor::MainWindow("C:/dev/Voxl-Engine/src/Core/Camera.cpp");
         break;
     }
 }

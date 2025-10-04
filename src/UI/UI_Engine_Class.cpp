@@ -1,5 +1,6 @@
 #include "UI_Engine.h"
-
+#include <iostream>
+#include <string>
 
 //STYLE
 void EngineUI_Class::ApplyDarkTheme(UI_TYPE type)
@@ -20,14 +21,14 @@ void EngineUI_Class::ApplyDarkTheme(UI_TYPE type)
 		//Colors
 		style.Colors[ImGuiCol_Tab] = engineColors.DarkGray;
 		style.Colors[ImGuiCol_TabHovered] = ImVec4(0.369, 0.369, 0.369, 1.0f);
-		style.Colors[ImGuiCol_TabActive] = ImVec4(0.251, 0.251, 0.251, 1.0f);
+		style.Colors[ImGuiCol_TabActive] = engineColors.Gray;
 		style.Colors[ImGuiCol_WindowBg] = engineColors.DarkGray;
 
 		//Variables
 		style.TabRounding = 0.0f;
 	case EngineUI_Class::Button:
 		style.Colors[ImGuiCol_Button] = engineColors.DarkGray;
-		style.Colors[ImGuiCol_ButtonActive] = ImVec4(0.251, 0.251, 0.251, 1.0f);
+		style.Colors[ImGuiCol_ButtonActive] = engineColors.Gray;
 		style.Colors[ImGuiCol_ButtonHovered] = ImVec4(0.369, 0.369, 0.369, 1.0f);
 		//Text-Align: Left
 		style.ButtonTextAlign = ImVec2(0.0f, 0.0f);
@@ -36,8 +37,20 @@ void EngineUI_Class::ApplyDarkTheme(UI_TYPE type)
 		style.Colors[ImGuiCol_Button] = engineColors.DarkGray;
 		style.Colors[ImGuiCol_ButtonActive] = engineColors.DarkGray;
 		style.Colors[ImGuiCol_ButtonHovered] = engineColors.DarkGray;
+
+
+	case EngineUI_Class::Dropdown:
+		style.Colors[ImGuiCol_FrameBg] = engineColors.DarkGray; 
+		style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.369, 0.369, 0.369, 1.0f); 
+		style.Colors[ImGuiCol_FrameBgActive] = engineColors.DarkGray; // clicked
+
+		//Removing the default blue
+		style.Colors[ImGuiCol_Header] = engineColors.DarkGray;
+		style.Colors[ImGuiCol_HeaderHovered] = ImVec4(0.20f,0.20f,0.20f,1.0f);
+		style.Colors[ImGuiCol_HeaderActive] = engineColors.Gray;
 	}
 }
+
 
 
 
@@ -52,20 +65,25 @@ bool EngineUI_Class::CreatePanel(const char* titleBar, ImGuiWindowFlags flags, I
 	return ImGui::Begin(titleBar, nullptr, flags);
 }
 
-void EngineUI_Class::CreateTab(const char* headerText, ImVec4 color)
+void EngineUI_Class::CreateTab(const char* headerText, ImVec4 color, int TabID)
 {
 	EngineUI_Class::ApplyDarkTheme(EngineUI_Class::TreeNode);
 
 	if (ImGui::BeginTabItem(headerText))
 	{
-		if (headerText == "Texture Editor")
+		switch (TabID)
 		{
-			VoxlEngine::currentTabMode = VoxlEngine::TextureEditor;
-		}
-		else
-		{
-			//temporary
+		case 0:
 			VoxlEngine::currentTabMode = VoxlEngine::World;
+			break;
+		case 1:
+			VoxlEngine::currentTabMode = VoxlEngine::ScriptEditor;
+			break;
+		case 2:
+			VoxlEngine::currentTabMode = VoxlEngine::TextureEditor;
+			break;
+		default:
+			break;
 		}
 
 
@@ -149,16 +167,18 @@ void EngineUI_Class::CreateImage(GLuint imageData, ImVec2 imageSize)
 	ImGui::Image((ImTextureID)(intptr_t)imageData, imageSize);
 }
 
-void EngineUI_Class::CreateFolder(std::string folderName, std::vector<fileData> childrenData)
+void EngineUI_Class::CreateFolder(std::string folderName, std::vector<EngineFile::Data> childrenData)
 {
+	EngineUI_Class::ApplyDarkTheme(EngineUI_Class::TreeNode);
 	//flags
 	ImGuiTreeNodeFlags folderFlags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_SpanAvailWidth;
 	ImGuiTreeNodeFlags fileFlags = ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen;
 
 	//icons
-	GLuint img_folder = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ObjectIcons/folder.png");
-	GLuint img_code = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ObjectIcons/code.png");
-	GLuint img_texture = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ObjectIcons/texture.png");
+	const GLuint img_folder = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ObjectIcons/folder-outlined.png");
+	const GLuint img_code = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ObjectIcons/code.png");
+	const GLuint img_texture = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ObjectIcons/texture.png");
+	const GLuint img_mesh = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ObjectIcons/cube.png");
 
 
 	std::string folderNodeName = "##xx" + folderName;
@@ -180,23 +200,28 @@ void EngineUI_Class::CreateFolder(std::string folderName, std::vector<fileData> 
 		// pushes the nodes 20px to the right
 		ImGui::Indent(20.0f);
 
-		for (EngineUI_Class::fileData data : childrenData)
+		for (EngineFile::Data data : childrenData)
 		{
 			switch (data.type)
 			{
-			case EngineUI_Class::folder:
+			case EngineFile::folder:
 				// folder icon
 				EngineUI_Class::CreateImage(img_folder, ImVec2(16, 16));
 				ImGui::SameLine();
 				break;
-			case EngineUI_Class::script:
+			case EngineFile::script:
 				// folder icon
 				EngineUI_Class::CreateImage(img_code, ImVec2(16, 16));
 				ImGui::SameLine();
 				break;
-			case EngineUI_Class::texture:
+			case EngineFile::texture:
 				// folder icon
 				EngineUI_Class::CreateImage(img_texture, ImVec2(16, 16));
+				ImGui::SameLine();
+				break;
+			case EngineFile::mesh:
+				// folder icon
+				EngineUI_Class::CreateImage(img_mesh, ImVec2(16, 16));
 				ImGui::SameLine();
 				break;
 			}
@@ -222,8 +247,9 @@ void EngineUI_Class::CreateObjectProperties(EngineUI_Class::ObjectProperty prope
 
 	if (open)
 	{
-		for (EngineUI_Class::ObjectPropertyData propData : properties.PropetyData)
+		for (EngineUI_Class::ObjectPropertyData propData : properties.PropertyData)
 		{
+			ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.5f);
 			ImGui::Text(propData.DataName.c_str());
 			ImGui::SameLine();
 
@@ -249,9 +275,48 @@ void EngineUI_Class::CreateObjectProperties(EngineUI_Class::ObjectProperty prope
 
 
 			//After the data text has been created,
-			//Undo the undent for the next item
+			//Undo the indent for the next item
 			ImGui::Indent(-indentAmount);
+			ImGui::PopStyleVar();
 		}
 		ImGui::TreePop();
 	}
+}
+
+void EngineUI_Class::CenteredText(const char* text)
+{
+    float windowWidth = ImGui::GetWindowSize().x;
+
+    float textWidth = ImGui::CalcTextSize(text).x;
+
+    // Calculates the indentation needed to center the text
+    float text_indentation = (windowWidth - textWidth) * 0.5f;
+
+    ImGui::SetCursorPosX(text_indentation);
+
+    ImGui::Text(text);
+}
+
+void EngineUI_Class::CreateCenterWindow(std::string Title, std::string Details, std::string ConfirmText, std::string DenyText)
+{
+	//Pre Configuring the Panel
+	ImGuiWindowFlags BGP_CenterWindow_F =
+		ImGuiWindowFlags_NoCollapse |
+		ImGuiWindowFlags_NoResize;
+	//Creating the panel
+
+	float panelWidth = 500;
+	float panelHeight = 350;
+
+	if (EngineUI_Class::CreatePanel("##centerWindow", BGP_CenterWindow_F, ImVec2((VoxlEngine::windowWidth * 0.5) - (panelWidth / 2), (VoxlEngine::windowHeight * 0.5) - (panelHeight / 2)), ImVec2(panelWidth, panelHeight)))
+	{
+		EngineUI_Class::CenteredText(Title.c_str());
+		ImGui::SameLine();
+		
+		ImGui::PushStyleColor(ImGuiCol_Button, engineColors.LightRed);
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive, engineColors.LightRed);
+		EngineUI_Class::CreateButton("X", ImVec2(20, 20));
+		ImGui::PopStyleColor(2);
+	}
+	ImGui::End();
 }

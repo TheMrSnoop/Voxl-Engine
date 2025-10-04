@@ -23,6 +23,7 @@ set(OLD_GLOB
   "C:/dev/Voxl-Engine/src/UI/UI_Engine_Class.cpp"
   "C:/dev/Voxl-Engine/src/UI/UI_Engine_Defaults.cpp"
   "C:/dev/Voxl-Engine/src/UI/UI_ProjectsPanel.cpp"
+  "C:/dev/Voxl-Engine/src/UI/UI_ScriptEditor.cpp"
   "C:/dev/Voxl-Engine/src/UI/UserInterface.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

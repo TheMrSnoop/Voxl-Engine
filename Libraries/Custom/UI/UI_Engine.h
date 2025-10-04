@@ -23,6 +23,53 @@
 #include <stb/stb_image.h>
 
 extern Colors engineColors;
+extern Font engineFonts;
+
+
+
+class EngineFile
+{
+public:
+	enum Type
+	{
+		folder,
+		script,
+		texture,
+		mesh
+	};
+
+	
+	struct Data
+	{
+		std::string name;
+		Type type;
+	};
+
+
+	inline static const std::vector<std::string> extensions_script =
+	{
+		".lua",
+		".cpp",
+		".h",
+		".c"	
+	};
+
+	inline static const std::vector<std::string> extensions_texture = 
+	{
+		".png",
+		".jpeg",
+		".jpg"
+	};
+
+	inline static const std::vector<std::string> extensions_mesh = 
+	{
+		".fbx",
+		".obj",
+		".blend"
+	};
+};
+
+
 
 class EngineUI_Class
 {
@@ -35,7 +82,8 @@ public:
 		Tabs,
 		Panel,
 		Button,
-		TreeNode
+		TreeNode,
+		Dropdown
 	};
 
 
@@ -59,18 +107,8 @@ public:
 		iconType icon;
 	};
 
-	enum fileType
-	{
-		folder,
-		script,
-		texture
-	};
 
-	struct fileData
-	{
-		std::string name;
-		fileType type;
-	};
+
 
 
 	struct ObjectPropertyData
@@ -84,8 +122,9 @@ public:
 	struct ObjectProperty
 	{
 		std::string Header;
-		std::vector<ObjectPropertyData> PropetyData;
+		std::vector<ObjectPropertyData> PropertyData;
 	};
+
 
 
 	//Create UI Classes
@@ -93,7 +132,7 @@ public:
 
 	static bool CreatePanel(const char* titleBar, ImGuiWindowFlags flags, ImVec2 screenPos, ImVec2 screenSize);
 
-	static void CreateTab(const char* headerText, ImVec4 color);
+	static void CreateTab(const char* headerText, ImVec4 color, int TabID);
 
 	static void CreateButton(const char* buttonText, ImVec2 size);
 
@@ -102,13 +141,20 @@ public:
 	//NOTE: If there is no keybind, simply put #.
 	static void CreateMenuBarDropdown(const char* dropdownName, std::vector<MenuBarData> data);
 
-	static void CreateFolder(std::string folderName, std::vector<fileData> childrenData);
+	static void CreateFolder(std::string folderName, std::vector<EngineFile::Data> childrenData);
 
 	static void CreateProjectEntry(std::string projectDetails, int index);
 
 	static void CreateObjectProperties(EngineUI_Class::ObjectProperty properties);
 
+	static void CreateCenterWindow(std::string Title, std::string Details, std::string ConfirmText, std::string DenyText);
+
+	static void CenteredText(const char* text);
+
 };
+
+
+
 
 
 //Create Specific Engine UI
@@ -130,4 +176,14 @@ public:
 	static void TexturePanel();
 
 };
+
+
+class ScriptEditor
+{
+public:
+	static void MainWindow(std::string dir);
+	static void ScriptsBar(std::vector<std::string> OpenedScripts);
+};
+
+
 

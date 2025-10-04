@@ -9,7 +9,6 @@
 #include "Camera.h"
 #include "Block.h"
 
-#define FMT_HEADER_ONLY
 #include <core.h>
 
 float VoxlEngine::FPS = 0.0f;
@@ -17,7 +16,7 @@ float VoxlEngine::DTPS = 0.0f;
 
 VoxlEngine::VoxlEngine()
 {
-	//Initalizes for FPS calculations
+	//Initializes for FPS calculations
 	lastTime = glfwGetTime();
 	timeAccumulator = 0.0f;
 }
@@ -158,7 +157,7 @@ VoxlEngine::RaycastHit VoxlEngine::Raycast(glm::vec3 origin, glm::vec3 dir, int 
 
 	for (int i = 0; i < maxSteps; ++i) {
 		// check if current voxel is solid
-		if (Block::doesBlockExsistAtLocation(voxelPosition)) {
+		if (Block::doesBlockExistAtLocation(voxelPosition)) {
 			hitResult.blockHitPosition = voxelPosition;
 			hitResult.hit = true;
 
@@ -203,4 +202,20 @@ VoxlEngine::RaycastHit VoxlEngine::Raycast(glm::vec3 origin, glm::vec3 dir, int 
 void VoxlEngine::Print(std::string text)
 {
 	VoxlEngine::ConsoleText += text + "\n";
+}
+
+
+
+std::string VoxlEngine::returnLuaFile(std::string fileDir)
+{
+	std::ifstream file(fileDir);
+	if (!file.is_open())
+	{
+		VoxlEngine::Print("ERROR. Close the .lua file to open inside the editor.");
+		return "";
+	}
+
+	std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()); //actually "reads" the file.
+
+	return contents;
 }

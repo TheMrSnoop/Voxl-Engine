@@ -850,6 +850,30 @@ src/UI/UI_ProjectsPanel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxlEngine.dir\build.make CMakeFiles/VoxlEngine.dir/src/UI/UI_ProjectsPanel.cpp.s
 .PHONY : src/UI/UI_ProjectsPanel.cpp.s
 
+src/UI/UI_ScriptEditor.obj: src/UI/UI_ScriptEditor.cpp.obj
+.PHONY : src/UI/UI_ScriptEditor.obj
+
+# target to build an object file
+src/UI/UI_ScriptEditor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxlEngine.dir\build.make CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.obj
+.PHONY : src/UI/UI_ScriptEditor.cpp.obj
+
+src/UI/UI_ScriptEditor.i: src/UI/UI_ScriptEditor.cpp.i
+.PHONY : src/UI/UI_ScriptEditor.i
+
+# target to preprocess a source file
+src/UI/UI_ScriptEditor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxlEngine.dir\build.make CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.i
+.PHONY : src/UI/UI_ScriptEditor.cpp.i
+
+src/UI/UI_ScriptEditor.s: src/UI/UI_ScriptEditor.cpp.s
+.PHONY : src/UI/UI_ScriptEditor.s
+
+# target to generate assembly for a file
+src/UI/UI_ScriptEditor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxlEngine.dir\build.make CMakeFiles/VoxlEngine.dir/src/UI/UI_ScriptEditor.cpp.s
+.PHONY : src/UI/UI_ScriptEditor.cpp.s
+
 src/UI/UserInterface.obj: src/UI/UserInterface.cpp.obj
 .PHONY : src/UI/UserInterface.obj
 
@@ -969,6 +993,9 @@ help:
 	@echo ... src/UI/UI_ProjectsPanel.obj
 	@echo ... src/UI/UI_ProjectsPanel.i
 	@echo ... src/UI/UI_ProjectsPanel.s
+	@echo ... src/UI/UI_ScriptEditor.obj
+	@echo ... src/UI/UI_ScriptEditor.i
+	@echo ... src/UI/UI_ScriptEditor.s
 	@echo ... src/UI/UserInterface.obj
 	@echo ... src/UI/UserInterface.i
 	@echo ... src/UI/UserInterface.s
