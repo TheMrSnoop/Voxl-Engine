@@ -3,11 +3,12 @@
 My attempt at a custom made game engine.
 Created in C++ to force myself to learn it, at least to an intermediate level.
 
-# Engine Screenshots
-Foliage in Voxl.
-![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/trees.png)
+Engine Screenshots
 
-Chunk Generation
+# Surface Generation
+![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/islands.png)
+
+# Full Chunk Generation
 ![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/chunk.png)
 
 # Still left to do
