@@ -8,7 +8,7 @@ Engine Screenshots
 # Surface Generation
 ![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/islands.png)
 
-# Full Chunk Generation
+# User-friendly UI
 ![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/chunk.png)
 
 # Still left to do
