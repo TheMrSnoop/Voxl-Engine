@@ -47,11 +47,11 @@ static const int ATLAS_TILE_PX = 16;
 static const int ATLAS_COLS = ATLAS_SIZE_PX / ATLAS_TILE_PX; // 4
 static const int ATLAS_ROWS = ATLAS_COLS; //makes it a square
 
-uint64_t TerrainGeneration::seed = VoxlEngine::generateSeed();
+uint64_t TerrainGeneration::seed = 0; //VoxlEngine::generateSeed();
 
 
 
-// file-scope pointer � initially null
+// file-scope pointer, initially null
 Texture* terrainAtlasTexture = nullptr;
 
 // call after GL context is created 
@@ -60,7 +60,7 @@ void Chunk::InitTerrainAtlas()
     //Initalizes the terrain
     if (terrainAtlasTexture == nullptr)
     {
-        terrainAtlasTexture = new Texture("C:/dev/Voxl-Engine/Images/BlockTextures/TerrainAtlas.jpg", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+        terrainAtlasTexture = new Texture("C:/dev/Voxl-Engine/Images/BlockTextures/TerrainAtlas.jpg", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE, false);
         // could be used for a chunk shader later
         // terrainAtlasTexture->texUnit(yourChunkShader, "uAtlas", 0); // where 0 = texture unit index for GL_TEXTURE0
     }
@@ -125,7 +125,7 @@ inline int getAtlasTileForBlockID(const std::string& id)
         {"Gold Ore", 12},
         {"Sand", 13},
         {"Water", 14},
-        {"Lava", 15}
+        {"Grass", 15}
     };
 
     auto it = map.find(id);
@@ -144,43 +144,60 @@ glm::vec3 faceOffsets[6] = {
     { 0, -1, 0 }   // -Y bottom
 };
 
+glm::vec3 faceNormals[6] = {
+    { 0, 0, 1 },   // +Z
+    { 0, 0, -1 },  // -Z
+    { -1, 0, 0 },  // -X
+    { 1, 0, 0 },   // +X
+    { 0, 1, 0 },   // +Y
+    { 0, -1, 0 }   // -Y
+};
+
+
 
 // indices for a single quad
 unsigned int quadIdx[6] = { 0, 1, 2, 2, 3, 0 };
 
+// Cube geometry 
 std::vector<GLfloat> vertices =
 {
     // FRONT
-    -0.5f, -0.5f, 0.5f,   0.8f,0.7f,0.4f,    0.0f,0.0f,
-     0.5f, -0.5f, 0.5f,   0.8f,0.7f,0.4f,    1.0f,0.0f,
-     0.5f,  0.5f, 0.5f,   0.8f,0.7f,0.4f,    1.0f,1.0f,
-    -0.5f,  0.5f, 0.5f,   0.8f,0.7f,0.4f,    0.0f,1.0f,
+    -0.5f, -0.5f, 0.5f,   0.8f,0.7f,0.4f,    0.0f,0.0f,  0.0f,0.0f,1.0f,
+    0.5f, -0.5f, 0.5f,   0.8f,0.7f,0.4f,    1.0f,0.0f,  0.0f,0.0f,1.0f,
+    0.5f,  0.5f, 0.5f,   0.8f,0.7f,0.4f,    1.0f,1.0f,  0.0f,0.0f,1.0f,
+    -0.5f,  0.5f, 0.5f,   0.8f,0.7f,0.4f,    0.0f,1.0f,  0.0f,0.0f,1.0f,
+
     // BACK
-     0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,
-    -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,
-    -0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,
-     0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,
-     // LEFT
-     -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,
-     -0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,
-     -0.5f,  0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,
-     -0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,
-     // RIGHT
-      0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,
-      0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,
-      0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,
-      0.5f,  0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,
-      // TOP
-      -0.5f, 0.5f,  0.5f,   0.8f,0.7f,0.4f,    0.0f,0.0f,
-       0.5f, 0.5f,  0.5f,   0.8f,0.7f,0.4f,    1.0f,0.0f,
-       0.5f, 0.5f, -0.5f,   0.8f,0.7f,0.4f,    1.0f,1.0f,
-      -0.5f, 0.5f, -0.5f,   0.8f,0.7f,0.4f,    0.0f,1.0f,
-      // BOTTOM
-      -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,
-       0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,
-       0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,
-      -0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f
+    0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,  0.0f,0.0f,-1.0f,
+    -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,  0.0f,0.0f,-1.0f,
+    -0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,  0.0f,0.0f,-1.0f,
+    0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,  0.0f,0.0f,-1.0f,
+
+    // LEFT
+    -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f, -1.0f,0.0f,0.0f,
+    -0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f, -1.0f,0.0f,0.0f,
+    -0.5f,  0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f, -1.0f,0.0f,0.0f,
+    -0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f, -1.0f,0.0f,0.0f,
+
+    // RIGHT
+    0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,  1.0f,0.0f,0.0f,
+    0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,  1.0f,0.0f,0.0f,
+    0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,  1.0f,0.0f,0.0f,
+    0.5f,  0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,  1.0f,0.0f,0.0f,
+
+    // TOP
+    -0.5f, 0.5f,  0.5f,   0.8f,0.7f,0.4f,    0.0f,0.0f,  0.0f,1.0f,0.0f,
+    0.5f, 0.5f,  0.5f,   0.8f,0.7f,0.4f,    1.0f,0.0f,  0.0f,1.0f,0.0f,
+    0.5f, 0.5f, -0.5f,   0.8f,0.7f,0.4f,    1.0f,1.0f,  0.0f,1.0f,0.0f,
+    -0.5f, 0.5f, -0.5f,   0.8f,0.7f,0.4f,    0.0f,1.0f,  0.0f,1.0f,0.0f,
+
+    // BOTTOM
+    -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,  0.0f,-1.0f,0.0f,
+    0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,  0.0f,-1.0f,0.0f,
+    0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,  0.0f,-1.0f,0.0f,
+    -0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,  0.0f,-1.0f,0.0f
 };
+
 
 
 bool doesThisChunkHaveABlockAtLocation(const glm::vec3& searchingPosition, const std::vector<Block>& blocks)
@@ -240,9 +257,17 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
         for (int face = 0; face < 6; ++face)
         {
             glm::vec3 neighborPos = pos + faceOffsets[face];
-            if (isPositionOccupiedByAnyChunk(neighborPos, blocks)) continue; // hidden face
 
-            int baseIndex = face * 4 * 8;
+            //face culling is temporarilly disabled.
+            if (false)
+            {
+                if (isPositionOccupiedByAnyChunk(neighborPos, blocks)) continue; // hidden face
+            }
+
+            constexpr int FLOATS_PER_VERTEX = 11;
+            constexpr int VERTS_PER_FACE = 4;
+
+            int baseIndex = face * VERTS_PER_FACE * FLOATS_PER_VERTEX;
 
             // atlas handling (per-block)
             int tileIndex = getAtlasTileForBlockID(block.blockID);
@@ -251,16 +276,28 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
             // push four vertices for this face
             for (int v = 0; v < 4; ++v)
             {
-                float vx = vertices[baseIndex + v * 8 + 0] + pos.x;
-                float vy = vertices[baseIndex + v * 8 + 1] + pos.y;
-                float vz = vertices[baseIndex + v * 8 + 2] + pos.z;
+                glm::vec3 normal = faceNormals[face];
 
-                float cr = vertices[baseIndex + v * 8 + 3];
-                float cg = vertices[baseIndex + v * 8 + 4];
-                float cb = vertices[baseIndex + v * 8 + 5];
+                int o = baseIndex + v * FLOATS_PER_VERTEX;
 
-                float localU = vertices[baseIndex + v * 8 + 6];
-                float localV = vertices[baseIndex + v * 8 + 7];
+
+                float vx = vertices[o + 0] + pos.x;
+                float vy = vertices[o + 1] + pos.y;
+                float vz = vertices[o + 2] + pos.z;
+
+
+                float cr = vertices[o + 3];
+                float cg = vertices[o + 4];
+                float cb = vertices[o + 5];
+
+                float localU = vertices[o + 6];
+                float localV = vertices[o + 7];
+
+                // normals are already in the template
+                float nx = vertices[o + 8];
+                float ny = vertices[o + 9];
+                float nz = vertices[o + 10];
+
 
                 float finalU, finalV;
                 placeUV(rect, localU, localV, finalU, finalV);
@@ -275,6 +312,10 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
 
                 mesh.vertices.push_back(finalU);
                 mesh.vertices.push_back(finalV);
+                
+                mesh.vertices.push_back(nx);
+                mesh.vertices.push_back(ny);
+                mesh.vertices.push_back(nz);
             }
 
             // adds indices for the quad (two triangles)
@@ -309,13 +350,20 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(unsigned int), mesh.indices.data(), GL_STATIC_DRAW);
 
-    GLsizei stride = 8 * sizeof(float);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)(0));               // pos
+    GLsizei stride = 11 * sizeof(float);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, stride, (void*)0);                  // pos
     glEnableVertexAttribArray(0);
+
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, stride, (void*)(3 * sizeof(float))); // color
     glEnableVertexAttribArray(1);
+
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, stride, (void*)(6 * sizeof(float))); // uv
     glEnableVertexAttribArray(2);
+
+    glVertexAttribPointer( 3, 3, GL_FLOAT, GL_FALSE, stride, (void*)(8 * sizeof(float)));
+    glEnableVertexAttribArray(3);
+
 
     // unbinds VAO
     glBindVertexArray(0);
@@ -356,16 +404,6 @@ float AnglesToRadians(float Angle)
 void RenderAllChunks(Shader& shaderProgram)
 {
     shaderProgram.Activate();
-
-    // builds missing meshes 
-    for (Chunk::worldChunkData& thisChunkData : allWorldChunkData)
-    {
-        if (thisChunkData.mesh.VAO == 0)
-        {
-            thisChunkData.mesh = BuildChunkMesh(shaderProgram, thisChunkData.chunkBlocks);
-        }
-    }
-
     for (Chunk::worldChunkData& thisChunkData : allWorldChunkData)
     {
         if (thisChunkData.mesh.VAO == 0 || thisChunkData.mesh.indexCount == 0) continue;
@@ -532,8 +570,8 @@ void Chunk::SpawnChunks(glm::uint Iterations, Shader shaderProgram)
             //Creates chunks in a radial pattern
             for (int i = 0; i <= MaxSquares; i++)
             {
-                Chunk_X_Position = std::sin(AnglesToRadians(Angle)) * Radius;
-                Chunk_Z_Position = std::cos(AnglesToRadians(Angle)) * Radius;
+                Chunk_X_Position = std::cos(AnglesToRadians(Angle)) * Radius;
+                Chunk_Z_Position = std::sin(AnglesToRadians(Angle)) * Radius;
 
                 Chunk_X_Position = std::round(Chunk_X_Position) * (ChunkWidth * 2.0f);
                 Chunk_Z_Position = std::round(Chunk_Z_Position) * (ChunkWidth * 2.0f);
@@ -545,16 +583,15 @@ void Chunk::SpawnChunks(glm::uint Iterations, Shader shaderProgram)
 
                 
                 //Spawns the chunk by layer
-                //I know the ID doesnt make any sense, but the atlas texture array or smth is mismatched with the block database...
-                // 
+
                 //Stone Layer
-                GenerateChunkLayer("Water", 0, glm::vec2(9, 10), false);
+                GenerateChunkLayer("Stone", 0, glm::vec2(9, 10), true);
 
                 //Dirt Layer
-                GenerateChunkLayer("Sand", 11, glm::vec2(11, 13), false);
+                GenerateChunkLayer("Dirt", 11, glm::vec2(11, 13), true);
 
                 //Grass Layer
-                GenerateChunkLayer("Gold Ore", 13, glm::vec2(-1, 15), true);
+                GenerateChunkLayer("Stone", 13, glm::vec2(-1, 15), true);
 
                 //GenerateWater();
 
@@ -574,13 +611,7 @@ void Chunk::SpawnChunks(glm::uint Iterations, Shader shaderProgram)
                 allWorldChunkData.push_back(std::move(worldData));
 
                 
-                for (Chunk::worldChunkData& wc : allWorldChunkData)
-                {
-                    if (wc.mesh.VAO == 0) // not yet built
-                    {
-                        wc.mesh = BuildChunkMesh(shaderProgram, wc.chunkBlocks);
-                    }
-                }
+                
             }
         }
 

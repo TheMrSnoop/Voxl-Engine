@@ -54,7 +54,7 @@ void main()
         gy += gray * kernelY[i];
     }
 
-    edgeStrength = sqrt(gx * gx + gy * gy);
+    edgeStrength = sqrt(gx * gx + gy * gy) * 0; //! TEMPORARY REMOVING OUTLINE !
 
     // outline threshold
     if (edgeStrength > 0.2)

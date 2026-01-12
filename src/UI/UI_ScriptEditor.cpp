@@ -115,6 +115,25 @@ void ScriptEditor::MainWindow(std::string dir)
 
     if (EngineUI_Class::CreatePanel("##scriptEditorPanel", BGP_CenterWindow_F, ImVec2(250, 100), ImVec2(VoxlEngine::windowWidth * 0.75, VoxlEngine::windowHeight - 275)))
     {
+
+        if (EngineUI_Class::CreatePanel("##scriptOptions", BGP_CenterWindow_F, ImVec2(0, 50), ImVec2(250, 25)))
+        {
+            if (ImGui::Button("   Compile", ImVec2(100, 50))) {
+                // clicked
+            }
+
+            // get rect of the button
+            ImVec2 min = ImGui::GetItemRectMin();
+            ImVec2 max = ImGui::GetItemRectMax();
+
+            // draw the icon inside the button
+            ImDrawList* dl = ImGui::GetWindowDrawList();
+            GLuint icon_Compile = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/compile.png");
+            ImVec2 iconPos(min.x + 6, min.y + (max.y - min.y - 16) * 0.5f);
+            dl->AddImage((ImTextureID)(intptr_t)icon_Compile, iconPos, ImVec2(iconPos.x + 16, iconPos.y + 16));
+        }
+        ImGui::End();
+
         float codeFontSize = 18.0f;
         if (EngineUI_Class::CreatePanel("##codeLinePanel", BGP_CenterWindow_F, ImVec2(250, 82), ImVec2(50, VoxlEngine::windowHeight - 275)))
         {

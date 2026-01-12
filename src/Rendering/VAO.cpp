@@ -24,4 +24,5 @@ void VAO::LinkAttrib(GLuint index, GLint size, GLenum type, GLsizei stride, cons
 {
 	glEnableVertexAttribArray(index);
 	glVertexAttribPointer(index, size, type, GL_FALSE, stride, pointer);
+	
 }

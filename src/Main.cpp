@@ -64,6 +64,9 @@ GLFWwindow* CreateProjectsWindow() {
 
 
 GLFWwindow* CreateEngineWindow(int width, int height) {
+    // Optional: set a hint to request maximization
+    glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
+
     GLFWwindow* win = glfwCreateWindow(width, height, "Voxl Engine", NULL, NULL);
     if (!win) return nullptr;
 
@@ -112,10 +115,16 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
 
 
     // sunlight 
-    glm::vec3 sunDir = glm::normalize(glm::vec3(currentTime, -1.0f, -0.2f));
-    glUniform3f(glGetUniformLocation(shaderProgram.ID, "sunDirection"), sunDir.x, sunDir.y, sunDir.z);
-    glUniform3f(glGetUniformLocation(shaderProgram.ID, "sunColor"), 1.0f, 1.0f, 1.0f);
-    glUniform1f(glGetUniformLocation(shaderProgram.ID, "sunStrength"), 0.8f);
+    glm::vec3 sunDir = glm::normalize(glm::vec3(currentTime * 0.01, 1.0f, 0.0f));
+    std::cout << sunDir.x << std::endl;
+
+    shaderProgram.setFloat("ambientStrength", 0.25f);
+
+    shaderProgram.setVec3("sunDirection", 0.5f, 1.0f, 0.0f);
+    shaderProgram.setVec3("sunColor", 1.0f, 1.0f, 1.0f);
+    
+
+
 
     //Camera Properties
     camera.Inputs(window);
@@ -129,7 +138,7 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
     cubeVAO.Bind();
 
     // Spawn chunks
-    Chunk::SpawnChunks(0, shaderProgram);
+    Chunk::SpawnChunks(1, shaderProgram);
 
     cubeVAO.Unbind();
     sceneFBO.Unbind();
@@ -138,7 +147,7 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
     glDisable(GL_DEPTH_TEST);
 
     screenShader.Activate();
-    if (screenShader.VertexShaderName == "Shaders/pixelation.vert")
+    if (screenShader.ShaderName == "Bitstyle")
     {
         screenShader.setFloat("pixelSize", 1.0f);
         screenShader.setVec2("resolution", (float)width, (float)height);
@@ -182,7 +191,7 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
     //Default Engine UI
     EngineUI_Defaults::MenuBar();
     EngineUI_Defaults::TabBar();
-    EngineUI_Class::CreateCenterWindow("New Terrain", "Create a new terrain.", "CREATE", "CANCEL");
+    //EngineUI_Class::CreateCenterWindow("New Terrain", "Create a new terrain.", "CREATE", "CANCEL");
     EngineUI_Defaults::ProjectName();
     EngineUI_Defaults::Console();
     EngineUI_Defaults::SceneCollection();
@@ -309,8 +318,9 @@ int main()
     Chunk::InitTerrainAtlas();
 
     // Shaders
-    Shader shaderProgram("Shaders/default.vert", "Shaders/default.frag");
-    Shader screenShader("Shaders/pixelation.vert", "Shaders/pixelation.frag");
+    Shader shaderProgram("Shaders/Default");
+
+    Shader screenShader("Shaders/Bitstyle");
 
     screenShader.Activate();
     screenShader.setInt("screenTexture", 0);
@@ -325,40 +335,40 @@ int main()
     GLfloat cubeVertices[] =
     {
         // FRONT
-        -0.5f, -0.5f, 0.5f,   0.8f,0.7f,0.4f,    0.0f,0.0f,
-         0.5f, -0.5f, 0.5f,   0.8f,0.7f,0.4f,    1.0f,0.0f,
-         0.5f,  0.5f, 0.5f,   0.8f,0.7f,0.4f,    1.0f,1.0f,
-        -0.5f,  0.5f, 0.5f,   0.8f,0.7f,0.4f,    0.0f,1.0f,
+        -0.5f, -0.5f, 0.5f,   0.8f,0.7f,0.4f,    0.0f,0.0f,  0.0f,0.0f,1.0f,
+         0.5f, -0.5f, 0.5f,   0.8f,0.7f,0.4f,    1.0f,0.0f,  0.0f,0.0f,1.0f,
+         0.5f,  0.5f, 0.5f,   0.8f,0.7f,0.4f,    1.0f,1.0f,  0.0f,0.0f,1.0f,
+        -0.5f,  0.5f, 0.5f,   0.8f,0.7f,0.4f,    0.0f,1.0f,  0.0f,0.0f,1.0f,
 
         // BACK
-         0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,
-        -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,
-        -0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,
-         0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,
+         0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,  0.0f,0.0f,-1.0f,
+        -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,  0.0f,0.0f,-1.0f,
+        -0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,  0.0f,0.0f,-1.0f,
+         0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,  0.0f,0.0f,-1.0f,
 
          // LEFT
-         -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,
-         -0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,
-         -0.5f,  0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,
-         -0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,
+         -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f, -1.0f,0.0f,0.0f,
+         -0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f, -1.0f,0.0f,0.0f,
+         -0.5f,  0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f, -1.0f,0.0f,0.0f,
+         -0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f, -1.0f,0.0f,0.0f,
 
          // RIGHT
-          0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,
-          0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,
-          0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,
-          0.5f,  0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,
+          0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,  1.0f,0.0f,0.0f,
+          0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,  1.0f,0.0f,0.0f,
+          0.5f,  0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,  1.0f,0.0f,0.0f,
+          0.5f,  0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,  1.0f,0.0f,0.0f,
 
           // TOP
-         -0.5f, 0.5f,  0.5f,   0.8f,0.7f,0.4f,    0.0f,0.0f,
-          0.5f, 0.5f,  0.5f,   0.8f,0.7f,0.4f,    1.0f,0.0f,
-          0.5f, 0.5f, -0.5f,   0.8f,0.7f,0.4f,    1.0f,1.0f,
-         -0.5f, 0.5f, -0.5f,   0.8f,0.7f,0.4f,    0.0f,1.0f,
+         -0.5f, 0.5f,  0.5f,   0.8f,0.7f,0.4f,    0.0f,0.0f,  0.0f,1.0f,0.0f,
+          0.5f, 0.5f,  0.5f,   0.8f,0.7f,0.4f,    1.0f,0.0f,  0.0f,1.0f,0.0f,
+          0.5f, 0.5f, -0.5f,   0.8f,0.7f,0.4f,    1.0f,1.0f,  0.0f,1.0f,0.0f,
+         -0.5f, 0.5f, -0.5f,   0.8f,0.7f,0.4f,    0.0f,1.0f,  0.0f,1.0f,0.0f,
 
          // BOTTOM
-         -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,
-          0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,
-          0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,
-         -0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f
+         -0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    0.0f,0.0f,  0.0f,-1.0f,0.0f,
+          0.5f, -0.5f, -0.5f,  0.8f,0.7f,0.4f,    1.0f,0.0f,  0.0f,-1.0f,0.0f,
+          0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    1.0f,1.0f,  0.0f,-1.0f,0.0f,
+         -0.5f, -0.5f,  0.5f,  0.8f,0.7f,0.4f,    0.0f,1.0f,  0.0f,-1.0f,0.0f
     };
 
     GLuint cubeIndices[] =
@@ -376,9 +386,10 @@ int main()
     cubeVAO.Bind();
     VBO cubeVBO(cubeVertices, sizeof(cubeVertices));
     EBO cubeEBO(cubeIndices, sizeof(cubeIndices));
-    cubeVAO.LinkAttrib(0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-    cubeVAO.LinkAttrib(1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-    cubeVAO.LinkAttrib(2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+    cubeVAO.LinkAttrib(0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+    cubeVAO.LinkAttrib(1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+    cubeVAO.LinkAttrib(2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+    cubeVAO.LinkAttrib(3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
     cubeVAO.Unbind();
     cubeVBO.Unbind();
     cubeEBO.Unbind();

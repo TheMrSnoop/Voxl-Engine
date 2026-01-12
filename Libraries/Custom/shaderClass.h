@@ -20,8 +20,10 @@ public:
 	std::string VertexShaderName;
 	std::string FragmentShaderName;
 
+	std::string ShaderName;
+
 	// Constructor that build the Shader Program from 2 different shaders
-	Shader(const char* vertexFile, const char* fragmentFile);
+	Shader(const char* shaderFolder);
 
 	// Activates the Shader Program
 	void Activate();
@@ -37,6 +39,6 @@ public:
 
 
 private:
-	void compileErrors(unsigned int shader, const char* type);
+	void compileErrors(unsigned int shader, const std::string& type);
 };
 #endif

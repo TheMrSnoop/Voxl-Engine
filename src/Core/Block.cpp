@@ -51,7 +51,8 @@ void Block::InitTextures()
 			GL_TEXTURE_2D,
 			GL_TEXTURE0,
 			format,
-			GL_UNSIGNED_BYTE
+			GL_UNSIGNED_BYTE,
+			false
 		);
 
 		blockDatabase[i].blockTextureIndex = i;

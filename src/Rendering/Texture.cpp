@@ -1,14 +1,14 @@
 #include"Texture.h"
 std::vector<Image::imageData> Image::imageDatabase;
 
-Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType)
+Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType, bool flipVertically)
 {
 	//Plugs in all the properties
 
 	type = texType;
 
 	int widthImg, heightImg, numColChr;
-	stbi_set_flip_vertically_on_load(true);
+	stbi_set_flip_vertically_on_load(flipVertically);
 	unsigned char* bytes = stbi_load(image, &widthImg, &heightImg, &numColChr, 0);
 
 

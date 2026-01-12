@@ -1,4 +1,9 @@
 #include "shaderClass.h"
+#include <filesystem>
+#include <vector>
+#include "VoxlEngine.h"
+
+namespace fs = std::filesystem;
 
 // Reads a text file and outputs a string with everything in the text file
 std::string get_file_contents(const char* filename)
@@ -17,15 +22,54 @@ std::string get_file_contents(const char* filename)
 	throw(errno);
 }
 
-// Constructor that build the Shader Program from 2 different shaders
-Shader::Shader(const char* vertexFile, const char* fragmentFile)
+std::string findShader(std::string folderName, std::string shaderExtension)
 {
-	// Read vertexFile and fragmentFile and store the strings
-	VertexShaderName = vertexFile;
-	FragmentShaderName = fragmentFile;
+	for (const auto& entry : fs::directory_iterator(folderName)) 
+	{
+		if (entry.is_regular_file() && entry.path().extension() == shaderExtension) {
+			//entry.path is a "fs::path" type, so this converts it to a string first, then a const char.
 
-	std::string vertexCode = get_file_contents(vertexFile);
-	std::string fragmentCode = get_file_contents(fragmentFile);
+			return entry.path().string();
+		}
+	}
+
+	throw std::runtime_error("a " + shaderExtension + " was not found in " + folderName);
+}
+
+
+std::string shaderDisplayName(std::string shaderFolder)
+{
+	std::string str = shaderFolder;
+
+	int index = str.find("/");
+
+
+	if (index != std::string::npos)
+	{
+		str.erase(0, index + 1);
+	}
+
+	return str;
+}
+
+// Constructor that build the Shader Program from 2 different shaders
+Shader::Shader(const char* shaderFolder)
+{
+
+	//Important for setting shader varriables in main.cpp, as it references this varriable.
+	//(Replaces VertexShaderName)
+
+	ShaderName = shaderDisplayName(shaderFolder);
+
+	// Read vertexFile and fragmentFile and store the strings
+	std::string vertexPath = findShader(shaderFolder, ".vert");
+	std::cout << "VERT = " << vertexPath << std::endl;
+
+	std::string fragmentPath = findShader(shaderFolder, ".frag");
+	std::cout << "FRAG = " << fragmentPath << std::endl;
+
+	std::string vertexCode = get_file_contents(vertexPath.c_str());
+	std::string fragmentCode = get_file_contents(fragmentPath.c_str());
 
 	// Convert the shader source strings into character arrays
 	const char* vertexSource = vertexCode.c_str();
@@ -74,30 +118,33 @@ void Shader::Delete()
 	glDeleteProgram(ID);
 }
 
-void Shader::compileErrors(unsigned int shader, const char* type)
+void Shader::compileErrors(unsigned int shader, const std::string& type)
 {
-	GLint hasCompiled;
-	char infoLog[1024];
+    GLint success;
+    char infoLog[1024];
 
-	if (type != "PROGRAM")
-	{
-		glGetShaderiv(shader, GL_COMPILE_STATUS, &hasCompiled);
-		if (hasCompiled == GL_FALSE)
-		{
-			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "SHADER_COMPILATION_ERROR for: " << type << "\n" << infoLog << std::endl;
-		}
-	}
-	else
-	{
-		glGetProgramiv(shader, GL_COMPILE_STATUS, &hasCompiled);
-		if (hasCompiled == GL_FALSE)
-		{
-			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-			std::cout << "SHADER_LINKING_ERROR for: " << type << "\n" << infoLog << std::endl;
-		}
-	}
+    if (type != "PROGRAM")
+    {
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+        if (!success)
+        {
+            glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
+            std::cout << "SHADER COMPILATION ERROR (" << type << ")\n"
+                      << infoLog << std::endl;
+        }
+    }
+    else
+    {
+        glGetProgramiv(shader, GL_LINK_STATUS, &success);
+        if (!success)
+        {
+            glGetProgramInfoLog(shader, 1024, nullptr, infoLog);
+            std::cout << "PROGRAM LINK ERROR\n"
+                      << infoLog << std::endl;
+        }
+    }
 }
+
 
 void Shader::setMat4(const std::string& name, const glm::mat4& mat)
 {

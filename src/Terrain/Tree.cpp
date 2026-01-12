@@ -14,12 +14,12 @@ Tree Tree::ReturnTree(const std::string TreeDisplayName)
 
 	if (TreeDisplayName == "Oak" || TreeDisplayName == "Oak_Large")
 	{
-		Tree newTree(TreeDisplayName, Block::ReturnBlock("Lava"), Block::ReturnBlock("Iron Ore"));
+		Tree newTree(TreeDisplayName, Block::ReturnBlock("Log"), Block::ReturnBlock("Leaves"));
 		return newTree;
 	}
 	else if (TreeDisplayName == "Pine")
 	{
-		Tree newTree(TreeDisplayName, Block::ReturnBlock("Emerald Ore"), Block::ReturnBlock("Opal Ore"));
+		Tree newTree(TreeDisplayName, Block::ReturnBlock("Pine Log"), Block::ReturnBlock("Pine Leaves"));
 		return newTree;
 	}
 	
