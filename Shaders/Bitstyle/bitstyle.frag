@@ -6,6 +6,7 @@ in vec2 TexCoords;
 uniform sampler2D screenTexture;
 uniform float pixelSize;
 uniform vec2 resolution;
+uniform float outlineThickness;
 
 void main()
 {
@@ -54,7 +55,7 @@ void main()
         gy += gray * kernelY[i];
     }
 
-    edgeStrength = sqrt(gx * gx + gy * gy) * 0; //! TEMPORARY REMOVING OUTLINE !
+    edgeStrength = sqrt(gx * gx + gy * gy) * outlineThickness; //! TEMPORARY REMOVING OUTLINE !
 
     // outline threshold
     if (edgeStrength > 0.2)

@@ -104,5 +104,6 @@
         "valarray": "cpp",
         "xhash": "cpp",
         "filesystem": "cpp"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

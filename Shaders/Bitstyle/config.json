@@ -1,0 +1,6 @@
+{
+    "screenTexture" : 0,
+    "pixelSize" : 2.0,
+    "resolution" : "$displayResolution",
+    "outlineThickness" : 0.5
+}

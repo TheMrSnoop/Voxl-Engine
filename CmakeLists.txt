@@ -18,6 +18,11 @@ file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+
+include_directories(
+    C:/dev/Voxl-Engine/Libraries/include/json/include
+)
+
 target_include_directories(${PROJECT_NAME} PRIVATE
         ${PROJ_ROOT}/src
         ${LIBRARIES_DIR}/include

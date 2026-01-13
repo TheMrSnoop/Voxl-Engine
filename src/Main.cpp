@@ -116,7 +116,6 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
 
     // sunlight 
     glm::vec3 sunDir = glm::normalize(glm::vec3(currentTime * 0.01, 1.0f, 0.0f));
-    std::cout << sunDir.x << std::endl;
 
     shaderProgram.setFloat("ambientStrength", 0.25f);
 
@@ -138,7 +137,7 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
     cubeVAO.Bind();
 
     // Spawn chunks
-    Chunk::SpawnChunks(1, shaderProgram);
+    Chunk::SpawnChunks(0, shaderProgram);
 
     cubeVAO.Unbind();
     sceneFBO.Unbind();
@@ -146,12 +145,12 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
 
     glDisable(GL_DEPTH_TEST);
 
-    screenShader.Activate();
-    if (screenShader.ShaderName == "Bitstyle")
-    {
-        screenShader.setFloat("pixelSize", 1.0f);
-        screenShader.setVec2("resolution", (float)width, (float)height);
-    }
+
+    //Activates shader and applies config file
+    //Must be called on tick()
+    screenShader.config();
+    
+    
     glBindTexture(GL_TEXTURE_2D, sceneFBO.textureID);
     quadVAO.Bind();
     glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -321,9 +320,7 @@ int main()
     Shader shaderProgram("Shaders/Default");
 
     Shader screenShader("Shaders/Bitstyle");
-
-    screenShader.Activate();
-    screenShader.setInt("screenTexture", 0);
+    screenShader.config();
 
     shaderProgram.Activate();
     shaderProgram.setInt("tex0", 0);

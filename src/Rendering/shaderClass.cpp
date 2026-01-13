@@ -3,7 +3,27 @@
 #include <vector>
 #include "VoxlEngine.h"
 
+#include <nlohmann/json.hpp>
+
 namespace fs = std::filesystem;
+
+using json = nlohmann::json;
+
+
+std::string shaderDisplayName(std::string shaderFolder)
+{
+	std::string str = shaderFolder;
+
+	int index = str.find("/");
+
+
+	if (index != std::string::npos)
+	{
+		str.erase(0, index + 1);
+	}
+
+	return str;
+}
 
 // Reads a text file and outputs a string with everything in the text file
 std::string get_file_contents(const char* filename)
@@ -22,7 +42,7 @@ std::string get_file_contents(const char* filename)
 	throw(errno);
 }
 
-std::string findShader(std::string folderName, std::string shaderExtension)
+std::string findFile(std::string folderName, std::string shaderExtension)
 {
 	for (const auto& entry : fs::directory_iterator(folderName)) 
 	{
@@ -37,35 +57,76 @@ std::string findShader(std::string folderName, std::string shaderExtension)
 }
 
 
-std::string shaderDisplayName(std::string shaderFolder)
+json loadConfig(const std::string jsonPath)
 {
-	std::string str = shaderFolder;
+	std::ifstream file(jsonPath);
+    if (!file.is_open())
+    {
+        std::cerr << "failed to open shader config: " << jsonPath << std::endl;
+        return {};
+    }
 
-	int index = str.find("/");
-
-
-	if (index != std::string::npos)
-	{
-		str.erase(0, index + 1);
-	}
-
-	return str;
+    json j;
+    file >> j;
+    return j;
 }
 
+void Shader::config()
+{
+	//reads json data
+	json jsonData = loadConfig(findFile(shaderFolder, ".json"));
+
+	//I need to replace shader.Activate() with shader.config()
+	Activate();
+
+	
+	for (auto& [key, value] : jsonData.items())
+    {
+        if (value.is_number_float())
+        {
+            setFloat(key.c_str(), value.get<float>());
+        }
+        else if (value.is_number_integer()) //INT
+        {
+            setInt(key.c_str(), value.get<int>());
+        }
+        else if (value.is_array() && value.size() == 2) //VEC2
+        {
+            float x = value[0].get<float>();
+            float y = value[1].get<float>();
+
+            setVec2(key.c_str(), x, y);
+        }
+        else if (value.is_array() && value.size() == 3) //ARRAY
+        {
+            setVec3(key.c_str(), value[0].get<float>(), value[1].get<float>(), value[2].get<float>());
+        }
+		else if (value.is_string() && value == "$displayResolution") //UNIQUE INDENTIFIERS 
+		{
+			setVec2(key.c_str(), VoxlEngine::windowWidth, VoxlEngine::windowHeight);
+		}
+    }
+}
+
+
 // Constructor that build the Shader Program from 2 different shaders
-Shader::Shader(const char* shaderFolder)
+Shader::Shader(const char* inputShaderFolder) : shaderFolder(inputShaderFolder)
 {
 
-	//Important for setting shader varriables in main.cpp, as it references this varriable.
-	//(Replaces VertexShaderName)
+	//class "shaderFolder" = "function(ShaderFolder)"
 
-	ShaderName = shaderDisplayName(shaderFolder);
+	//Important for setting shader variables in main.cpp, as it references this variable.
+	//(Replaces VertexShaderName)
+	shaderName = shaderDisplayName(shaderFolder);
+
+
+
 
 	// Read vertexFile and fragmentFile and store the strings
-	std::string vertexPath = findShader(shaderFolder, ".vert");
+	std::string vertexPath = findFile(shaderFolder, ".vert");
 	std::cout << "VERT = " << vertexPath << std::endl;
 
-	std::string fragmentPath = findShader(shaderFolder, ".frag");
+	std::string fragmentPath = findFile(shaderFolder, ".frag");
 	std::cout << "FRAG = " << fragmentPath << std::endl;
 
 	std::string vertexCode = get_file_contents(vertexPath.c_str());
@@ -100,11 +161,12 @@ Shader::Shader(const char* shaderFolder)
 	glLinkProgram(ID);
 	compileErrors(ID, "PROGRAM");
 
-	// Delete the now useless Vertex and Fragment Shader objects
+	// Deletes the now useless Vertex and Fragment Shader objects
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
 }
+
 
 // Activates the Shader Program
 void Shader::Activate()
@@ -129,8 +191,7 @@ void Shader::compileErrors(unsigned int shader, const std::string& type)
         if (!success)
         {
             glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
-            std::cout << "SHADER COMPILATION ERROR (" << type << ")\n"
-                      << infoLog << std::endl;
+            std::cout << "SHADER COMPILATION ERROR (" << type << ")\n" << infoLog << std::endl;
         }
     }
     else
@@ -139,8 +200,7 @@ void Shader::compileErrors(unsigned int shader, const std::string& type)
         if (!success)
         {
             glGetProgramInfoLog(shader, 1024, nullptr, infoLog);
-            std::cout << "PROGRAM LINK ERROR\n"
-                      << infoLog << std::endl;
+            std::cout << "PROGRAM LINK ERROR\n" << infoLog << std::endl;
         }
     }
 }

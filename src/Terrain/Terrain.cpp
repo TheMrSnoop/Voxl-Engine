@@ -200,45 +200,8 @@ std::vector<GLfloat> vertices =
 
 
 
-bool doesThisChunkHaveABlockAtLocation(const glm::vec3& searchingPosition, const std::vector<Block>& blocks)
-{
-    for (const Block& block : blocks)
-    {
-        if (block.Position.x == searchingPosition.x && block.Position.y == searchingPosition.y  && block.Position.z == searchingPosition.z)
-        {
-            return true;
-        }
-    }
-    return false;
-}
 
-// checks the surrounding chunks
-bool isPositionOccupiedByAnyChunk(const glm::vec3& pos, const std::vector<Block>& thisChunkBlocks)
-{
-    //first it scans for itself
-    if (doesThisChunkHaveABlockAtLocation(pos, thisChunkBlocks)) {
-        return true;
-    }
 
-    // scans other chunks
-    for (const Chunk::worldChunkData& wc : allWorldChunkData)
-    {
-        glm::vec3 chunkPos = wc.chunkPosition;
-        float halfSize = Chunk::ChunkWidth * 1.0f;
-        if (pos.x < chunkPos.x - halfSize - 1.0f || pos.x > chunkPos.x + halfSize + 1.0f) {
-            continue;
-        }
-        if (pos.z < chunkPos.z - halfSize - 1.0f || pos.z > chunkPos.z + halfSize + 1.0f) {
-            continue;
-        }
-
-        if (doesThisChunkHaveABlockAtLocation(pos, wc.chunkBlocks)) {
-            return true;
-        }
-    }
-
-    return false;
-}
 
 
 Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>& blocks)
@@ -259,10 +222,7 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
             glm::vec3 neighborPos = pos + faceOffsets[face];
 
             //face culling is temporarilly disabled.
-            if (false)
-            {
-                if (isPositionOccupiedByAnyChunk(neighborPos, blocks)) continue; // hidden face
-            }
+            
 
             constexpr int FLOATS_PER_VERTEX = 11;
             constexpr int VERTS_PER_FACE = 4;
@@ -473,13 +433,9 @@ void GenerateWater()
             {
                 relativeOffset = glm::vec3(x * 1.0f, 1.0f, z * 1.0f);
 
-                if (!doesThisChunkHaveABlockAtLocation(relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position), allNewChunkBlocks))
-                {
-                    //remember, textures are still mismatched.
-                    Block newChunkBlock("Stone", relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
+                Block newChunkBlock("Stone", relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
 
-                    allNewChunkBlocks.push_back(newChunkBlock);
-                }
+                allNewChunkBlocks.push_back(newChunkBlock);
             }
         }
     }
@@ -489,12 +445,19 @@ void GenerateChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightR
 {
     glm::vec3 relativeOffset = glm::vec3(0.0f, 0.0f, 0.0f);
 
+    int CHUNK_X = Chunk::ChunkWidth * -1;
+    int CHUNK_Z = Chunk::ChunkWidth * -1;
+
+
+    bool mask[CHUNK_X][CHUNK_Z];
+    int tile[CHUNK_X][CHUNK_Z];
+
 
     // Spawns a column of stone blocks in a row (Z Axis)
-    for (int z = Chunk::ChunkWidth * -1; z < Chunk::ChunkWidth; z++)
+    for (int z = CHUNK_X; z < Chunk::ChunkWidth; z++)
     {
         //Spawns a column of blocks in a row (X Axis)
-        for (int x = Chunk::ChunkWidth * -1; x < Chunk::ChunkWidth; x++)
+        for (int x = CHUNK_X; x < Chunk::ChunkWidth; x++)
         {
             int Y_Min_Height;
             int Y_Max_Height;
@@ -511,19 +474,16 @@ void GenerateChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightR
 
                     //if true, then the chunk already has a block at location, so I inverse it with !.
                     //speeds up chunk generation by about 1.75x, because it only adds a new block if it doesnt already exsist.
-                    if (!doesThisChunkHaveABlockAtLocation(relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position), allNewChunkBlocks))
-                    {
-                        Block newChunkBlock(BlockID, relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
+                    Block newChunkBlock(BlockID, relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
 
-                        allNewChunkBlocks.push_back(newChunkBlock);
-                    }
+                    allNewChunkBlocks.push_back(newChunkBlock);
                 }
             }
             else
             {
                 //Noise DATA
                 float freq = 0.1f;          // big flat areas -> lower; more detail -> higher
-                float amplitude = 1.0f;      // �1 block typical; use 2.0 for �2 blocks
+                float amplitude = 1.0f;      // 1 block typical; use 2.0 for 2 blocks
                 int quantizeLevels = 2;      // 1 = continuous; 2 = stronger plateaus
 
                 int baseMax = (int)maxHeightRange.y; // your intended base height
@@ -541,14 +501,11 @@ void GenerateChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightR
                 {
                     relativeOffset = glm::vec3(x * 1.0f, 1.0f, z * 1.0f);
                     //speeds up chunk generation by about 1.75x, because it only adds a new block if it doesnt already exsist.
-                    if (!doesThisChunkHaveABlockAtLocation(relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position), allNewChunkBlocks))
-                    {
-                        Block newChunkBlock(BlockID, relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
+                    Block newChunkBlock(BlockID, relativeOffset + glm::vec3(Chunk_X_Position, y * 1.0f, Chunk_Z_Position));
 
-                        allNewChunkBlocks.push_back(newChunkBlock);
+                    allNewChunkBlocks.push_back(newChunkBlock);
 
-                        //Should only generate trees (sometimes) on the highest block, on the surface.
-                    }
+                    //Should only generate trees (sometimes) on the highest block, on the surface.
                 }
             }
         }
@@ -591,11 +548,11 @@ void Chunk::SpawnChunks(glm::uint Iterations, Shader shaderProgram)
                 GenerateChunkLayer("Dirt", 11, glm::vec2(11, 13), true);
 
                 //Grass Layer
-                GenerateChunkLayer("Stone", 13, glm::vec2(-1, 15), true);
+                GenerateChunkLayer("Grass Top", 13, glm::vec2(-1, 15), true);
 
                 //GenerateWater();
 
-                GenerateTrees(VoxlEngine::getRandomInt(1, 2));
+                GenerateTrees(VoxlEngine::getRandomInt(1, 4));
 
 
 
