@@ -11,6 +11,10 @@ Created in C++ to force myself to learn it, at least to an intermediate level.
 # User-friendly UI
 ![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/chunk.png)
 
+# Basic Lighting and Shaders
+![alt text](https://github.com/TheMrSnoop/Voxl-Engine/blob/main/Images/Engine%20Screenshots/basicLighting.png)
+
+
 # Still left to do
 - [x] Add Voxel Based Terrain
 - [x] Add basic Engine UI
