@@ -20,6 +20,13 @@ public:
 	void Bind();
 	void Unbind();
 	void Delete();
+
+
+	struct atlasData
+	{
+		std::string ID;
+		std::vector<int> textureArray;
+	};
 };
 
 

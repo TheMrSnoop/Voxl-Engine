@@ -320,3 +320,43 @@ void EngineUI_Class::CreateCenterWindow(std::string Title, std::string Details, 
 	}
 	ImGui::End();
 }
+
+
+void Dropbox::updateStyle()
+{
+	ImGuiStyle& style = ImGui::GetStyle();
+
+
+	style.Colors[ImGuiCol_Text] = engineColors.White;
+
+	style.Colors[ImGuiCol_FrameBg] = ImVec4(0.125f,0.125f,0.125f,1.0f); 
+	style.Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.369, 0.369, 0.369, 1.0f); 
+	style.Colors[ImGuiCol_FrameBgActive] = engineColors.DarkGray; // clicked
+
+}
+
+void Dropbox::updateIndex(int newIndex)
+{
+	defaultIndex = newIndex;
+}
+																															//This is called an "initializer list"
+Dropbox::Dropbox(std::string arg_Label, std::string arg_id, int arg_defaultIndex, std::vector<const char*> arg_items) : Label(arg_Label), defaultIndex(arg_defaultIndex), items(arg_items)
+{
+	updateStyle();
+
+	if (Label != "")
+	{
+		ImGui::Text(Label.c_str());
+		ImGui::SameLine();
+	}
+
+	//Fills out normal array to use for ImGui
+	const char* dropBoxItems[items.size()];
+
+	for (int i = 0; i < items.size(); i++)
+	{
+		dropBoxItems[i] = items[i];
+	}
+
+	ImGui::Combo(arg_id.c_str(), &defaultIndex, dropBoxItems, IM_ARRAYSIZE(dropBoxItems));
+}

@@ -54,6 +54,18 @@ uint64_t TerrainGeneration::seed = 0; //VoxlEngine::generateSeed();
 // file-scope pointer, initially null
 Texture* terrainAtlasTexture = nullptr;
 
+static std::vector<Texture::atlasData> atlasMap;
+void updateAtlasMap()
+{
+    json atlasJson = VoxlEngine::loadJson("../../src/Terrain/terrainAtlas.json");
+
+    for (const auto& item : atlasJson["atlasMap"])
+    {
+        //Fills out vector array using json data.
+        atlasMap.push_back({item["id"].get<std::string>(), item["blockTextures"].get<std::vector<int>>()});
+    }
+}
+
 // call after GL context is created 
 void Chunk::InitTerrainAtlas()
 {
@@ -68,9 +80,9 @@ void Chunk::InitTerrainAtlas()
     //Prints the generated seed.
     cout << "World Seed: " << TerrainGeneration::seed << endl;
     VoxlEngine::Print("World Seed: " + std::to_string(TerrainGeneration::seed));
+
+    updateAtlasMap();
 }
-
-
 
 // only if padding seems to be needed
 static const float ATLAS_PAD_UV = 0.0f;
@@ -107,30 +119,18 @@ inline void placeUV(const TileUV& r, float localU, float localV, float& outU, fl
 
 
 // blockID -> tile index map, is currently compltely mismatched
-inline int getAtlasTileForBlockID(const std::string& id)
+int getAtlasTileForBlockID(std::string id, int faceIndex)
 {
-    static std::unordered_map<std::string, int> map = {
-        {"Grass Top", 0},
-        {"Dirt",  1},
-        {"Stone", 2},
-        {"Log", 3},
-        {"Leaves", 4},
-        {"Pine Log", 5},
-        {"Pine Leaves", 6},
-        {"Coal Ore", 7},
-        {"Iron Ore", 8},
-        {"Emerald Ore",9},
-        {"Opal Ore", 10},
-        {"Ruby Ore", 11},
-        {"Gold Ore", 12},
-        {"Sand", 13},
-        {"Water", 14},
-        {"Grass", 15}
-    };
+    for (Texture::atlasData element : atlasMap)
+    {
+        if (element.ID == id)
+        {
+            return element.textureArray[faceIndex];
+        }
+    }
 
-    auto it = map.find(id);
-    if (it != map.end()) return it->second;
-    return 0; // fallback tile (stone) if unknown
+    //return grass by default
+    return 0;
 }
 
 
@@ -221,7 +221,7 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
         {
             glm::vec3 neighborPos = pos + faceOffsets[face];
 
-            //face culling is temporarilly disabled.
+            
             
 
             constexpr int FLOATS_PER_VERTEX = 11;
@@ -230,7 +230,9 @@ Chunk::ChunkMesh BuildChunkMesh(Shader& shaderProgram, const std::vector<Block>&
             int baseIndex = face * VERTS_PER_FACE * FLOATS_PER_VERTEX;
 
             // atlas handling (per-block)
-            int tileIndex = getAtlasTileForBlockID(block.blockID);
+            int tileIndex;
+            tileIndex = getAtlasTileForBlockID(block.blockID, face);
+
             TileUV rect = atlasUVFromIndex(tileIndex);
 
             // push four vertices for this face
@@ -393,12 +395,12 @@ void GenerateTrees(int Count)
         //Tree Spawn Rates
         //OAK: 50%
         //LARGE OAK: 50%
-        Tree newTree = (VoxlEngine::getRandomInt(0, 1) == 0) ? Tree::ReturnTree("Oak") : Tree::ReturnTree("Oak_Large");
+        Tree newTree = (VoxlEngine::getRandomInt(0, 1) == 0) ? Tree::ReturnTree("Oak") : Tree::ReturnTree("Pine");
 
 
         
 
-        glm::vec3 treeSpawnPosition = glm::vec3(Chunk_X_Position + (float)VoxlEngine::getRandomInt(-8, 8), 15.0f, Chunk_Z_Position + (float)VoxlEngine::getRandomInt(-8, 8));
+        glm::vec3 treeSpawnPosition = glm::vec3(Chunk_X_Position + (float)VoxlEngine::getRandomInt(-8, 8), 46.0f, Chunk_Z_Position + (float)VoxlEngine::getRandomInt(-8, 8));
 
         //there is only 2 parts, so this should happen twice.
         for (Tree::TreePart part : newTree.parts)
@@ -453,7 +455,7 @@ void GenerateChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightR
     int tile[CHUNK_X][CHUNK_Z];
 
 
-    // Spawns a column of stone blocks in a row (Z Axis)
+    // Spawns a column of blocks in a row (Z Axis)
     for (int z = CHUNK_X; z < Chunk::ChunkWidth; z++)
     {
         //Spawns a column of blocks in a row (X Axis)
@@ -482,8 +484,8 @@ void GenerateChunkLayer(std::string BlockID, int minHeight, glm::vec2 maxHeightR
             else
             {
                 //Noise DATA
-                float freq = 0.1f;          // big flat areas -> lower; more detail -> higher
-                float amplitude = 1.0f;      // 1 block typical; use 2.0 for 2 blocks
+                float freq = 0.115f;          // big flat areas -> lower; more detail -> higher
+                float amplitude = 2.5f;      // 1 block typical; use 2.0 for 2 blocks
                 int quantizeLevels = 2;      // 1 = continuous; 2 = stronger plateaus
 
                 int baseMax = (int)maxHeightRange.y; // your intended base height
@@ -541,14 +543,18 @@ void Chunk::SpawnChunks(glm::uint Iterations, Shader shaderProgram)
                 
                 //Spawns the chunk by layer
 
+
+                //Deepslate Layer
+                GenerateChunkLayer("Deepslate", 0, glm::vec2(19, 20), true);
+
                 //Stone Layer
-                GenerateChunkLayer("Stone", 0, glm::vec2(9, 10), true);
+                GenerateChunkLayer("Stone", 21, glm::vec2(31, 41), true);
 
                 //Dirt Layer
-                GenerateChunkLayer("Dirt", 11, glm::vec2(11, 13), true);
+                GenerateChunkLayer("Dirt", 41, glm::vec2(42, 44), true);
 
                 //Grass Layer
-                GenerateChunkLayer("Grass Top", 13, glm::vec2(-1, 15), true);
+                GenerateChunkLayer("Grass", 44, glm::vec2(42, 46), true);
 
                 //GenerateWater();
 

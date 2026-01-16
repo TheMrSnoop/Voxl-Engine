@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/VoxlEngine.dir/src/Main.cpp.obj.d"
   "CMakeFiles/VoxlEngine.dir/src/Rendering/EBO.cpp.obj"
   "CMakeFiles/VoxlEngine.dir/src/Rendering/EBO.cpp.obj.d"
+  "CMakeFiles/VoxlEngine.dir/src/Rendering/EngineCompass.cpp.obj"
+  "CMakeFiles/VoxlEngine.dir/src/Rendering/EngineCompass.cpp.obj.d"
   "CMakeFiles/VoxlEngine.dir/src/Rendering/FBO.cpp.obj"
   "CMakeFiles/VoxlEngine.dir/src/Rendering/FBO.cpp.obj.d"
   "CMakeFiles/VoxlEngine.dir/src/Rendering/Texture.cpp.obj"

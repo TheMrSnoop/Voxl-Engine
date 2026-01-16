@@ -1,0 +1,12 @@
+{
+  "atlasMap": [
+    { "id": "Grass",        "blockTextures":[15, 15, 15, 15, 0, 1]},
+    { "id": "Dirt",         "blockTextures":[1, 1, 1, 1, 1, 1]},
+    { "id": "Stone",        "blockTextures":[2, 2, 2, 2, 2, 2]},
+    { "id": "Log",      "blockTextures":[3, 3, 3, 3, 7, 7]},
+    { "id": "Leaves",   "blockTextures":[4, 4, 4, 4, 4, 4]},
+    { "id": "Pine Log",     "blockTextures":[5, 5, 5, 5, 5, 5]},
+    { "id": "Pine Leaves",  "blockTextures":[6, 6, 6, 6, 6, 6]},
+    { "id": "Deepslate",    "blockTextures":[13, 13, 13, 13, 13, 13]}
+  ]
+}

@@ -151,6 +151,8 @@ public:
 
 	static void CenteredText(const char* text);
 
+	
+
 };
 
 
@@ -172,6 +174,7 @@ public:
 
 	//Mode Specific
 	static void ToolBar_World();
+	static void DebugHeader();
 	static void SceneCollection();
 	static void TexturePanel();
 
@@ -185,5 +188,17 @@ public:
 	static void ScriptsBar(std::vector<std::string> OpenedScripts);
 };
 
+class Dropbox
+{
+public:
+	std::string Label;
+	int defaultIndex;
+	std::vector<const char*> items;
 
+	Dropbox(std::string arg_Label, std::string arg_id, int arg_defaultIndex, std::vector<const char*> arg_items);
+
+	void updateStyle();
+
+	void updateIndex(int newIndex);
+};
 

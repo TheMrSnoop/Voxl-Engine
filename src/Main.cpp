@@ -30,6 +30,7 @@
 #include "UI_Engine.h"
 #include "UI_ProjectsPanel.h"
 #include "Terrain.h"
+#include "EngineCompass.h"
 #include <core.h>
 
 //Its cleaner if I just put this inside Camera.h
@@ -40,7 +41,7 @@ bool VoxlEngine::showEngineMetrics = false;
 
 VoxlEngine::TabModes VoxlEngine::currentTabMode = VoxlEngine::World;
 
-std::string VoxlEngine::ConsoleText = "Voxl Engine 2025 v0.1.2.stable.alpha.52861 \nOpenGL API #330 \nC:/dev/VoxlEngine/newproject/\n";
+std::string VoxlEngine::ConsoleText = "Voxl Engine v.pre.26.1 | made by TheMrSnoop :) \nOpenGL API #330 \nC:/dev/VoxlEngine/newproject/\n";
 
 VoxlEngine::programModes VoxlEngine::currentProgramMode = VoxlEngine::RunningProject;
 
@@ -67,7 +68,7 @@ GLFWwindow* CreateEngineWindow(int width, int height) {
     // Optional: set a hint to request maximization
     glfwWindowHint(GLFW_MAXIMIZED, GLFW_TRUE);
 
-    GLFWwindow* win = glfwCreateWindow(width, height, "Voxl Engine", NULL, NULL);
+    GLFWwindow* win = glfwCreateWindow(width, height, "Voxl Engine v.pre.26.1", NULL, NULL);
     if (!win) return nullptr;
 
     glfwMakeContextCurrent(win);
@@ -83,7 +84,7 @@ void RunProjectMenu(GLFWwindow* window)
     //Sets the window icon
     int iconWidth, iconHeight, iconChannels;
     stbi_set_flip_vertically_on_load(false);
-    unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/TerracubeGradient_Small.png", &iconWidth, &iconHeight, &iconChannels, 4);
+    unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/GrassBlock.png", &iconWidth, &iconHeight, &iconChannels, 4);
     GLFWimage images[1];
     images[0].width = iconWidth;
     images[0].height = iconHeight;
@@ -99,7 +100,7 @@ void RunProjectMenu(GLFWwindow* window)
     ProjectsPanel::CreateMainProjectsMenu(window);
 }
 
-void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cubeVAO, VAO quadVAO, int width, int height, GLFWwindow* window, Camera &camera)
+void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cubeVAO, VAO quadVAO, int width, int height, GLFWwindow* window, Camera &camera, Compass &viewPortCompass)
 {
     voxlEngine.CalculateFPS();
     float currentTime = (float)glfwGetTime();
@@ -192,11 +193,17 @@ void RunProject(Shader shaderProgram, Shader screenShader, FBO sceneFBO, VAO cub
     EngineUI_Defaults::TabBar();
     //EngineUI_Class::CreateCenterWindow("New Terrain", "Create a new terrain.", "CREATE", "CANCEL");
     EngineUI_Defaults::ProjectName();
+    EngineUI_Defaults::DebugHeader();
     EngineUI_Defaults::Console();
     EngineUI_Defaults::SceneCollection();
     EngineUI_Defaults::ObjectProperties();
     EngineUI_Defaults::ProjectFiles();
 
+
+
+
+    //Compass
+    viewPortCompass.Render(camera.view);
 
 
 
@@ -307,7 +314,7 @@ int main()
     //Sets the window icon
     int iconWidth, iconHeight, iconChannels;
     stbi_set_flip_vertically_on_load(false);
-    unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/TerracubeGradient_Small.png", &iconWidth, &iconHeight, &iconChannels, 4);
+    unsigned char* iconPixels = stbi_load("C:/dev/Voxl-Engine/Images/Branding/GrassBlock.png", &iconWidth, &iconHeight, &iconChannels, 4);
     GLFWimage images[1];
     images[0].width = iconWidth;
     images[0].height = iconHeight;
@@ -325,6 +332,7 @@ int main()
     shaderProgram.Activate();
     shaderProgram.setInt("tex0", 0);
 
+    
 
     glActiveTexture(GL_TEXTURE0);
 
@@ -424,7 +432,7 @@ int main()
     int blockDataBaseLength = (int)allBlocks.size();
     int blockTextureBaseLength = (int)allBlockTextures.size();
 
-    Camera camera(width, height, glm::vec3(0.0f, 24.0f, 2.0f));
+    Camera camera(width, height, glm::vec3(0.0f, 50.0f, 2.0f));
 
     WorldStructure Ruins(std::string("Ruins"),
         {
@@ -461,6 +469,10 @@ int main()
     glDisable(GL_BLEND);
     glDepthMask(GL_TRUE);
 
+    
+    //Compass Initialization 
+    Shader compassShader("Shaders/Compass");
+    Compass viewPortCompass(compassShader);
 
     // Engine render loop
     while (!glfwWindowShouldClose(window) && !VoxlEngine::engineClosed && VoxlEngine::currentProgramMode == VoxlEngine::RunningProject)
@@ -472,7 +484,7 @@ int main()
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-        RunProject(shaderProgram, screenShader, sceneFBO, cubeVAO, quadVAO, width, height, window, camera);
+        RunProject(shaderProgram, screenShader, sceneFBO, cubeVAO, quadVAO, width, height, window, camera, viewPortCompass);
 
         ImGui::Render();
         

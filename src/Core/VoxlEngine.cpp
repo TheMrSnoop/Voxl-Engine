@@ -11,6 +11,14 @@
 
 #include <core.h>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
+#include <filesystem>
+namespace fs = std::filesystem;
+
+
+
 float VoxlEngine::FPS = 0.0f;
 float VoxlEngine::DTPS = 0.0f;
 
@@ -218,4 +226,34 @@ std::string VoxlEngine::returnLuaFile(std::string fileDir)
 	std::string contents((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>()); //actually "reads" the file.
 
 	return contents;
+}
+
+
+std::string VoxlEngine::findFile(std::string path, std::string extension)
+{
+	for (const auto& entry : fs::directory_iterator(path)) 
+	{
+		if (entry.is_regular_file() && entry.path().extension() == extension) {
+			//entry.path is a "fs::path" type, so this converts it to a string first, then a const char.
+
+			return entry.path().string();
+		}
+	}
+
+	throw std::runtime_error("a " + extension + " was not found in " + path);
+}
+
+
+json VoxlEngine::loadJson(const std::string jsonPath)
+{
+	std::ifstream file(jsonPath);
+    if (!file.is_open())
+    {
+        std::cerr << "failed to open json: " << jsonPath << std::endl;
+        return {};
+    }
+
+    json j;
+    file >> j;
+    return j;
 }

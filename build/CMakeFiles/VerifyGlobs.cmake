@@ -10,6 +10,7 @@ set(OLD_GLOB
   "C:/dev/Voxl-Engine/src/Core/stb.cpp"
   "C:/dev/Voxl-Engine/src/Main.cpp"
   "C:/dev/Voxl-Engine/src/Rendering/EBO.cpp"
+  "C:/dev/Voxl-Engine/src/Rendering/EngineCompass.cpp"
   "C:/dev/Voxl-Engine/src/Rendering/FBO.cpp"
   "C:/dev/Voxl-Engine/src/Rendering/Texture.cpp"
   "C:/dev/Voxl-Engine/src/Rendering/VAO.cpp"

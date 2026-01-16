@@ -21,6 +21,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/dev/Voxl-Engine/src/Core/stb.cpp" "CMakeFiles/VoxlEngine.dir/src/Core/stb.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/Core/stb.cpp.obj.d"
   "C:/dev/Voxl-Engine/src/Main.cpp" "CMakeFiles/VoxlEngine.dir/src/Main.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/Main.cpp.obj.d"
   "C:/dev/Voxl-Engine/src/Rendering/EBO.cpp" "CMakeFiles/VoxlEngine.dir/src/Rendering/EBO.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/Rendering/EBO.cpp.obj.d"
+  "C:/dev/Voxl-Engine/src/Rendering/EngineCompass.cpp" "CMakeFiles/VoxlEngine.dir/src/Rendering/EngineCompass.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/Rendering/EngineCompass.cpp.obj.d"
   "C:/dev/Voxl-Engine/src/Rendering/FBO.cpp" "CMakeFiles/VoxlEngine.dir/src/Rendering/FBO.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/Rendering/FBO.cpp.obj.d"
   "C:/dev/Voxl-Engine/src/Rendering/Texture.cpp" "CMakeFiles/VoxlEngine.dir/src/Rendering/Texture.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/Rendering/Texture.cpp.obj.d"
   "C:/dev/Voxl-Engine/src/Rendering/VAO.cpp" "CMakeFiles/VoxlEngine.dir/src/Rendering/VAO.cpp.obj" "gcc" "CMakeFiles/VoxlEngine.dir/src/Rendering/VAO.cpp.obj.d"

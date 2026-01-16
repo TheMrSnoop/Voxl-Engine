@@ -7,6 +7,14 @@
 #include <iostream>
 #include <random>
 
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
+#include <filesystem>
+namespace fs = std::filesystem;
+
+
+
 class VoxlEngine
 {
 public:
@@ -52,6 +60,8 @@ public:
 
 	//--DATA RETRIEVAL--//
 	static std::string returnLuaFile(std::string fileDir);
+	static json loadJson(std::string jsonPath);
+	static std::string findFile(std::string folderName, std::string shaderExtension);
 
 	//apparently I need to drop the static keyword.
 	enum programModes

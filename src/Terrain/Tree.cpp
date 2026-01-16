@@ -384,8 +384,6 @@ Tree::Tree(const std::string TreeDisplayName, const Block::BlockData& trunkBlock
 
 		this->parts.push_back(leafPart);
 	}
-
-
 	else if (TreeDisplayName == "Fallen_Log")
 	{
 		//Trunk

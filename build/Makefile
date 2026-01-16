@@ -538,6 +538,30 @@ src/Rendering/EBO.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxlEngine.dir\build.make CMakeFiles/VoxlEngine.dir/src/Rendering/EBO.cpp.s
 .PHONY : src/Rendering/EBO.cpp.s
 
+src/Rendering/EngineCompass.obj: src/Rendering/EngineCompass.cpp.obj
+.PHONY : src/Rendering/EngineCompass.obj
+
+# target to build an object file
+src/Rendering/EngineCompass.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxlEngine.dir\build.make CMakeFiles/VoxlEngine.dir/src/Rendering/EngineCompass.cpp.obj
+.PHONY : src/Rendering/EngineCompass.cpp.obj
+
+src/Rendering/EngineCompass.i: src/Rendering/EngineCompass.cpp.i
+.PHONY : src/Rendering/EngineCompass.i
+
+# target to preprocess a source file
+src/Rendering/EngineCompass.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxlEngine.dir\build.make CMakeFiles/VoxlEngine.dir/src/Rendering/EngineCompass.cpp.i
+.PHONY : src/Rendering/EngineCompass.cpp.i
+
+src/Rendering/EngineCompass.s: src/Rendering/EngineCompass.cpp.s
+.PHONY : src/Rendering/EngineCompass.s
+
+# target to generate assembly for a file
+src/Rendering/EngineCompass.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\VoxlEngine.dir\build.make CMakeFiles/VoxlEngine.dir/src/Rendering/EngineCompass.cpp.s
+.PHONY : src/Rendering/EngineCompass.cpp.s
+
 src/Rendering/FBO.obj: src/Rendering/FBO.cpp.obj
 .PHONY : src/Rendering/FBO.obj
 
@@ -954,6 +978,9 @@ help:
 	@echo ... src/Rendering/EBO.obj
 	@echo ... src/Rendering/EBO.i
 	@echo ... src/Rendering/EBO.s
+	@echo ... src/Rendering/EngineCompass.obj
+	@echo ... src/Rendering/EngineCompass.i
+	@echo ... src/Rendering/EngineCompass.s
 	@echo ... src/Rendering/FBO.obj
 	@echo ... src/Rendering/FBO.i
 	@echo ... src/Rendering/FBO.s

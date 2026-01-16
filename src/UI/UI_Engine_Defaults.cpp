@@ -7,6 +7,8 @@ using namespace std;
 #include <filesystem>
 namespace fs = std::filesystem;
 
+#include <string>
+
 //ENGINE UI
 void EngineUI_Defaults::MenuBar()
 {
@@ -100,7 +102,7 @@ void EngineUI_Defaults::ToolBar_World()
 	GLuint img_add = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/add.png");
 	GLuint img_brush = Image::GenerateImage("C:/dev/Voxl-Engine/Images/UI_Icons/ToolBar/paint.png");
 
-	EngineUI_Class::CreatePanel("##Toolbar", BGP_Toolbar_F, ImVec2(0, 30), ImVec2(VoxlEngine::windowWidth - 250, 55));
+	EngineUI_Class::CreatePanel("##Toolbar", BGP_Toolbar_F, ImVec2(0, 30), ImVec2(250, 55));
 	ImGui::SameLine();
 	if (ImGui::ImageButton("btn_select", img_select, ImVec2(16, 16))) {
 		// clicked
@@ -119,6 +121,28 @@ void EngineUI_Defaults::ToolBar_World()
 	}
 
 	//Closes Toolbar
+	ImGui::End();
+}
+
+
+void EngineUI_Defaults::DebugHeader()
+{
+	//EngineUI_Class::ApplyDarkTheme(EngineUI_Class::Button);
+	ImGuiWindowFlags BGP_Toolbar_F =
+		ImGuiWindowFlags_NoCollapse |
+		ImGuiWindowFlags_NoResize |
+		ImGuiWindowFlags_NoMove |
+		ImGuiWindowFlags_NoScrollbar;
+	EngineUI_Class::CreatePanel("##DebugHeader", BGP_Toolbar_F, ImVec2(250, 30), ImVec2(VoxlEngine::windowWidth - 500, 50));
+
+	int currentFPS = floor(VoxlEngine::FPS);
+	float frameTime = VoxlEngine::DTPS * 1000;
+	int currentTime = (int)glfwGetTime();
+
+	std::string text_FPS = std::to_string(currentFPS) + " FPS | " + std::to_string(frameTime) + "ms | " + std::to_string(currentTime) + "s";
+
+	ImGui::Text(text_FPS.c_str());
+
 	ImGui::End();
 }
 
@@ -228,11 +252,18 @@ void EngineUI_Defaults::ObjectProperties()
 		ImGuiWindowFlags_NoMove;
 	EngineUI_Class::CreatePanel("##propertiesPanel", BGP_Properties_F, ImVec2(VoxlEngine::windowWidth - 250, VoxlEngine::windowHeight / 2), ImVec2(250, VoxlEngine::windowHeight / 2));
 	
-	for (EngineUI_Class::ObjectProperty objProp : VoxelLandscapeProperties)
-	{
-		EngineUI_Class::CreateObjectProperties(objProp);
-	}
+	const std::vector<const char*> db_c_height = { "Plains", "Mountain", "Valley" };
+
+	const std::vector<const char*> db_c_noise = { "Perlin", "Heightend Perlin" };
+
+
+
+	Dropbox heightConfig("Height Config", "##height", 0, db_c_height);
+	Dropbox noiseConfig("Noise Config", "##noise", 0, db_c_noise);
+
+
 	ImGui::End();
+
 }
 
 void EngineUI_Defaults::Console()

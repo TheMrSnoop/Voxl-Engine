@@ -37,6 +37,12 @@
 },
 {
   "directory": "C:/dev/Voxl-Engine/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Rendering\\EngineCompass.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Rendering\\EngineCompass.cpp",
+  "file": "C:/dev/Voxl-Engine/src/Rendering/EngineCompass.cpp",
+  "output": "CMakeFiles/VoxlEngine.dir/src/Rendering/EngineCompass.cpp.obj"
+},
+{
+  "directory": "C:/dev/Voxl-Engine/build",
   "command": "C:\\msys64\\mingw64\\bin\\g++.exe -DFMT_HEADER_ONLY @CMakeFiles/VoxlEngine.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\VoxlEngine.dir\\src\\Rendering\\FBO.cpp.obj -c C:\\dev\\Voxl-Engine\\src\\Rendering\\FBO.cpp",
   "file": "C:/dev/Voxl-Engine/src/Rendering/FBO.cpp",
   "output": "CMakeFiles/VoxlEngine.dir/src/Rendering/FBO.cpp.obj"
